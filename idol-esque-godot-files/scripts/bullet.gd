@@ -1,0 +1,54 @@
+class_name EnemyBullet extends CharacterBody3D
+
+@export var config : BulletConfig
+
+@onready var sprite: Sprite3D = $Sprite3D
+
+func setup(_config : BulletConfig, _position : Vector3 = Vector3.ZERO) :
+	position = _position
+	config = _config
+	
+	var collision_object : Area3D = $Area3D
+	
+	collision_object.collision_mask = 0
+	
+	match config.bullet_colour:
+		BulletConfig.BulletColour.RED:
+			$Sprite3D.modulate = Color.RED
+			collision_object.set_collision_mask_value(1, true)
+			collision_object.set_collision_mask_value(3, true)
+		BulletConfig.BulletColour.YELLOW:
+			$Sprite3D.modulate = Color.YELLOW
+			collision_object.set_collision_mask_value(1, true)
+			collision_object.set_collision_mask_value(3, true)
+		BulletConfig.BulletColour.BLUE:
+			$Sprite3D.modulate = Color.BLUE
+			collision_object.set_collision_mask_value(1, true)
+			collision_object.set_collision_mask_value(3, true)
+		BulletConfig.BulletColour.ENEMY:
+			collision_object.set_collision_mask_value(1, true)
+			collision_object.set_collision_mask_value(2, true)
+	
+
+func _physics_process(_delta: float) -> void:
+	match config.movement_type:
+		BulletConfig.MoveFunction.LINEAR:
+			velocity = config.direction * config.speed
+		BulletConfig.MoveFunction.QUADRATIC:
+			push_error("Function not implemented") 
+		BulletConfig.MoveFunction.HOMING:
+			push_error("Function not implemented") 
+		BulletConfig.MoveFunction.WAVE:
+			push_error("Function not implemented") 
+	
+	move_and_slide()
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is Enemy:
+		body.damage(1, config)
+	queue_free()
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	print("area UNHANDLED " + area.name)

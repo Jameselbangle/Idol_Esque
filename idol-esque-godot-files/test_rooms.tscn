@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://c4nlhvb38baor"]
 
+[ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://scenes/player_controller.tscn" id="1_w5gxa"]
+
 [node name="Node" type="Node" unique_id=95474739]
 
 [node name="small_room_1" type="Node3D" parent="." unique_id=1077050944]
@@ -151,3 +153,10 @@ size = Vector3(1, 11.640503, 1.1863098)
 transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0.7176802, -0.3676613, 1.1814068e-08, -9.013455e-09, 3.4650574, 11.999998, -1.4317169)
 
 [node name="de_perent" type="Node" parent="." unique_id=1312768846]
+
+[node name="playrers" type="Node" parent="." unique_id=439986479]
+
+[node name="player_controller" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6111398, 0, 0)
+
+[node name="bullet_manager" type="Node" parent="." unique_id=1767652969]

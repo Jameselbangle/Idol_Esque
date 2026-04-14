@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://j8ggnltygy01"]
+
+[ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_6agyq"]
+[ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://sprites/Player/front.png" id="2_8xumb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wr06p"]
+size = Vector3(0.5932617, 0.7895508, 0.18457031)
+
+[node name="player_controller" type="CharacterBody3D" unique_id=1761623861]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_6agyq")
+
+[node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
+transform = Transform3D(2, 0, 0, 0, 1.9999999, 0, 0, 0, 1.9999999, 0, 0.75, -0.002)
+shape = SubResource("BoxShape3D_wr06p")
+
+[node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, 0)
+billboard = 1
+texture = ExtResource("2_8xumb")
+
+[node name="FireRate" type="Timer" parent="." unique_id=644492934]
+wait_time = 0.001
+one_shot = true
+
+[node name="BulletSpawn" type="Marker3D" parent="." unique_id=1953609992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7146696, 0.68829453)
+
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
