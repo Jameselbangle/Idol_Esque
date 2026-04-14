@@ -73,7 +73,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if $FireRate.time_left == 0:
 			shoot()
 		is_shooting = true
-	if event.is_action_released("fire"):
+	if event.is_action_released("fire") and event.device == player_count:
 		is_shooting = false
 	
 	## movement

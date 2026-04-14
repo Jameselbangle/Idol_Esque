@@ -161,8 +161,18 @@ transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0
 
 [node name="playrers" type="Node" parent="." unique_id=439986479]
 
-[node name="player_controller" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6111398, 0, 0)
+[node name="player_1" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+player_colour = 1
+
+[node name="player_2" parent="playrers" unique_id=1323944788 instance=ExtResource("1_w5gxa")]
+player_count = 1
+player_colour = 2
+
+[node name="player_3" parent="playrers" unique_id=1596200121 instance=ExtResource("1_w5gxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+player_count = 2
+player_colour = 3
 
 [node name="bullet_manager" type="Node" parent="." unique_id=1767652969]
 
