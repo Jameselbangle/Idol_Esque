@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://scenes/player_controller.tscn" id="1_w5gxa"]
 
+[sub_resource type="Environment" id="Environment_w5gxa"]
+ambient_light_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
+ambient_light_energy = 15.35
+
 [node name="Node" type="Node" unique_id=95474739]
 
 [node name="small_room_1" type="Node3D" parent="." unique_id=1077050944]
@@ -13,7 +17,8 @@ use_collision = true
 size = Vector3(1, 1, 1.5108032)
 
 [node name="Camera3D" type="Camera3D" parent="small_room_1" unique_id=1100892456]
-transform = Transform3D(0.81837523, -0.008682221, 0.0023877844, 0.004590918, 0.61457115, 0.6611775, -0.00975636, -0.73238194, 0.68082416, 0.577, 12, 11.186879)
+transform = Transform3D(0.81837523, -0.008682221, 0.0023877844, 0.004590918, 0.61457115, 0.6611775, -0.00975636, -0.73238194, 0.68082416, 0.577, 8.818167, 10.159297)
+fov = 115.76413
 
 [node name="Wall_1" type="CSGBox3D" parent="small_room_1" unique_id=744963743]
 transform = Transform3D(0.52318084, 0, 0, 0, 4.008408, 0, 0, 0, 6.5941596, -3.721334, 1.8895824, 2.7146058)
@@ -160,3 +165,6 @@ transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6111398, 0, 0)
 
 [node name="bullet_manager" type="Node" parent="." unique_id=1767652969]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1104905651]
+environment = SubResource("Environment_w5gxa")
