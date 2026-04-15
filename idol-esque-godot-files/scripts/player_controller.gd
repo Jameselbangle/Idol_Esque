@@ -74,21 +74,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		release_mouse()
 	
 	## -------------------------------- 
-	## TEMP LOOK
-	if event.is_action_pressed("left_look_1") and player_count == 0:
-		KEY_rotate(-1)
-	if event.is_action_pressed("right_look_1") and player_count == 0:
-		KEY_rotate(1)
-	if event.is_action_pressed("left_look_2") and player_count == 1:
-		KEY_rotate(-1)
-	if event.is_action_pressed("right_look_2") and player_count == 1:
-		KEY_rotate(1)
-	if event.is_action_pressed("left_look_3") and player_count == 2:
-		KEY_rotate(-1)
-	if event.is_action_pressed("right_look_3") and player_count == 2:
-		KEY_rotate(1)
+	## KEY LOOK
+	match player_count:
+		0:
+			if event.is_action_pressed("left_look_1"):
+				KEY_rotate(-1)
+			if event.is_action_pressed("right_look_1"):
+				KEY_rotate(1)
+		1:
+			if event.is_action_pressed("left_look_2"):
+				KEY_rotate(-1)
+			if event.is_action_pressed("right_look_2"):
+				KEY_rotate(1)
+		2:
+			if event.is_action_pressed("left_look_3"):
+				KEY_rotate(-1)
+			if event.is_action_pressed("right_look_3"):
+				KEY_rotate(1)
 	
-	## TEMP FIRE
+	## KEY FIRE
 	if (event.is_action_pressed("fire_1") and player_count == 0) or (event.is_action_pressed("fire_2") and player_count == 1) or (event.is_action_pressed("fire_3") and player_count == 2):
 		if $FireRate.time_left == 0:
 			shoot()
@@ -176,7 +180,7 @@ func shoot():
 	$FireRate.start(.2)
 	
 	var spawn_pos = bullet_spawn.global_position
-	var speed : float = 10.0
+	var speed : float = 20.0
 	
 	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
 	
