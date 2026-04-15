@@ -49,11 +49,20 @@ func _ready() -> void:
 	## TEMP Colour for sprites
 	match player_colour:
 		BulletConfig.BulletColour.RED:
-			player_sprite.modulate = Color.RED
+			sprites["front"] = load("res://sprites/Player/Stella/Stella_front.png")
+			sprites["back"] = load("res://sprites/Player/Stella/Stella_Back.png")
+			sprites["left"] = load("res://sprites/Player/Stella/Stella_Left.png")
+			sprites["right"] = load("res://sprites/Player/Stella/Stella_Right.png")
 		BulletConfig.BulletColour.BLUE:
-			player_sprite.modulate = Color.BLUE
+			sprites["front"] = load("res://sprites/Player/Iris/Iris_Front.png")
+			sprites["back"] = load("res://sprites/Player/Iris/Iris_Back.png")
+			sprites["left"] = load("res://sprites/Player/Iris/Iris_Left.png")
+			sprites["right"] = load("res://sprites/Player/Iris/Iris_Right.png")
 		BulletConfig.BulletColour.YELLOW:
-			player_sprite.modulate = Color.YELLOW
+			sprites["front"] = load("res://sprites/Player/Bee/Bee_Front.png")
+			sprites["back"] = load("res://sprites/Player/Bee/Bee_Back.png")
+			sprites["left"] = load("res://sprites/Player/Bee/Bee_Left.png")
+			sprites["right"] = load("res://sprites/Player/Bee/Bee_Right.png")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -64,11 +73,35 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("escape"):
 		release_mouse()
 	
+	## -------------------------------- 
+	## TEMP LOOK
+	if event.is_action_pressed("left_look_1") and player_count == 0:
+		KEY_rotate(-1)
+	if event.is_action_pressed("right_look_1") and player_count == 0:
+		KEY_rotate(1)
+	if event.is_action_pressed("left_look_2") and player_count == 1:
+		KEY_rotate(-1)
+	if event.is_action_pressed("right_look_2") and player_count == 1:
+		KEY_rotate(1)
+	if event.is_action_pressed("left_look_3") and player_count == 2:
+		KEY_rotate(-1)
+	if event.is_action_pressed("right_look_3") and player_count == 2:
+		KEY_rotate(1)
+	
+	## TEMP FIRE
+	if (event.is_action_pressed("fire_1") and player_count == 0) or (event.is_action_pressed("fire_2") and player_count == 1) or (event.is_action_pressed("fire_3") and player_count == 2):
+		if $FireRate.time_left == 0:
+			shoot()
+		is_shooting = true
+	if (event.is_action_released("fire_1") and player_count == 0) or (event.is_action_released("fire_2") and player_count == 1) or (event.is_action_released("fire_3") and player_count == 2):
+		is_shooting = false
+	## -------------------------------- 
+	
 	## Sort for individual players
 	if event.device != player_count:
 		return
 	
-	## Handles firing bullets seperate from PhysicsProcess
+	## Handles firing bullets seperate from PhysicsProcess 
 	if event.is_action_pressed("fire") and event.device == player_count:
 		if $FireRate.time_left == 0:
 			shoot()
@@ -89,10 +122,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_Y)
 	)
-	
-	## Look around w/ mouse 
-	#if mouse_captured and event is InputEventMouseMotion:
-		#rotate_look(event.relative)
+
+
 
 ## TODO: Move input and moving code to _unhandled input
 func _physics_process(delta: float) -> void:
@@ -100,12 +131,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
-	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
-	
 	### --------------
 	### TEMP MOVEMENT
-	var key_move: Vector2
 	if player_count == 0:
 		joy_move = Input.get_vector("left1","right1","up1","down1").normalized()
 	elif player_count == 1:
@@ -113,9 +140,8 @@ func _physics_process(delta: float) -> void:
 	elif player_count == 2:
 		joy_move = Input.get_vector("left3","right3","up3","down3").normalized()
 	
-	if key_move != Vector2(0,0):
-		velocity.x = lerp( velocity.x, key_move.x * move_speed, slipperyness_lerp * delta) 
-		velocity.z = lerp( velocity.z, key_move.y * move_speed, slipperyness_lerp * delta) 
+	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
+	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
 	
 	### --------------
 	
@@ -127,7 +153,6 @@ func _physics_process(delta: float) -> void:
 	if rotation.y != target_angle:
 		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
 		rotation.y = lerp_angle(rotation.y, target_angle, rotation_lerp_weight)
-	
 	
 	## sprite rotation code
 	if rotation.y > (num * PI/den) or rotation.y < -(num * PI/den):
@@ -142,24 +167,16 @@ func _physics_process(delta: float) -> void:
 	## Use velocity to actually move
 	move_and_slide()
 
-
-## OLD
-## Rotate us to look around.
-## For Mouse, only use if no controller is present
-func rotate_look(rot_input : Vector2):
-	look_rotation.x -= rot_input.y * look_speed
-	look_rotation.x = clamp(look_rotation.x, deg_to_rad(-85), deg_to_rad(85))
-	look_rotation.y -= rot_input.x * look_speed
-	transform.basis = Basis()
-	rotate_y(look_rotation.y)
-
+func KEY_rotate(rotate: float):
+	target_angle = rotation.y + (rotate * (PI / 2))
+	rotation.y = target_angle
 
 ## Creating Bullets and firing
 func shoot():
 	$FireRate.start(.2)
 	
 	var spawn_pos = bullet_spawn.global_position
-	var speed : float = 5.0
+	var speed : float = 10.0
 	
 	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
 	

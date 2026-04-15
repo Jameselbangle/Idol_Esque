@@ -2,9 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://scenes/player_controller.tscn" id="1_w5gxa"]
 
-[sub_resource type="Environment" id="Environment_w5gxa"]
-ambient_light_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
-ambient_light_energy = 15.35
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w5gxa"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_g21g7"]
+sky_material = SubResource("ProceduralSkyMaterial_w5gxa")
+
+[sub_resource type="Environment" id="Environment_7utqf"]
+background_mode = 2
+sky = SubResource("Sky_g21g7")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="Node" type="Node" unique_id=95474739]
 
@@ -176,5 +185,9 @@ player_colour = 3
 
 [node name="bullet_manager" type="Node" parent="." unique_id=1767652969]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1104905651]
-environment = SubResource("Environment_w5gxa")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=627731921]
+environment = SubResource("Environment_7utqf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1424571914]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
