@@ -21,9 +21,9 @@ glow_enabled = true
 transform = Transform3D(1.2218595, 0, 0, 0, 1.1077828, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="floor" type="CSGBox3D" parent="small_room_1" unique_id=597576046]
-transform = Transform3D(7.2641144, 0, 0, 0, 0.1505733, 0, 0, 0, 11.079339, -0.046071276, -0.051818427, 1.973237)
+transform = Transform3D(7.2641144, 0, 0, 0, 0.1505733, 0, 0, 0, 11.079339, -0.046071276, -8.305334, 1.973237)
 use_collision = true
-size = Vector3(1, 1, 1.5108032)
+size = Vector3(1, 7.6903076, 1.5108032)
 
 [node name="Camera3D" type="Camera3D" parent="small_room_1" unique_id=1100892456]
 transform = Transform3D(0.81837523, -0.008682221, 0.0023877844, 0.004590918, 0.61457115, 0.6611775, -0.00975636, -0.73238194, 0.68082416, 0.577, 8.818167, 10.159297)
