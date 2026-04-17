@@ -12,6 +12,8 @@ extends CharacterBody3D
 @export var den : int = 5
 var num : int = den - 1
 
+@export_group("Is Keyboard?")
+@export var keyboard_mode : bool = false
 
 @onready var player_sprite : Sprite3D = $player_spr
 @onready var bullet_spawn : Marker3D = $BulletSpawn
@@ -33,7 +35,7 @@ var is_shooting: bool = false
 var look_speed : float = 0.002
 
 ## rotating character with joystick
-var deadzone: float = 0.5
+var deadzone: float = 0.3
 var rotation_speed: float = 5.0
 var target_angle: float
 
@@ -137,12 +139,19 @@ func _physics_process(delta: float) -> void:
 	
 	### --------------
 	### TEMP MOVEMENT
-	if player_count == 0:
-		joy_move = Input.get_vector("left1","right1","up1","down1").normalized()
-	elif player_count == 1:
-		joy_move = Input.get_vector("left2","right2","up2","down2").normalized()
-	elif player_count == 2:
-		joy_move = Input.get_vector("left3","right3","up3","down3").normalized()
+	
+	if keyboard_mode:
+		if player_count == 0:
+			joy_move = Input.get_vector("left1","right1","up1","down1").normalized()
+		elif player_count == 1:
+			joy_move = Input.get_vector("left2","right2","up2","down2").normalized()
+		elif player_count == 2:
+			joy_move = Input.get_vector("left3","right3","up3","down3").normalized()
+	
+	if abs(joy_move.x) < deadzone:
+		joy_move.x = 0
+	if abs(joy_move.y) < deadzone:
+		joy_move.y = 0
 	
 	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
 	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
