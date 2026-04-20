@@ -71,6 +71,9 @@ func choose_target() -> Vector3:
 		if distance < closest_distance:
 			closest_distance = distance
 			closest_player = player
+	
+	if closest_player == null:
+		return Vector3.ZERO
 	return closest_player.global_position
 
 func line_formation(start_position : Vector3, end_position : 

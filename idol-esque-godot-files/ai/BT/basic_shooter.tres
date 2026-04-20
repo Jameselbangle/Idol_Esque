@@ -1,0 +1,22 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://ypkqohami6qb"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_xnx0r"]
+
+[sub_resource type="BTAction" id="BTAction_j2rqp"]
+
+[sub_resource type="BTCooldown" id="BTCooldown_81pmq"]
+children = [SubResource("BTAction_j2rqp")]
+duration = 5.0
+
+[sub_resource type="BTAction" id="BTAction_vsplb"]
+
+[sub_resource type="BTCooldown" id="BTCooldown_0oelj"]
+children = [SubResource("BTAction_vsplb")]
+duration = 0.5
+
+[sub_resource type="BTSelector" id="BTSelector_b6uju"]
+children = [SubResource("BTCooldown_81pmq"), SubResource("BTCooldown_0oelj")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_xnx0r")
+root_task = SubResource("BTSelector_b6uju")

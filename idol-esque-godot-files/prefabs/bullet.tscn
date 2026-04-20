@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://3owv0xjdpbg4"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_7rc6x"]
+[ext_resource type="Script" path="res://scripts/bullet_config.gd" id="2_44iiu"]
+[ext_resource type="Texture2D" uid="uid://chw1orhe2neqw" path="res://art/characters/bullets/Bullet.png" id="3_db0hv"]
+
+[sub_resource type="Resource" id="Resource_02qb5"]
+script = ExtResource("2_44iiu")
+metadata/_custom_type_script = "uid://djuwhyhdhfi2v"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_38r62"]
+radius = 0.47740978
+
+[node name="Bullet" type="CharacterBody3D" unique_id=1062259565]
+collision_layer = 8
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_7rc6x")
+config = SubResource("Resource_02qb5")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1263084993]
+pixel_size = 0.05
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("3_db0hv")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1434270476]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1712136748]
+shape = SubResource("SphereShape3D_38r62")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
