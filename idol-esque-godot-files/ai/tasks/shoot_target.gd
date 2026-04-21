@@ -24,5 +24,4 @@ func _tick(delta: float) -> Status:
 		return FAILURE
 	var target_pos : Vector3 = enemy.choose_target()
 	var config : BulletConfig = BulletConfig.new()
-	print("Shoot")
 	return SUCCESS

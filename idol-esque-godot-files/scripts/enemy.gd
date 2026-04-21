@@ -10,6 +10,8 @@ class_name Enemy extends CharacterBody3D
 
 @export var shield : BulletConfig.BulletColour
 
+var test : bool = true
+
 
 var bullet_buffer = []
 
@@ -36,6 +38,14 @@ func _ready() -> void:
 func _process(float) -> void:
 	if _health <= 0:
 		queue_free()
+	
+	if test:
+		test = false
+		var config : BulletConfig = BulletConfig.new()
+		print("TEST")
+		Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
+		Bullet_Factory.circle_formation(self, Vector3(0, 0, 0), 3, 16, config)
+		shoot_bullet_buffer()
 
 func _physics_process(_delta):
 	# Do not query when the map has never synchronized and is empty.
@@ -75,43 +85,6 @@ func choose_target() -> Vector3:
 	if closest_player == null:
 		return Vector3.ZERO
 	return closest_player.global_position
-
-func line_formation(start_position : Vector3, end_position : 
-						Vector3, bullet_count : int, bullet_config : BulletConfig) -> void:
-	assert(bullet_count > 1, "Needs at least 2 bullets to form a line")
-	var step_size : float = 1.0 / (bullet_count - 1)
-	var t : float = 0
-
-	while t <= 1:
-		var spawn_pos : Vector3 = position + start_position.lerp(end_position, t)
-		var bullet = enemy_bullet_scene.instantiate()
-		bullet.setup(bullet_config, spawn_pos)
-		bullet_buffer.append(bullet)
-		t += step_size
-
-
-func circle_formation(offset : Vector3, radius : float, 
-						bullet_count : int, bullet_config : BulletConfig):
-	assert(radius > 0, "Radius needs to be larger than 0")
-	var step_size : float = 2 * PI / bullet_count
-	var theta : float = 0
-	
-	while theta < TAU:
-		var x_pos = cos(theta) * radius
-		var z_pos : float = 0.0
-		if theta < PI:
-			z_pos = sqrt(radius ** 2 - (x_pos - offset.x) ** 2) + offset.z
-		else:
-			z_pos = -sqrt(radius ** 2 - (x_pos - offset.x) ** 2) + offset.z
-		
-		var spawn_pos : Vector3 = position + offset
-		spawn_pos.x += x_pos 
-		spawn_pos.z += z_pos
-		
-		var bullet = enemy_bullet_scene.instantiate()
-		bullet.setup(bullet_config, spawn_pos)
-		bullet_buffer.append(bullet)
-		theta += step_size
 
 ## Shoot bullet pattern at a desired location
 func shoot(target_pos : Vector3 = Vector3.ZERO) -> void:
