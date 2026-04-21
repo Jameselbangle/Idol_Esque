@@ -44,7 +44,9 @@ func _process(float) -> void:
 		var config : BulletConfig = BulletConfig.new()
 		print("TEST")
 		Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
-		Bullet_Factory.circle_formation(self, Vector3(0, 0, 0), 3, 16, config)
+		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 12, config)
+		Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3, 6, 5, config)
+		Bullet_Factory.arc_formation(self, Vector3(0, 0, -3), 2, 18, config)
 		shoot_bullet_buffer()
 
 func _physics_process(_delta):
