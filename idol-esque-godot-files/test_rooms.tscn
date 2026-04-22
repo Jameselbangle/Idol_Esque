@@ -125,6 +125,7 @@ size = Vector3(1, 1, 1.1863098)
 
 [node name="Camera3D2" type="Camera3D" parent="Mid_room_1" unique_id=1308390062]
 transform = Transform3D(0.39762774, 0, 0, 0, 0.5203589, 0.7376321, 0, -0.3004294, 0.21193643, -0.441, 12, 1.988)
+current = true
 
 [node name="Mid_room_2" type="Node3D" parent="." unique_id=1972130241]
 transform = Transform3D(-1.09930454e-07, 0, -2.7198946, 0, 1.1077828, 0, 2.5149157, 0, -1.1889037e-07, 30.130402, 0, -24.102446)
@@ -170,15 +171,16 @@ transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0
 [node name="playrers" type="Node" parent="." unique_id=439986479]
 
 [node name="player_1" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.36611, 0.032012463, -3.803069)
 player_colour = 1
 
 [node name="player_2" parent="playrers" unique_id=1323944788 instance=ExtResource("1_w5gxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.36611, 0.032012463, -3.803069)
 player_count = 1
 player_colour = 2
 
 [node name="player_3" parent="playrers" unique_id=1596200121 instance=ExtResource("1_w5gxa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.36611, 0.032012463, -3.803069)
 player_count = 2
 player_colour = 3
 

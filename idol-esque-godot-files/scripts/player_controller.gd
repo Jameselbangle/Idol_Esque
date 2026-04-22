@@ -17,12 +17,12 @@ var num : int = den - 1
 
 @onready var player_sprite : Sprite3D = $player_spr
 @onready var bullet_spawn : Marker3D = $BulletSpawn
-var bulletScene = preload("res://scenes/bullet.tscn")
+var bulletScene = preload("res://prefabs/bullet.tscn")
 var sprites = {
-	"front" : preload("res://sprites/Player/front.png"),
-	"back" : preload("res://sprites/Player/back.png"),
-	"left" : preload("res://sprites/Player/left.png"),
-	"right" : preload("res://sprites/Player/right.png")
+	"front" : preload("res://art/characters/players/front.png"),
+	"back" : preload("res://art/characters/players/back.png"),
+	"left" : preload("res://art/characters/players/left.png"),
+	"right" : preload("res://art/characters/players/right.png")
 }
 
 
@@ -51,20 +51,20 @@ func _ready() -> void:
 	## TEMP Colour for sprites
 	match player_colour:
 		BulletConfig.BulletColour.RED:
-			sprites["front"] = load("res://sprites/Player/Stella/Stella_front.png")
-			sprites["back"] = load("res://sprites/Player/Stella/Stella_Back.png")
-			sprites["left"] = load("res://sprites/Player/Stella/Stella_Left.png")
-			sprites["right"] = load("res://sprites/Player/Stella/Stella_Right.png")
+			sprites["front"] = load("res://art/characters/players/Stella/Stella_front.png")
+			sprites["back"] = load("res://art/characters/players/Stella/Stella_Back.png")
+			sprites["left"] = load("res://art/characters/players/Stella/Stella_Left.png")
+			sprites["right"] = load("res://art/characters/players/Stella/Stella_Right.png")
 		BulletConfig.BulletColour.BLUE:
-			sprites["front"] = load("res://sprites/Player/Iris/Iris_Front.png")
-			sprites["back"] = load("res://sprites/Player/Iris/Iris_Back.png")
-			sprites["left"] = load("res://sprites/Player/Iris/Iris_Left.png")
-			sprites["right"] = load("res://sprites/Player/Iris/Iris_Right.png")
+			sprites["front"] = load("res://art/characters/players/Iris/Iris_Front.png")
+			sprites["back"] = load("res://art/characters/players/Iris/Iris_Back.png")
+			sprites["left"] = load("res://art/characters/players/Iris/Iris_Left.png")
+			sprites["right"] = load("res://art/characters/players/Iris/Iris_Right.png")
 		BulletConfig.BulletColour.YELLOW:
-			sprites["front"] = load("res://sprites/Player/Bee/Bee_Front.png")
-			sprites["back"] = load("res://sprites/Player/Bee/Bee_Back.png")
-			sprites["left"] = load("res://sprites/Player/Bee/Bee_Left.png")
-			sprites["right"] = load("res://sprites/Player/Bee/Bee_Right.png")
+			sprites["front"] = load("res://art/characters/players/Bee/Bee_Front.png")
+			sprites["back"] = load("res://art/characters/players/Bee/Bee_Back.png")
+			sprites["left"] = load("res://art/characters/players/Bee/Bee_Left.png")
+			sprites["right"] = load("res://art/characters/players/Bee/Bee_Right.png")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -76,31 +76,33 @@ func _unhandled_input(event: InputEvent) -> void:
 		release_mouse()
 	
 	## -------------------------------- 
-	## KEY LOOK
-	match player_count:
-		0:
-			if event.is_action_pressed("left_look_1"):
-				KEY_rotate(-1)
-			if event.is_action_pressed("right_look_1"):
-				KEY_rotate(1)
-		1:
-			if event.is_action_pressed("left_look_2"):
-				KEY_rotate(-1)
-			if event.is_action_pressed("right_look_2"):
-				KEY_rotate(1)
-		2:
-			if event.is_action_pressed("left_look_3"):
-				KEY_rotate(-1)
-			if event.is_action_pressed("right_look_3"):
-				KEY_rotate(1)
-	
-	## KEY FIRE
-	if (event.is_action_pressed("fire_1") and player_count == 0) or (event.is_action_pressed("fire_2") and player_count == 1) or (event.is_action_pressed("fire_3") and player_count == 2):
-		if $FireRate.time_left == 0:
-			shoot()
-		is_shooting = true
-	if (event.is_action_released("fire_1") and player_count == 0) or (event.is_action_released("fire_2") and player_count == 1) or (event.is_action_released("fire_3") and player_count == 2):
-		is_shooting = false
+	## KEYBOARD MODE
+	if keyboard_mode:
+		## KEY LOOK
+		match player_count:
+			0:
+				if event.is_action_pressed("left_look_1"):
+					KEY_rotate(-1)
+				if event.is_action_pressed("right_look_1"):
+					KEY_rotate(1)
+			1:
+				if event.is_action_pressed("left_look_2"):
+					KEY_rotate(-1)
+				if event.is_action_pressed("right_look_2"):
+					KEY_rotate(1)
+			2:
+				if event.is_action_pressed("left_look_3"):
+					KEY_rotate(-1)
+				if event.is_action_pressed("right_look_3"):
+					KEY_rotate(1)
+		
+		## KEY FIRE
+		if (event.is_action_pressed("fire_1") and player_count == 0) or (event.is_action_pressed("fire_2") and player_count == 1) or (event.is_action_pressed("fire_3") and player_count == 2):
+			if $FireRate.time_left == 0:
+				shoot()
+			is_shooting = true
+		if (event.is_action_released("fire_1") and player_count == 0) or (event.is_action_released("fire_2") and player_count == 1) or (event.is_action_released("fire_3") and player_count == 2):
+			is_shooting = false
 	## -------------------------------- 
 	
 	## Sort for individual players
@@ -148,15 +150,15 @@ func _physics_process(delta: float) -> void:
 		elif player_count == 2:
 			joy_move = Input.get_vector("left3","right3","up3","down3").normalized()
 	
-	if abs(joy_move.x) < deadzone:
-		joy_move.x = 0
-	if abs(joy_move.y) < deadzone:
-		joy_move.y = 0
+	### --------------
+	
+	## Deadzone checker & apply velocity
+	var movement_vector = sqrt(joy_move.x **2 + joy_move.y **2)
+	if abs(movement_vector) < deadzone:
+		joy_move = Vector2.ZERO
 	
 	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
 	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
-	
-	### --------------
 	
 	## Rotation code
 	## source: https://www.youtube.com/watch?v=1C2AAiNxoc8
