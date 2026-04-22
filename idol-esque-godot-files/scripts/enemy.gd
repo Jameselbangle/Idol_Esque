@@ -42,11 +42,17 @@ func _process(float) -> void:
 	if test:
 		test = false
 		var config : BulletConfig = BulletConfig.new()
+		config.direction = Vector3.RIGHT
 		print("TEST")
 		Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
 		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 12, config)
-		Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3, 6, 5, config)
+		Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3.2, 5, 5, config)
 		Bullet_Factory.arc_formation(self, Vector3(0, 0, -3), 2, 18, config)
+		Bullet_Factory.single_formation(self, Vector3(-4, 0, 0), config)
+		
+		for i in bullet_buffer:
+			i.transform = i.transform.rotated(Vector3.UP, PI / 2)
+			print(i.rotation)
 		shoot_bullet_buffer()
 
 func _physics_process(_delta):
