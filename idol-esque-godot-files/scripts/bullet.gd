@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 		BulletConfig.MoveFunction.HOMING:
 			var direction = config.target - position
 			direction = direction.normalized()
-			velocity += direction * config.speed * 0.1
+			velocity += direction * config.speed
 		BulletConfig.MoveFunction.WAVE:
 			push_error("Function not implemented") 
 	
