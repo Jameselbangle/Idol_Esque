@@ -1,6 +1,6 @@
 class_name Bullet_Factory extends Node
 
-static func single_formation(source : Enemy, offset : Vector3, bullet_config : BulletConfig, rotation : float = 0):
+static func single_formation(source : Enemy, offset : Vector3, bullet_config : Array[BulletConfig], rotation : float = 0):
 	var spawn_pos : Vector3 = source.position + offset
 	var bullet = source.enemy_bullet_scene.instantiate()
 	bullet.setup(bullet_config, spawn_pos)
@@ -8,7 +8,7 @@ static func single_formation(source : Enemy, offset : Vector3, bullet_config : B
 	source.bullet_buffer.append(bullet)
 
 static func line_formation(source : Enemy, start_position : Vector3, end_position : 
-						Vector3, bullet_count : int, bullet_config : BulletConfig, rotation : float = 0) -> void:
+						Vector3, bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0) -> void:
 	assert(bullet_count > 1, "Needs at least 2 bullets to form a line")
 	var step_size : float = 1.0 / (bullet_count - 1)
 	var t : float = 0
@@ -22,7 +22,7 @@ static func line_formation(source : Enemy, start_position : Vector3, end_positio
 		t += step_size
 
 static func circle_formation(source : Enemy, offset : Vector3, radius : float, 
-						bullet_count : int, bullet_config : BulletConfig, rotation : float = 0):
+						bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0):
 	assert(radius > 0, "Radius needs to be larger than 0")
 	var step_size : float = 2 * PI / bullet_count
 	var theta : float = 0
@@ -46,7 +46,7 @@ static func circle_formation(source : Enemy, offset : Vector3, radius : float,
 		theta += step_size
 
 static func polygon_formation(source : Enemy, offset : Vector3, radius : float, sides : int,
-						bullet_per_side : int, bullet_config : BulletConfig, rotation : float = 0):
+						bullet_per_side : int, bullet_config : Array[BulletConfig], rotation : float = 0):
 	assert(radius > 0, "Radius needs to be larger than 0")
 	assert(sides > 2, "Sides needs to be larger than 2")
 	
@@ -61,7 +61,7 @@ static func polygon_formation(source : Enemy, offset : Vector3, radius : float, 
 		source.bullet_buffer.pop_back()
 
 static func arc_formation(source : Enemy, offset : Vector3, radius : float, 
-						bullet_count : int, bullet_config : BulletConfig, rotation : float = 0):
+						bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0):
 	assert(radius > 0, "Radius needs to be larger than 0")
 	var step_size : float = 2 * PI / bullet_count
 	var theta : float = 0

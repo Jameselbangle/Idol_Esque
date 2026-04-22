@@ -34,6 +34,7 @@ func _ready() -> void:
 		5:
 			shield = BulletConfig.BulletColour.RED
 			$Sprite3D.modulate = Color.RED
+var config : Array[BulletConfig] = [BulletConfig.new()]
 
 func _process(float) -> void:
 	if _health <= 0:
@@ -41,22 +42,30 @@ func _process(float) -> void:
 	
 	if test:
 		test = false
-		var config : BulletConfig = BulletConfig.new()
-		config.movement_type = BulletConfig.MoveFunction.HOMING
-		config.direction = Vector3.RIGHT
-		config.speed = 5
-		config.acc = Vector3.LEFT * 0.1
-		config.target = Vector3(0, 1, 0)
+		
+		#config[0].movement_type = BulletConfig.MoveFunction.HOMING
+		#config[0].direction = Vector3.RIGHT
+		#config[0].speed = 5
+		#config[0].acc = Vector3.LEFT * 0.1
+		#config[0].target = Vector3(0, 1, 0)
+		config[0].tick_timer = 100000
+		
+		var con2 : BulletConfig = BulletConfig.new()
+		con2.movement_type = BulletConfig.MoveFunction.LINEAR
+		con2.direction = Vector3.LEFT
+		con2.speed = 1
+		con2.tick_timer = 120
+		
+		config.append(con2)
 		
 		print("TEST")
-		Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
-		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 12, config)
-		Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3.2, 6, 5, config)
-		Bullet_Factory.arc_formation(self, Vector3(0, 0, -3), 2, 18, config)
-		Bullet_Factory.single_formation(self, Vector3(-4, 0, 0), config)
+		#Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
+		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 8, config)
+		Bullet_Factory.circle_formation(self, Vector3.ZERO, 3, 8, config, PI / 8)
+		#Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3.2, 6, 5, config)
+		#Bullet_Factory.arc_formation(self, Vector3(0, 0, -3), 2, 18, config)
+		#Bullet_Factory.single_formation(self, Vector3(-4, 0, 0), config)
 		
-		for i in bullet_buffer:
-			i.transform = i.transform.rotated(Vector3.UP, 0)
 		shoot_bullet_buffer(PI)
 
 func _physics_process(_delta):

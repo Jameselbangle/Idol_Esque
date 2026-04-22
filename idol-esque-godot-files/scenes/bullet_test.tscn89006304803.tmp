@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://4lu6ovrtbgsj"]
+
+[ext_resource type="PackedScene" uid="uid://bp8m0ett22vxl" path="res://prefabs/enemy.tscn" id="1_8dvgp"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ysrml"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8dvgp"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_87sy2"]
+
+[node name="BulletTest" type="Node3D" unique_id=649448446]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=284096630]
+navigation_mesh = SubResource("NavigationMesh_ysrml")
+use_edge_connections = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1489809226]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1274264639]
+shape = SubResource("BoxShape3D_8dvgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=135505481]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_87sy2")
+
+[node name="Enemy" parent="." unique_id=454864309 instance=ExtResource("1_8dvgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1164485, 0)
+movement_speed = null
+_health = null
+shield = null
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=541020554]
+transform = Transform3D(1, 0, 0, 0, 0.53256613, 0.84638846, 0, -0.84638846, 0.53256613, 0, 6.5414925, 5.27748)
