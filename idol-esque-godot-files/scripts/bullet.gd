@@ -35,7 +35,9 @@ func _physics_process(_delta: float) -> void:
 		BulletConfig.MoveFunction.LINEAR:
 			velocity = config.direction * config.speed
 		BulletConfig.MoveFunction.QUADRATIC:
-			push_error("Function not implemented") 
+			velocity = config.direction * config.speed
+			velocity += config.acc * _delta
+			config.direction = velocity / config.speed
 		BulletConfig.MoveFunction.HOMING:
 			push_error("Function not implemented") 
 		BulletConfig.MoveFunction.WAVE:

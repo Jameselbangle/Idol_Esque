@@ -42,7 +42,11 @@ func _process(float) -> void:
 	if test:
 		test = false
 		var config : BulletConfig = BulletConfig.new()
+		config.movement_type = BulletConfig.MoveFunction.QUADRATIC
 		config.direction = Vector3.RIGHT
+		config.speed = 5
+		config.acc = Vector3.LEFT * 0.1
+		
 		print("TEST")
 		Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
 		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 12, config)
@@ -52,7 +56,6 @@ func _process(float) -> void:
 		
 		for i in bullet_buffer:
 			i.transform = i.transform.rotated(Vector3.UP, PI / 2)
-			print(i.rotation)
 		shoot_bullet_buffer()
 
 func _physics_process(_delta):
