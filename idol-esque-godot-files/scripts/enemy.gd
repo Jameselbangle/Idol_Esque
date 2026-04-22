@@ -42,21 +42,22 @@ func _process(float) -> void:
 	if test:
 		test = false
 		var config : BulletConfig = BulletConfig.new()
-		config.movement_type = BulletConfig.MoveFunction.QUADRATIC
+		config.movement_type = BulletConfig.MoveFunction.HOMING
 		config.direction = Vector3.RIGHT
 		config.speed = 5
 		config.acc = Vector3.LEFT * 0.1
+		config.target = Vector3(0, 1, 0)
 		
 		print("TEST")
 		Bullet_Factory.line_formation(self, Vector3(-3, 0, 4), Vector3(3, 0, 4), 5, config)
 		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 12, config)
-		Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3.2, 5, 5, config)
+		Bullet_Factory.polygon_formation(self, Vector3(0, 0, 0), 3.2, 6, 5, config)
 		Bullet_Factory.arc_formation(self, Vector3(0, 0, -3), 2, 18, config)
 		Bullet_Factory.single_formation(self, Vector3(-4, 0, 0), config)
 		
 		for i in bullet_buffer:
-			i.transform = i.transform.rotated(Vector3.UP, PI / 2)
-		shoot_bullet_buffer()
+			i.transform = i.transform.rotated(Vector3.UP, 0)
+		shoot_bullet_buffer(PI)
 
 func _physics_process(_delta):
 	# Do not query when the map has never synchronized and is empty.
@@ -115,8 +116,10 @@ func shoot(target_pos : Vector3 = Vector3.ZERO) -> void:
 	get_tree().current_scene.get_node("BulletManager").add_child(bullet)
 
 
-func shoot_bullet_buffer() -> void:
+func shoot_bullet_buffer(rotation : float = 0) -> void:
 	var current_scene : Node = get_tree().current_scene
+	for i in bullet_buffer:
+			i.transform = i.transform.rotated(Vector3.UP, rotation)
 	for bullet in bullet_buffer:
 		current_scene.add_child(bullet)
 	bullet_buffer.clear()
