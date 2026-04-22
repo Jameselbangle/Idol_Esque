@@ -1,10 +1,10 @@
 class_name EnemyBullet extends CharacterBody3D
 
-@export var config : BulletConfig
+@export var config : Array[BulletConfig] = []
 
 @onready var sprite: Sprite3D = $Sprite3D
 
-func setup(_config : BulletConfig, _position : Vector3 = Vector3.ZERO) :
+func setup(_config : Array[BulletConfig], _position : Vector3 = Vector3.ZERO) :
 	position = _position
 	config = _config
 	
@@ -12,7 +12,7 @@ func setup(_config : BulletConfig, _position : Vector3 = Vector3.ZERO) :
 	
 	collision_object.collision_mask = 0
 	
-	match config.bullet_colour:
+	match config[0].bullet_colour:
 		BulletConfig.BulletColour.RED:
 			$Sprite3D.modulate = Color.RED
 			collision_object.set_collision_mask_value(1, true)
@@ -30,14 +30,29 @@ func setup(_config : BulletConfig, _position : Vector3 = Vector3.ZERO) :
 			collision_object.set_collision_mask_value(2, true)
 	
 
+func _process(delta: float) -> void:
+	if config.is_empty():
+		return
+	
+	if (config.size() > 0 && config[0].tick_timer <= 0):
+		tick()
+		return
+	config[0].tick_timer -= delta
+
 func _physics_process(_delta: float) -> void:
-	match config.movement_type:
+	if config.is_empty():
+		return
+	match config[0].movement_type:
 		BulletConfig.MoveFunction.LINEAR:
-			velocity = config.direction * config.speed
+			velocity = config[0].direction * config[0].speed
 		BulletConfig.MoveFunction.QUADRATIC:
-			push_error("Function not implemented") 
+			velocity = config[0].direction * config[0].speed
+			velocity += config[0].acc * _delta
+			config[0].direction = velocity / config[0].speed
 		BulletConfig.MoveFunction.HOMING:
-			push_error("Function not implemented") 
+			var direction = config[0].target - position
+			direction = direction.normalized()
+			velocity += direction * config[0].speed
 		BulletConfig.MoveFunction.WAVE:
 			push_error("Function not implemented") 
 	
@@ -52,3 +67,9 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	print("area UNHANDLED " + area.name)
+
+func tick() -> void:
+	config.pop_front()
+	if (config.size() == 0):
+		queue_free()
+		return
