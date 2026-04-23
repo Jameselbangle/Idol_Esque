@@ -12,6 +12,10 @@ extends CharacterBody3D
 @export var den : int = 5
 var num : int = den - 1
 
+@export_group("Timers")
+@export var firerate : float = 0.2
+@export var chargerate : float = firerate * 2
+
 @export_group("Is Keyboard?")
 @export var keyboard_mode : bool = false
 
@@ -111,13 +115,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	## Handles firing bullets seperate from PhysicsProcess 
 	if event.is_action_pressed("fire") and event.device == player_count:
-		if $FireRate.time_left == 0:
+		if $FireRate.is_stopped():
 			shoot()
 		is_shooting = true
 	if event.is_action_released("fire") and event.device == player_count:
 		is_shooting = false
 	
-	## movement
+	## Charge fire attack
+	if event.is_action_pressed("charge_fire") and event.device == player_count:
+		$ChargeRate.start()
+	if event.is_action_released("charge_fire") and event.device == player_count:
+		if $ChargeRate.is_stopped():
+			charge_shoot()
+		print($ChargeRate.time_left)
+	
+	## Dash
+	# WHERE TF IS IT???
+	
+	## Movement
 	#joy_move = Input.get_vector("left","right","up","down")
 	joy_move = Vector2(
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_X),
@@ -130,7 +145,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_Y)
 	)
-
 
 
 ## TODO: Move input and moving code to _unhandled input
@@ -188,22 +202,39 @@ func KEY_rotate(rotate: float):
 
 ## Creating Bullets and firing
 func shoot():
-	$FireRate.start(.2)
+	$FireRate.start(firerate)
 	
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 20.0
 	
 	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
 	
-	var config : BulletConfig = BulletConfig.new()
-	config.direction = direction
-	config.speed = speed
-	config.bullet_colour = player_colour
+	var config : Array[BulletConfig] = [BulletConfig.new()]
+	config[0].direction = direction
+	config[0].speed = speed
+	config[0].bullet_colour = player_colour
+	
 	
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
+
+func charge_shoot():
+	var spawn_pos = bullet_spawn.global_position
+	var speed : float = 10.0
+	
+	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
+	
+	var config : Array[BulletConfig] = [BulletConfig.new()]
+	config[0].direction = direction
+	config[0].speed = speed
+	config[0].bullet_colour = player_colour
+	config[0].size = 1.0
+	
+	var bullet = bulletScene.instantiate()
+	bullet.setup(config, spawn_pos)
+	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
 func _on_fire_rate_timeout() -> void:
 	if is_shooting:

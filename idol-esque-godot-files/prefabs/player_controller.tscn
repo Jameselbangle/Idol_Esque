@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://j8ggnltygy01"]
 
-[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_tpop7"]
+[ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_tpop7"]
 [ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://art/characters/players/front.png" id="2_km0ln"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wr06p"]
@@ -22,6 +22,9 @@ texture = ExtResource("2_km0ln")
 
 [node name="FireRate" type="Timer" parent="." unique_id=644492934]
 wait_time = 0.001
+one_shot = true
+
+[node name="ChargeRate" type="Timer" parent="." unique_id=1521825256]
 one_shot = true
 
 [node name="BulletSpawn" type="Marker3D" parent="." unique_id=1953609992]
