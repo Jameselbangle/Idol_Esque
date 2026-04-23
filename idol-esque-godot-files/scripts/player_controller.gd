@@ -19,7 +19,8 @@ var slipperyness_lerp : float = base_slipperyness_lerp
 @export var denominator  : int = 5
 var num : int = denominator  - 1
 
-@export_group("Timers")
+@export_group("Bullets")
+@export var bullet_speed : float = 20.0
 @export var firerate : float = 0.2
 @export var charge_time_seconds : float = 0.8
 
@@ -243,20 +244,16 @@ func KEY_rotate(rot: float):
 
 ## Creating Bullets and firing
 func shoot():
-	$FireRate.start(.2)
-
+	fire_rate_timer.start()
 	fire_rate_timer.start(firerate)
-
 	
 	var spawn_pos = bullet_spawn.global_position
-	var speed : float = 20.0
-	
 	var direction := Vector3(sin(neck.rotation.y), 0, cos(neck.rotation.y))
 	
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 	config[0].direction = direction
-	config[0].speed = speed
 	config[0].bullet_colour = player_colour
+	config[0].speed = bullet_speed
 	
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
