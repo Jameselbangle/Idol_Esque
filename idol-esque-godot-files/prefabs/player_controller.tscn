@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://j8ggnltygy01"]
 
-[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_tpop7"]
+[ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_tpop7"]
 [ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://art/characters/players/front.png" id="2_km0ln"]
 [ext_resource type="Shader" uid="uid://ci6kbqhc1mw3u" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="3_io705"]
 [ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
@@ -55,10 +55,6 @@ texture = ExtResource("2_km0ln")
 wait_time = 0.001
 one_shot = true
 
-<<<<<<< Updated upstream
-[node name="BulletSpawn" type="Marker3D" parent="." unique_id=1953609992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7146696, 0.68829453)
-=======
 [node name="ChargeRate" type="Timer" parent="." unique_id=1521825256]
 one_shot = true
 
@@ -88,7 +84,6 @@ script = ExtResource("4_51y0g")
 max_value = 1.0
 background_color = Color(4.813075e-07, 0.7110055, 0.71102077, 1)
 progress_color = Color(0, 0, 0, 1)
->>>>>>> Stashed changes
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]

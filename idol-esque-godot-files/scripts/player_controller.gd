@@ -253,10 +253,10 @@ func shoot():
 	
 	var direction := Vector3(sin(neck.rotation.y), 0, cos(neck.rotation.y))
 	
-	var config : BulletConfig = BulletConfig.new()
-	config.direction = direction
-	config.speed = speed
-	config.bullet_colour = player_colour
+	var config : Array[BulletConfig] = [BulletConfig.new()]
+	config[0].direction = direction
+	config[0].speed = speed
+	config[0].bullet_colour = player_colour
 	
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
