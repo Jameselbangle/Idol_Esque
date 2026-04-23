@@ -36,7 +36,7 @@ func _ready() -> void:
 			$Sprite3D.modulate = Color.RED
 var config : Array[BulletConfig] = [BulletConfig.new()]
 
-func _process(float) -> void:
+func _process(floating) -> void:
 	if _health <= 0:
 		queue_free()
 	
@@ -125,10 +125,10 @@ func shoot(target_pos : Vector3 = Vector3.ZERO) -> void:
 	get_tree().current_scene.get_node("BulletManager").add_child(bullet)
 
 
-func shoot_bullet_buffer(rotation : float = 0) -> void:
+func shoot_bullet_buffer(rot : float = 0) -> void:
 	var current_scene : Node = get_tree().current_scene
 	for i in bullet_buffer:
-			i.transform = i.transform.rotated(Vector3.UP, rotation)
+			i.transform = i.transform.rotated(Vector3.UP, rot)
 	for bullet in bullet_buffer:
 		current_scene.add_child(bullet)
 	bullet_buffer.clear()
