@@ -19,13 +19,10 @@ var slipperyness_lerp : float = base_slipperyness_lerp
 @export var denominator  : int = 5
 var num : int = denominator  - 1
 
-<<<<<<< Updated upstream
-=======
 @export_group("Timers")
 @export var firerate : float = 0.2
 @export var charge_time_seconds : float = 0.8
 
->>>>>>> Stashed changes
 @export_group("Is Keyboard?")
 @export var keyboard_mode : bool = false
 
@@ -138,21 +135,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	## Handles firing bullets seperate from PhysicsProcess 
-<<<<<<< Updated upstream
-	if event.is_action_pressed("fire") and event.device == player_count:
-		if $FireRate.time_left == 0:
-=======
 	if event.is_action_pressed("fire") and event.device == 0 and !is_shooting and !is_charging:
 		if fire_rate_timer.is_stopped():
->>>>>>> Stashed changes
 			shoot()
 		is_shooting = true
 	elif event.is_action_released("fire") and event.device == 0 and is_shooting:
 		is_shooting = false
 	
-<<<<<<< Updated upstream
-	## movement
-=======
 	## Charge fire attack
 	if event.is_action_pressed("charge_fire") and event.device == player_count and !is_charging:
 		charge_rate_timer.start()
@@ -173,7 +162,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		bar_dash_cooldown.visible = true
 	
 	## Movement
->>>>>>> Stashed changes
 	#joy_move = Input.get_vector("left","right","up","down")
 	joy_move = Vector2(
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_X),
@@ -255,11 +243,10 @@ func KEY_rotate(rot: float):
 
 ## Creating Bullets and firing
 func shoot():
-<<<<<<< Updated upstream
 	$FireRate.start(.2)
-=======
+
 	fire_rate_timer.start(firerate)
->>>>>>> Stashed changes
+
 	
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 20.0
@@ -276,8 +263,6 @@ func shoot():
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
 
-<<<<<<< Updated upstream
-=======
 func charge_shoot():
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 10.0
@@ -294,7 +279,7 @@ func charge_shoot():
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
->>>>>>> Stashed changes
+
 func _on_fire_rate_timeout() -> void:
 	if is_shooting and !is_charging:
 		shoot()
