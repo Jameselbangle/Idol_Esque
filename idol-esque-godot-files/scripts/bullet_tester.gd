@@ -9,11 +9,12 @@ func _process(delta: float) -> void:
 	if test:
 		test = false
 		var config : Array[BulletConfig] = [BulletConfig.new()]
-		config[0].tick_timer = 60
+		config[0].tick_timer = 10
 		
 		var con2 : BulletConfig = BulletConfig.new()
-		con2.speed = 0.1
-		con2.direction = Vector3.RIGHT
+		con2.speed = -2
+		con2.movement_type = BulletConfig.MoveFunction.TARGET
+		con2.target = Vector3.UP
 		con2.tick_timer = 60
 		config.append(con2)
 		

@@ -1,6 +1,6 @@
 class_name BulletConfig extends Resource
 
-enum MoveFunction {LINEAR, QUADRATIC, HOMING, WAVE}
+enum MoveFunction {LINEAR, QUADRATIC, HOMING, WAVE, TARGET}
 enum BulletColour {ENEMY, RED, YELLOW, BLUE}
 
 @export var speed : float = 1.0

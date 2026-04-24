@@ -56,7 +56,13 @@ func _physics_process(_delta: float) -> void:
 			direction = direction.normalized()
 			velocity += direction * config[tick_step].speed
 		BulletConfig.MoveFunction.WAVE:
-			push_error("Function not implemented") 
+			push_error("Function not implemented")
+		BulletConfig.MoveFunction.TARGET:
+			var dir = config[tick_step].target - position
+			dir = dir.normalized()
+			config[tick_step].direction = dir
+			config[tick_step].movement_type = BulletConfig.MoveFunction.TARGET
+			velocity = dir * config[tick_step].speed
 	
 	move_and_slide()
 
@@ -70,11 +76,7 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	print("area UNHANDLED " + area.name)
 
 func tick() -> void:
-	print(tick_step)
 	tick_step += 1
-	print(tick_step)
-	print("TICK")
-	print()
 	if (config.size() <= tick_step):
 		queue_free()
 		return

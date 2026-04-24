@@ -24,6 +24,9 @@ static func line_formation(source : Enemy, start_position : Vector3, end_positio
 static func circle_formation(source : Enemy, offset : Vector3, radius : float, 
 						bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0):
 	assert(radius > 0, "Radius needs to be larger than 0")
+	
+	print(bullet_config[0].target)
+	
 	var step_size : float = 2 * PI / bullet_count
 	var theta : float = 0
 	
