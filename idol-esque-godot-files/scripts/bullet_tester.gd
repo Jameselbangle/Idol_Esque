@@ -9,12 +9,16 @@ func _process(delta: float) -> void:
 	if test:
 		test = false
 		var config : Array[BulletConfig] = [BulletConfig.new()]
+		config[0].tick_timer = 60
 		
-		print("self is: ", self)
-		print("has property: ", "enemy_bullet_scene" in self)
+		var con2 : BulletConfig = BulletConfig.new()
+		con2.speed = 0.1
+		con2.direction = Vector3.RIGHT
+		con2.tick_timer = 60
+		config.append(con2)
 		
-		Bullet_Factory.circle_formation(self, Vector3.ZERO, 3, 8, config)
-		Bullet_Factory.circle_formation(self, Vector3.ZERO, 3.5, 8, config, PI / 8)
+		Bullet_Factory.circle_formation(self, Vector3.ZERO, 1, 8, config)
+		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 8, config, PI / 8)
 		
 		shoot()
 	
