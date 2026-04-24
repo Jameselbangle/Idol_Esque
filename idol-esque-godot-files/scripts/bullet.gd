@@ -61,7 +61,6 @@ func _physics_process(_delta: float) -> void:
 			var dir = config[tick_step].target - position
 			dir = dir.normalized()
 			config[tick_step].direction = dir
-			config[tick_step].movement_type = BulletConfig.MoveFunction.TARGET
 			velocity = dir * config[tick_step].speed
 	
 	move_and_slide()
@@ -69,7 +68,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Enemy:
-		body.damage(1, config)
+		body.damage(1, config[tick_step])
 	queue_free()
 
 func _on_area_3d_area_entered(area: Area3D) -> void:

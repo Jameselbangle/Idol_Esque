@@ -12,7 +12,11 @@
 
 var _bullet_buffer = []
 
+# Setup pattern functions in ready
+var patterns : Array[Callable] = []
+
 @abstract func choose_target() -> Vector3
+@abstract func choose_target_position() -> Vector3
 
 #TODO: Should be made ABSTRACT
 func _physics_process(_delta):

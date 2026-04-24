@@ -1,0 +1,53 @@
+[gd_resource type="BehaviorTree" format=3 uid="uid://bhdlsb8xbnorc"]
+
+[ext_resource type="Script" uid="uid://biqf2nmojq8oe" path="res://ai/tasks/set_target_pos.gd" id="1_wkxx6"]
+[ext_resource type="Script" uid="uid://wx86bpmoh23u" path="res://ai/tasks/shoot_target.gd" id="2_rhiej"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_4epn5"]
+
+[sub_resource type="BTAction" id="BTAction_08uao"]
+script = ExtResource("1_wkxx6")
+
+[sub_resource type="BTCooldown" id="BTCooldown_wkxx6"]
+children = [SubResource("BTAction_08uao")]
+duration = 6.0
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_wkxx6"]
+children = [SubResource("BTCooldown_wkxx6")]
+
+[sub_resource type="BTComment" id="BTComment_785rd"]
+custom_name = "CHARGE!"
+
+[sub_resource type="BTWait" id="BTWait_wdu5k"]
+
+[sub_resource type="BTCooldown" id="BTCooldown_0pxof"]
+children = [SubResource("BTComment_785rd"), SubResource("BTWait_wdu5k")]
+duration = 5.0
+
+[sub_resource type="BTProbability" id="BTProbability_njg4o"]
+children = [SubResource("BTCooldown_0pxof")]
+run_chance = 0.6
+
+[sub_resource type="BTComment" id="BTComment_tg22u"]
+custom_name = "SCREAM!"
+
+[sub_resource type="BTAction" id="BTAction_il0rn"]
+script = ExtResource("2_rhiej")
+attackIndex = null
+
+[sub_resource type="BTCooldown" id="BTCooldown_0li1r"]
+children = [SubResource("BTComment_tg22u"), SubResource("BTAction_il0rn")]
+duration = 5.0
+
+[sub_resource type="BTProbability" id="BTProbability_qi4kf"]
+children = [SubResource("BTCooldown_0li1r")]
+
+[sub_resource type="BTSelector" id="BTSelector_alvvb"]
+children = [SubResource("BTProbability_njg4o"), SubResource("BTProbability_qi4kf")]
+
+[sub_resource type="BTSequence" id="BTSequence_4epn5"]
+children = [SubResource("BTAlwaysSucceed_wkxx6"), SubResource("BTSelector_alvvb")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_4epn5")
+root_task = SubResource("BTSequence_4epn5")

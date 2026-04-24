@@ -14,6 +14,7 @@ duration = 5.0
 
 [sub_resource type="BTAction" id="BTAction_vsplb"]
 script = ExtResource("2_j2rqp")
+attackIndex = null
 
 [sub_resource type="BTCooldown" id="BTCooldown_0oelj"]
 children = [SubResource("BTAction_vsplb")]
