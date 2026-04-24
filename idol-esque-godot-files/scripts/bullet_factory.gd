@@ -39,10 +39,10 @@ static func circle_formation(source : Enemy, offset : Vector3, radius : float,
 		spawn_pos.x += x_pos 
 		spawn_pos.z += z_pos
 		
-		var bullet = source.enemy_bullet_scene.instantiate()
+		var bullet = source._bullet_scene.instantiate()
 		bullet.setup(bullet_config, spawn_pos)
 		bullet.transform = bullet.transform.rotated(Vector3.UP, rotation)
-		source.bullet_buffer.append(bullet)
+		source._bullet_buffer.append(bullet)
 		theta += step_size
 
 static func polygon_formation(source : Enemy, offset : Vector3, radius : float, sides : int,
