@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://j8ggnltygy01"]
+
+[ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_tpop7"]
+[ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://art/characters/players/front.png" id="2_km0ln"]
+[ext_resource type="Shader" uid="uid://ci6kbqhc1mw3u" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="3_io705"]
+[ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_io705"]
+radius = 0.5366211
+height = 1.604248
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnhpu"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_io705")
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/progress_color = Color(0, 1, 0, 1)
+shader_parameter/progress_value = 50.0
+shader_parameter/billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_a22ng"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_bnhpu")
+size = Vector2(1, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_io705"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_io705")
+shader_parameter/background_color = Color(4.813075e-07, 0.7110055, 0.71102077, 1)
+shader_parameter/progress_color = Color(0, 0, 0, 1)
+shader_parameter/progress_value = 50.0
+shader_parameter/billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_51y0g"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_io705")
+size = Vector2(1, 0.1)
+
+[node name="player_controller" type="CharacterBody3D" unique_id=1761623861]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_tpop7")
+
+[node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81677246, -0.002)
+shape = SubResource("CapsuleShape3D_io705")
+
+[node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, 0)
+billboard = 1
+texture = ExtResource("2_km0ln")
+
+[node name="FireRate" type="Timer" parent="." unique_id=644492934]
+wait_time = 0.001
+one_shot = true
+
+[node name="ChargeRate" type="Timer" parent="." unique_id=1521825256]
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="." unique_id=1747015632]
+one_shot = true
+
+[node name="DashLength" type="Timer" parent="." unique_id=1533560143]
+one_shot = true
+
+[node name="neck" type="Node3D" parent="." unique_id=659936507]
+
+[node name="BulletSpawn" type="Marker3D" parent="neck" unique_id=1953609992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715, 0.688)
+
+[node name="ChargeProgressBar" type="MeshInstance3D" parent="." unique_id=1774778579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8251066)
+visible = false
+mesh = SubResource("QuadMesh_a22ng")
+script = ExtResource("4_51y0g")
+max_value = 1.0
+
+[node name="DashProgressBar" type="MeshInstance3D" parent="." unique_id=808747772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1524185)
+visible = false
+mesh = SubResource("QuadMesh_51y0g")
+script = ExtResource("4_51y0g")
+max_value = 1.0
+background_color = Color(4.813075e-07, 0.7110055, 0.71102077, 1)
+progress_color = Color(0, 0, 0, 1)
+
+[connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]

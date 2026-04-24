@@ -11,7 +11,7 @@ var slipperyness_lerp : float = base_slipperyness_lerp
 
 @export_group("Dash")
 @export var dash_cooldown : float = 1.0
-@export var dash_length_seconds : float = 0.15
+@export var dash_length_seconds : float = 0.3
 @export var dash_speed : float = 30.0
 
 @export_group("Rotation Angle")
@@ -52,6 +52,7 @@ var joy_look : Vector2
 
 var is_shooting: bool = false
 var is_charging: bool = false
+var is_dashing: bool = false
 var can_dash : bool = true
 
 ## rotating character with joystick
@@ -136,11 +137,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	## Handles firing bullets seperate from PhysicsProcess 
-	if event.is_action_pressed("fire") and event.device == 0 and !is_shooting and !is_charging:
+	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging:
 		if fire_rate_timer.is_stopped():
 			shoot()
 		is_shooting = true
-	elif event.is_action_released("fire") and event.device == 0 and is_shooting:
+	elif event.is_action_released("fire") and event.device == player_count and is_shooting:
 		is_shooting = false
 	
 	## Charge fire attack
@@ -163,7 +164,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		bar_dash_cooldown.visible = true
 	
 	## Movement
-	#joy_move = Input.get_vector("left","right","up","down")
+	#if (event.is_action("left") or event.is_action("right") or event.is_action("up") or event.is_action("down")) and event.device == player_count:
+		#joy_move = Input.get_vector("left","right","up","down")
 	joy_move = Vector2(
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_X),
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_Y)
@@ -220,7 +222,7 @@ func _physics_process(delta: float) -> void:
 		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
 		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
 	
-	## sprite rotation code
+	## Sprite rotation code
 	if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
 		player_sprite.texture = sprites["back"]
 	elif neck.rotation.y > (PI/denominator ):
@@ -235,8 +237,22 @@ func _physics_process(delta: float) -> void:
 	if neck.rotation.y < -(PI):
 		neck.rotation.y += 2 * PI
 	
+	## Dash speed code
+	if is_dashing:
+		## Linear decrease in speed
+		var time_progressed_ratio = (1 / dash_length_timer.wait_time) * (dash_length_timer.wait_time - dash_length_timer.time_left)
+		var diff = time_progressed_ratio * (dash_speed - move_speed)
+		
+		## Exponentional INC in speed
+		#var time_left_ratio = 1 - ((1 / dash_length_timer.wait_time) * (dash_length_timer.wait_time - dash_length_timer.time_left))
+		#var diff = ((1/(time_left_ratio + 0.9)**2)-0.24) * (dash_speed - move_speed)
+		
+		var temp_speed = dash_speed - diff
+		velocity = velocity.normalized() * temp_speed
+	
 	## Use velocity to actually move
 	move_and_slide()
+
 
 func KEY_rotate(rot: float):
 	target_angle = neck.rotation.y + (rot * (PI / 2))
@@ -259,7 +275,6 @@ func shoot():
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
-
 func charge_shoot():
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 10.0
@@ -276,24 +291,31 @@ func charge_shoot():
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
-
 func _on_fire_rate_timeout() -> void:
 	if is_shooting and !is_charging:
 		shoot()
 
 
 func dash():
+	## Makes dash Unable & starts timers
 	can_dash = false
+	is_dashing = true
 	dash_cooldown_timer.start()
 	dash_length_timer.start()
 	
-	velocity = velocity.normalized() * dash_speed
-	slipperyness_lerp = base_slipperyness_lerp / 100
+	## Dash Movement enabled
+	#velocity = velocity.normalized() * dash_speed
+	slipperyness_lerp = 0
 
+## Dash Movement disabled
 func _on_dash_length_timeout() -> void:
-	velocity = velocity / dash_speed 
+	is_dashing = false
 	slipperyness_lerp = base_slipperyness_lerp
+	
+	## Enable/disable for precise stopping/starting
+	#velocity = velocity / dash_speed 
 
+## Re-enables dash 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	bar_dash_cooldown.visible = false
