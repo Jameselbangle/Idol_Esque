@@ -17,7 +17,6 @@ func _ready() -> void:
 	patterns.append(circle_burst)
 
 func circle_burst(_target):
-	print("CIRCLE BURST")
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 
 	config[0].speed = -2

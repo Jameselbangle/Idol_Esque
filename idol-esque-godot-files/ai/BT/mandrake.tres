@@ -33,7 +33,6 @@ custom_name = "SCREAM!"
 
 [sub_resource type="BTAction" id="BTAction_il0rn"]
 script = ExtResource("2_rhiej")
-attackIndex = null
 
 [sub_resource type="BTCooldown" id="BTCooldown_0li1r"]
 children = [SubResource("BTComment_tg22u"), SubResource("BTAction_il0rn")]
