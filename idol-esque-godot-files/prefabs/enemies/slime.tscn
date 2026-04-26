@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://bp8m0ett22vxl"]
+[gd_scene format=3 uid="uid://co7jmjwp5sh5s"]
 
-[ext_resource type="BehaviorTree" uid="uid://ypkqohami6qb" path="res://ai/BT/enemy.tres" id="4_2nw32"]
+[ext_resource type="Texture2D" uid="uid://d13x3j3euevdd" path="res://art/characters/enemies/slime/cute_slime_forward.png" id="1_5jc4t"]
+[ext_resource type="BehaviorTree" uid="uid://bmvrr33q65286" path="res://slime.tres" id="2_uocvo"]
 
-[sub_resource type="BlackboardPlan" id="BlackboardPlan_c4w8v"]
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_5jc4t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_md0e3"]
 size = Vector3(1.6901245, 1.6150513, 1.0930176)
@@ -14,7 +15,7 @@ loop_mode = 1
 [sub_resource type="Animation" id="Animation_31a65"]
 resource_name = "scream"
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7wh05"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4l1t8"]
 _data = {
 &"idle": SubResource("Animation_jt5h8"),
 &"scream": SubResource("Animation_31a65")
@@ -26,6 +27,7 @@ collision_mask = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1195072125]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+texture = ExtResource("1_5jc4t")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=189828419]
 avoidance_enabled = true
@@ -37,12 +39,12 @@ debug_path_custom_color = Color(0, 1, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3226261, 0)
 
 [node name="BTPlayer" type="BTPlayer" parent="." unique_id=615294950]
-behavior_tree = ExtResource("4_2nw32")
-blackboard_plan = SubResource("BlackboardPlan_c4w8v")
+behavior_tree = ExtResource("2_uocvo")
+blackboard_plan = SubResource("BlackboardPlan_5jc4t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1034790952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012561798, -0.0032043457, 0.00012207031)
 shape = SubResource("BoxShape3D_md0e3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1529833441]
-libraries/ = SubResource("AnimationLibrary_7wh05")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780835842]
+libraries/ = SubResource("AnimationLibrary_4l1t8")

@@ -34,8 +34,11 @@ custom_name = "SCREAM!"
 [sub_resource type="BTAction" id="BTAction_il0rn"]
 script = ExtResource("2_rhiej")
 
+[sub_resource type="BTSequence" id="BTSequence_08uao"]
+children = [SubResource("BTAction_il0rn")]
+
 [sub_resource type="BTCooldown" id="BTCooldown_0li1r"]
-children = [SubResource("BTComment_tg22u"), SubResource("BTAction_il0rn")]
+children = [SubResource("BTComment_tg22u"), SubResource("BTSequence_08uao")]
 duration = 5.0
 
 [sub_resource type="BTProbability" id="BTProbability_qi4kf"]
