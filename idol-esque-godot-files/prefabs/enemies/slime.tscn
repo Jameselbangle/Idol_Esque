@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://co7jmjwp5sh5s"]
 
 [ext_resource type="Texture2D" uid="uid://d13x3j3euevdd" path="res://art/characters/enemies/slime/cute_slime_forward.png" id="1_5jc4t"]
+[ext_resource type="Script" uid="uid://4n6wx6cfecvo" path="res://scripts/enemies/slime.gd" id="1_qrp3d"]
 [ext_resource type="BehaviorTree" uid="uid://bmvrr33q65286" path="res://slime.tres" id="2_uocvo"]
+[ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_v3pje"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5jc4t"]
 
@@ -21,16 +23,18 @@ _data = {
 &"scream": SubResource("Animation_31a65")
 }
 
-[node name="Enemy" type="CharacterBody3D" unique_id=454864309]
+[node name="Slime" type="CharacterBody3D" unique_id=454864309]
 collision_layer = 4
 collision_mask = 0
+script = ExtResource("1_qrp3d")
+_bullet_scene = ExtResource("2_v3pje")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1195072125]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
 texture = ExtResource("1_5jc4t")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=189828419]
-avoidance_enabled = true
+target_desired_distance = 1.5
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4lu6ovrtbgsj"]
 
-[ext_resource type="Script" uid="uid://bc0453lsuq0ln" path="res://scripts/bullet_tester.gd" id="1_8dvgp"]
+[ext_resource type="Script" uid="uid://bc0453lsuq0ln" path="res://scripts/bullets/bullet_tester.gd" id="1_8dvgp"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_87sy2"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ysrml"]

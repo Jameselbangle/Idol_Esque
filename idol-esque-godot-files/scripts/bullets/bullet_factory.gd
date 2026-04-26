@@ -15,10 +15,10 @@ static func line_formation(source : Enemy, start_position : Vector3, end_positio
 
 	while t <= 1:
 		var spawn_pos : Vector3 = source.position + start_position.lerp(end_position, t)
-		var bullet = source.enemy_bullet_scene.instantiate()
+		var bullet = source._bullet_scene.instantiate()
 		bullet.setup(bullet_config, spawn_pos)
 		bullet.transform = bullet.transform.rotated(Vector3.UP, rotation)
-		source.bullet_buffer.append(bullet)
+		source._bullet_buffer.append(bullet)
 		t += step_size
 
 static func circle_formation(source : Enemy, offset : Vector3, radius : float, 

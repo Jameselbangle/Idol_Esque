@@ -13,17 +13,14 @@ func _process(delta: float) -> void:
 		first_press = false
 		
 		var config : Array[BulletConfig] = [BulletConfig.new()]
-		config[0].tick_timer = 0
 	
-		var con2 : BulletConfig = BulletConfig.new()
-		con2.speed = -2
-		con2.movement_type = BulletConfig.MoveFunction.TARGET
-		con2.target = Vector3.UP
-		con2.tick_timer = 60
-		config.append(con2)
+		config[0].speed = 2
+		config[0].movement_type = BulletConfig.MoveFunction.LINEAR
+		config[0].direction = (Vector3(1, 0, 3) - position).normalized()
+		config[0].direction.y = 0
+		config[0].tick_timer = 600
 	
-		Bullet_Factory.circle_formation(self, Vector3.ZERO, 1, 8, config)
-		Bullet_Factory.circle_formation(self, Vector3.ZERO, 2, 8, config, PI / 8)
+		Bullet_Factory.line_formation(self, Vector3.ZERO, config[0].direction * 2, 3, config)
 	
 		shoot()
 	

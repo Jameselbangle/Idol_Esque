@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxlobb1sm4bde"]
 
-[ext_resource type="Script" uid="uid://cnrrt1lhlq70p" path="res://scripts/mandrake.gd" id="1_vnqm5"]
+[ext_resource type="Script" uid="uid://cnrrt1lhlq70p" path="res://scripts/enemies/mandrake.gd" id="1_vnqm5"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_jt5h8"]
 [ext_resource type="Texture2D" uid="uid://bcw51iyq5q05g" path="res://art/characters/enemies/mandrake/original/mandrake_original_forward.png" id="2_uvdid"]
 [ext_resource type="BehaviorTree" uid="uid://bhdlsb8xbnorc" path="res://ai/BT/mandrake.tres" id="3_uvdid"]

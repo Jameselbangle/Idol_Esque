@@ -16,7 +16,7 @@ func choose_target_position() -> Vector3:
 func _ready() -> void:
 	patterns.append(circle_burst)
 
-func circle_burst(_target):
+func circle_burst():
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 
 	config[0].speed = -2

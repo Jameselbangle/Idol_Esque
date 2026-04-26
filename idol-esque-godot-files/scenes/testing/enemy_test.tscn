@@ -68,8 +68,8 @@ shape = SubResource("BoxShape3D_8dvgp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("BoxMesh_87sy2")
 
-[node name="Enemy" parent="NavigationRegion3D" unique_id=454864309 instance=ExtResource("1_44dbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1080713, 0)
+[node name="Slime" parent="NavigationRegion3D" unique_id=454864309 instance=ExtResource("1_44dbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9783038, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=541020554]
 transform = Transform3D(1, 0, 0, 0, 0.53256613, 0.84638846, 0, -0.84638846, 0.53256613, 0, 6.5414925, 5.27748)

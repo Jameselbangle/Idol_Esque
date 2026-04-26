@@ -1,6 +1,30 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://bmvrr33q65286"]
 
+[ext_resource type="Script" uid="uid://biqf2nmojq8oe" path="res://ai/tasks/set_target_pos.gd" id="1_e3ssi"]
+[ext_resource type="Script" uid="uid://wx86bpmoh23u" path="res://ai/tasks/shoot_target.gd" id="2_uvce1"]
+
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_kfudi"]
+
+[sub_resource type="BTAction" id="BTAction_uvce1"]
+script = ExtResource("1_e3ssi")
+
+[sub_resource type="BTCooldown" id="BTCooldown_h51et"]
+children = [SubResource("BTAction_uvce1")]
+duration = 6.0
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_yb2hr"]
+children = [SubResource("BTCooldown_h51et")]
+
+[sub_resource type="BTAction" id="BTAction_h51et"]
+script = ExtResource("2_uvce1")
+
+[sub_resource type="BTCooldown" id="BTCooldown_uvce1"]
+children = [SubResource("BTAction_h51et")]
+duration = 2.0
+
+[sub_resource type="BTSequence" id="BTSequence_4tcyf"]
+children = [SubResource("BTAlwaysSucceed_yb2hr"), SubResource("BTCooldown_uvce1")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_kfudi")
+root_task = SubResource("BTSequence_4tcyf")
