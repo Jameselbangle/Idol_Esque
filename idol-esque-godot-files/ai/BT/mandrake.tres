@@ -1,4 +1,4 @@
-[gd_resource type="BehaviorTree" format=3 uid="uid://bhdlsb8xbnorc"]
+[gd_resource type="BehaviorTree" format=3 uid="uid://b1ijp7cxnqnsp"]
 
 [ext_resource type="Script" uid="uid://biqf2nmojq8oe" path="res://ai/tasks/set_target_pos.gd" id="1_wkxx6"]
 [ext_resource type="Script" uid="uid://wx86bpmoh23u" path="res://ai/tasks/shoot_target.gd" id="2_rhiej"]
@@ -10,7 +10,7 @@ script = ExtResource("1_wkxx6")
 
 [sub_resource type="BTCooldown" id="BTCooldown_wkxx6"]
 children = [SubResource("BTAction_08uao")]
-duration = 6.0
+duration = 0.0
 
 [sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_wkxx6"]
 children = [SubResource("BTCooldown_wkxx6")]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d13x3j3euevdd" path="res://art/characters/enemies/slime/cute_slime_forward.png" id="1_5jc4t"]
 [ext_resource type="Script" uid="uid://4n6wx6cfecvo" path="res://scripts/enemies/slime.gd" id="1_qrp3d"]
-[ext_resource type="BehaviorTree" uid="uid://bmvrr33q65286" path="res://slime.tres" id="2_uocvo"]
+[ext_resource type="BehaviorTree" uid="uid://xkugsms15caq" path="res://slime.tres" id="2_uocvo"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_v3pje"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5jc4t"]
@@ -34,7 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 texture = ExtResource("1_5jc4t")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=189828419]
-target_desired_distance = 1.5
+target_desired_distance = 0.5
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)

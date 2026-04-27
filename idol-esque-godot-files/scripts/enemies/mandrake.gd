@@ -1,22 +1,31 @@
 extends Enemy
 
 func choose_target() -> Vector3:
-	return Vector3.ZERO
+	var targets = get_tree().get_nodes_in_group("players")
+	assert(!targets.is_empty(), "'players' group is empty")
+	
+	var current_target = targets[0]
+	
+	for i in targets:
+		if position.distance_to(i.position) < position.distance_to(current_target.position):
+			current_target = i
+	return current_target.position
 
 func choose_target_position() -> Vector3:
-	var options = [
-		Vector3(2.5, 0, 2.5),
-		Vector3(2.5, 0, -2.5),
-		Vector3(-2.5, 0, 2.5),
-		Vector3(-2.5, 0, -2.5),
-		Vector3.ZERO
-	]
-	return options[randi() % options.size()]
+	var targets = get_tree().get_nodes_in_group("players")
+	assert(!targets.is_empty(), "'players' group is empty")
+	
+	var current_target = targets[0]
+	
+	for i in targets:
+		if position.distance_to(i.position) < position.distance_to(current_target.position):
+			current_target = i
+	return current_target.position
 
 func _ready() -> void:
 	patterns.append(circle_burst)
 
-func circle_burst():
+func circle_burst(_target):
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 
 	config[0].speed = -2
