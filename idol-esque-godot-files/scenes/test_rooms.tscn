@@ -125,6 +125,9 @@ size = Vector3(1, 1, 1.1863098)
 
 [node name="Camera3D2" type="Camera3D" parent="Mid_room_1" unique_id=1308390062]
 transform = Transform3D(0.39762774, 0, 0, 0, 0.5203589, 0.7376321, 0, -0.3004294, 0.21193643, -0.441, 12, 1.988)
+
+[node name="testCanera" type="Camera3D" parent="." unique_id=693628821]
+transform = Transform3D(-0.06183247, 0.57818705, -0.8135579, 0, 0.8151176, 0.5792955, 0.9980866, 0.03581927, -0.05040073, 5.2761545, 6.900038, -4.3504066)
 current = true
 
 [node name="Mid_room_2" type="Node3D" parent="." unique_id=1972130241]
