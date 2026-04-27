@@ -7,8 +7,10 @@ class_name EnemyBullet extends CharacterBody3D
 var tick_step = 0
 
 func setup(_config : Array[BulletConfig], _position : Vector3 = Vector3.ZERO) :
-	position = _position
 	config = _config
+	position = _position + Vector3(0, config[0].size/2, 0)
+	
+	scale = Vector3(config[0].size, config[0].size, config[0].size)
 	
 	var collision_object : Area3D = $Area3D
 	
