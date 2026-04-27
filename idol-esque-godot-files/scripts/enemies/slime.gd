@@ -23,6 +23,9 @@ func burst_shot(_target : Vector3):
 	config[0].movement_type = BulletConfig.MoveFunction.LINEAR
 	config[0].direction = (_target - position).normalized()
 	config[0].direction.y = 0
+	
+	if (config[0].direction == Vector3.ZERO): return
+	
 	config[0].tick_timer = 600
 	
 	Bullet_Factory.line_formation(self, Vector3.ZERO, config[0].direction * 2, 3, config)
