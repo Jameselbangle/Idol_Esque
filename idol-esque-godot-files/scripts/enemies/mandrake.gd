@@ -10,7 +10,7 @@ func choose_target() -> Vector3:
 	for i in targets:
 		if i.is_dead:
 			pass
-		if position.distance_to(i.position) < position.distance_to(current_target.position):
+		elif position.distance_to(i.position) < position.distance_to(current_target.position):
 			current_target = i
 	return current_target.position
 

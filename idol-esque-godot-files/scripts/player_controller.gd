@@ -416,6 +416,9 @@ func _on_revive_area_body_exited(body: Node3D) -> void:
 
 ## Revive timer
 func _on_revive_timer_timeout() -> void:
+	revive()
+
+func revive():
 	health = 5
 	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
 	is_dead = false
@@ -423,7 +426,6 @@ func _on_revive_timer_timeout() -> void:
 	revive_area.monitoring = false
 	bar_revive.visible = false
 	player_sprite.texture = sprites["front"]
-
 
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
