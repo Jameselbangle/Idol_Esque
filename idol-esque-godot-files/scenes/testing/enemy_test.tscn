@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://co7jmjwp5sh5s" path="res://prefabs/enemies/slime.tscn" id="1_44dbt"]
 [ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://art/characters/players/front.png" id="2_q02w0"]
+[ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="3_v3rb3"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ysrml"]
 vertices = PackedVector3Array(-4.5, 2, -4.5, -4.5, 2, -4, 4.5, 2, -4, 4.5, 2, -4.5, -3.25, 1, -3.25, -3.25, 1, 3.5, 3.5, 1, 3.5, 3.5, 1, -3.25)
@@ -92,3 +93,6 @@ shape = SubResource("BoxShape3D_v3rb3")
 [node name="Sprite3D" type="Sprite3D" parent="Target" unique_id=1551503382]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
 texture = ExtResource("2_q02w0")
+
+[node name="Spawner" parent="." unique_id=1742698435 instance=ExtResource("3_v3rb3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
