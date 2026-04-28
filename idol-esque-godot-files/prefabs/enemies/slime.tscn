@@ -23,6 +23,10 @@ _data = {
 &"scream": SubResource("Animation_31a65")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_v3pje"]
+radius = 0.6
+height = 0.4
+
 [node name="Slime" type="CharacterBody3D" unique_id=454864309]
 collision_layer = 4
 collision_mask = 0
@@ -52,3 +56,8 @@ shape = SubResource("BoxShape3D_md0e3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780835842]
 libraries/ = SubResource("AnimationLibrary_4l1t8")
+
+[node name="Shadow" type="MeshInstance3D" parent="." unique_id=1112190252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, -0.24706738, 0)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_v3pje")

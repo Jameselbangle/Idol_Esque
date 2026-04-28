@@ -17,6 +17,9 @@ glow_enabled = true
 
 [node name="Node" type="Node" unique_id=95474739]
 
+[node name="testCanera" type="Camera3D" parent="." unique_id=693628821]
+transform = Transform3D(-0.06183246, 0.57818705, -0.8135579, 0, 0.8151176, 0.5792955, 0.9980866, 0.035819266, -0.050400726, 5.2761545, 6.900038, -4.3504066)
+
 [node name="small_room_1" type="Node3D" parent="." unique_id=1077050944]
 transform = Transform3D(1.2218595, 0, 0, 0, 1.1077828, 0, 0, 0, 1, 0, 0, 0)
 
@@ -125,9 +128,6 @@ size = Vector3(1, 1, 1.1863098)
 
 [node name="Camera3D2" type="Camera3D" parent="Mid_room_1" unique_id=1308390062]
 transform = Transform3D(0.39762774, 0, 0, 0, 0.5203589, 0.7376321, 0, -0.3004294, 0.21193643, -0.441, 12, 1.988)
-
-[node name="testCanera" type="Camera3D" parent="." unique_id=693628821]
-transform = Transform3D(-0.06183247, 0.57818705, -0.8135579, 0, 0.8151176, 0.5792955, 0.9980866, 0.03581927, -0.05040073, 5.2761545, 6.900038, -4.3504066)
 current = true
 
 [node name="Mid_room_2" type="Node3D" parent="." unique_id=1972130241]
@@ -176,16 +176,20 @@ transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0
 [node name="player_1" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.36611, 0.032012463, -3.803069)
 player_colour = 1
+charge_time_seconds = 0.8
+keyboard_mode = true
 
 [node name="player_2" parent="playrers" unique_id=225536931 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.36611, 0.032012463, -3.803069)
 player_count = 1
 player_colour = 2
+charge_time_seconds = 0.8
 
 [node name="player_3" parent="playrers" unique_id=1527669421 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.36611, 0.032012463, -3.803069)
 player_count = 2
 player_colour = 3
+charge_time_seconds = 0.8
 
 [node name="bullet_manager" type="Node" parent="." unique_id=1767652969]
 

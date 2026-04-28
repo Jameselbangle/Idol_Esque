@@ -21,7 +21,6 @@ var num : int = denominator  - 1
 
 @export_group("Bullets")
 @export var bullet_speed : float = 20.0
-@export var firerate : float = 0.2
 @export var charge_time_seconds : float = 0.8
 
 @export_group("Timers")
@@ -50,6 +49,7 @@ var sprites = {
 @onready var bar_dash_cooldown : ProgressBar3D = $DashProgressBar
 
 @onready var neck : Node3D = $neck
+@onready var character_body = get_node(".")
 
 var joy_move : Vector2
 var joy_look : Vector2
@@ -134,6 +134,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			is_shooting = true
 		if (event.is_action_released("fire_1") and player_count == 0) or (event.is_action_released("fire_2") and player_count == 1) or (event.is_action_released("fire_3") and player_count == 2):
 			is_shooting = false
+		
+		## Dash
+		if (can_dash and event.is_action_pressed("dash_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
+			dash()
+		
+		## Charge
+		if !is_charging and (event.is_action_pressed("charge_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
+			charge_shot_charge()
+		elif is_charging and (event.is_action_released("charge_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
+			charge_shot_fire()
 	## -------------------------------- 
 	
 	## Sort for individual players
@@ -150,17 +160,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	## Charge fire attack
 	if event.is_action_pressed("charge_fire") and event.device == player_count and !is_charging:
-		charge_rate_timer.start()
-		is_charging = true
-		bar_charging.visible = true
+		charge_shot_charge()
 	elif event.is_action_released("charge_fire") and event.device == player_count and is_charging:
-		## Allows for a 1/5 allowance (e.g. since charge time is 1s, if its been .9s you can shoot anyway)
-		if charge_rate_timer.time_left <= (0.2) * charge_time_seconds:
-			charge_shoot()
-		is_charging = false
-		bar_charging.visible = false
-		if fire_rate_timer.is_stopped():
-			fire_rate_timer.start()
+		charge_shot_fire()
 	
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
@@ -278,6 +280,25 @@ func shoot():
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
+func _on_fire_rate_timeout() -> void:
+	if is_shooting and !is_charging:
+		shoot()
+
+
+func charge_shot_charge():
+	charge_rate_timer.start()
+	is_charging = true
+	bar_charging.visible = true
+
+func charge_shot_fire():
+	## Allows for a 1/5 allowance (e.g. since charge time is 1s, if its been .9s you can shoot anyway)
+	if charge_rate_timer.time_left <= (0.2) * charge_time_seconds:
+		charge_shoot()
+	is_charging = false
+	bar_charging.visible = false
+	if fire_rate_timer.is_stopped():
+		fire_rate_timer.start()
+
 func charge_shoot():
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 10.0
@@ -289,38 +310,24 @@ func charge_shoot():
 	config[0].speed = speed
 	config[0].bullet_colour = player_colour
 	config[0].size = 2.0
+	config[0].damage = 5.0
 	
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
-func charge_shoot():
-	var spawn_pos = bullet_spawn.global_position
-	var speed : float = 10.0
-	
-	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
-	
-	var config : Array[BulletConfig] = [BulletConfig.new()]
-	config[0].direction = direction
-	config[0].speed = speed
-	config[0].bullet_colour = player_colour
-	config[0].size = 1.0
-	
-	var bullet = bulletScene.instantiate()
-	bullet.setup(config, spawn_pos)
-	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
-func _on_fire_rate_timeout() -> void:
-	if is_shooting and !is_charging:
-		shoot()
-
-
+## Dash begin
 func dash():
+	bar_dash_cooldown.visible = true
+	
 	## Makes dash Unable & starts timers
 	can_dash = false
 	is_dashing = true
 	dash_cooldown_timer.start()
 	dash_length_timer.start()
+	
+	character_body.set_collision_layer_value(2, false)
 	
 	## Dash Movement enabled
 	#velocity = velocity.normalized() * dash_speed
@@ -330,6 +337,7 @@ func dash():
 func _on_dash_length_timeout() -> void:
 	is_dashing = false
 	slipperyness_lerp = base_slipperyness_lerp
+	character_body.set_collision_layer_value(2, true)
 	
 	## Enable/disable for precise stopping/starting
 	#velocity = velocity / dash_speed 

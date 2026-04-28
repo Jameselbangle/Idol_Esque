@@ -6,8 +6,12 @@
 [ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_io705"]
-radius = 0.5366211
+radius = 0.3
 height = 1.604248
+
+[sub_resource type="SphereMesh" id="SphereMesh_io705"]
+radius = 0.3
+height = 0.4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bnhpu"]
 resource_local_to_scene = true
@@ -37,17 +41,18 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_io705")
 size = Vector2(1, 0.1)
 
-[node name="player_controller" type="CharacterBody3D" unique_id=1761623861]
+[node name="player_controller" type="CharacterBody3D" unique_id=1761623861 groups=["players"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_tpop7")
+charge_time_seconds = 0.9
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81677246, -0.002)
 shape = SubResource("CapsuleShape3D_io705")
 
 [node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, -0.3)
 billboard = 1
 texture = ExtResource("2_km0ln")
 
@@ -67,17 +72,22 @@ one_shot = true
 [node name="neck" type="Node3D" parent="." unique_id=659936507]
 
 [node name="BulletSpawn" type="Marker3D" parent="neck" unique_id=1953609992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715, 0.688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4754212, 0.688)
+
+[node name="Shadow" type="MeshInstance3D" parent="." unique_id=934179183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, 0.21, 0)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_io705")
 
 [node name="ChargeProgressBar" type="MeshInstance3D" parent="." unique_id=1774778579]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8251066)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.658744)
 visible = false
 mesh = SubResource("QuadMesh_a22ng")
 script = ExtResource("4_51y0g")
 max_value = 1.0
 
 [node name="DashProgressBar" type="MeshInstance3D" parent="." unique_id=808747772]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1524185)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.98605585)
 visible = false
 mesh = SubResource("QuadMesh_51y0g")
 script = ExtResource("4_51y0g")
