@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_hq8ac"]
 [ext_resource type="PackedScene" uid="uid://dxlobb1sm4bde" path="res://prefabs/enemies/mandrake.tscn" id="2_nb301"]
 [ext_resource type="PackedScene" uid="uid://co7jmjwp5sh5s" path="res://prefabs/enemies/slime.tscn" id="3_wbqvx"]
+[ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="5_obwlg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2av8n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +18,10 @@ background_mode = 2
 sky = SubResource("Sky_nb301")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hq8ac"]
+vertices = PackedVector3Array(-9.766653, 0.47374153, -5.093898, -9.016653, 0.47374153, -5.343898, -9.016653, 0.47374153, -7.343898, -13.766653, 0.47374153, -7.343898, -13.766653, 0.47374153, -4.593898, -9.766653, 0.47374153, -4.593898, -8.266653, 0.47374153, -5.093898, 4.733347, 0.47374153, -4.343898, 4.983347, 0.97374153, -5.343898, 4.983347, 0.47374153, -7.343898, 3.2534313, 0.47374153, -6.0919876, 10.983347, 0.47374153, 2.4061022, 5.233347, 0.47374153, -4.343898, -13.766653, 0.47374153, -1.0938978, -6.766653, 0.47374153, 6.906102, -8.266653, 0.47374153, -4.343898, -9.016653, 0.97374153, -4.468898, 7.233347, 0.47374153, 6.906102, 5.483347, 0.97374153, -5.343898, 13.983347, 0.47374153, -7.343898, 6.900013, 0.47374153, -5.6772313, 13.983347, 0.47374153, -0.8438978, 16.983347, 6.9737415, -3.0938978, 16.983347, 6.9737415, -2.5938978, 17.483347, 6.9737415, -2.8438978, 17.483347, 6.9737415, -3.3438978, 13.483347, 6.9737415, 0.9061022, 13.483347, 6.9737415, 1.4061022, 13.983347, 6.9737415, 1.1561022, 13.983347, 6.9737415, 0.6561022, 11.983347, 6.9737415, 2.6561022, 12.233347, 6.9737415, 3.1561022, 12.983347, 6.9737415, 2.4061022, 12.733347, 6.9737415, 1.9061022, -13.766653, 0.47374153, 2.6561022, -13.766653, 0.47374153, 6.906102, -10.016653, 0.47374153, 6.906102, 10.483347, 0.47374153, 6.656102, 13.983347, 0.47374153, 6.906102, 13.983347, 0.47374153, 2.9061022, 10.233347, 6.9737415, 4.656102, 10.483347, 6.9737415, 5.156102, 11.233347, 6.9737415, 4.406102, 10.983347, 6.9737415, 3.9061022, 8.733347, 6.9737415, 6.406102, 8.983347, 6.9737415, 6.906102, 9.733347, 6.9737415, 6.156102, 9.483347, 6.9737415, 5.656102)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(8, 10, 9), PackedInt32Array(9, 10, 2), PackedInt32Array(2, 6, 1), PackedInt32Array(6, 10, 7), PackedInt32Array(7, 10, 8), PackedInt32Array(10, 6, 2), PackedInt32Array(7, 12, 11), PackedInt32Array(5, 16, 4), PackedInt32Array(4, 16, 15), PackedInt32Array(4, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(15, 6, 14), PackedInt32Array(14, 6, 7), PackedInt32Array(14, 7, 17), PackedInt32Array(17, 7, 11), PackedInt32Array(18, 8, 20), PackedInt32Array(20, 8, 9), PackedInt32Array(20, 9, 19), PackedInt32Array(18, 20, 12), PackedInt32Array(12, 20, 19), PackedInt32Array(12, 19, 21), PackedInt32Array(12, 21, 11), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(29, 28, 26), PackedInt32Array(26, 28, 27), PackedInt32Array(33, 32, 30), PackedInt32Array(30, 32, 31), PackedInt32Array(36, 35, 34), PackedInt32Array(39, 38, 37), PackedInt32Array(43, 42, 40), PackedInt32Array(40, 42, 41), PackedInt32Array(47, 46, 44), PackedInt32Array(44, 46, 45)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nb301"]
 transparency = 1
@@ -43,51 +48,63 @@ script = ExtResource("1_hq8ac")
 
 [node name="bullet_manager" type="Node" parent="." unique_id=206797378]
 
-[node name="Room_0" type="Node" parent="." unique_id=50402358]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=347130482]
+navigation_mesh = SubResource("NavigationMesh_hq8ac")
+use_edge_connections = false
 
-[node name="Room_0_Vis" type="CSGCombiner3D" parent="Room_0" unique_id=1547174819]
+[node name="Room_0" type="Node" parent="NavigationRegion3D" unique_id=50402358]
+
+[node name="Room_0_Vis" type="CSGCombiner3D" parent="NavigationRegion3D/Room_0" unique_id=1547174819]
 use_collision = true
 collision_mask = 15
 
-[node name="floor" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=408193601]
+[node name="floor" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Vis" unique_id=408193601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032865524, -1.0262585, 0.023942947)
 size = Vector3(29, 2, 16)
 
-[node name="wall_right" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=1638047116]
+[node name="wall_right" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Vis" unique_id=1638047116]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.5, -2)
 size = Vector3(1, 10, 19)
 
-[node name="wall_left" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=2066599922]
+[node name="wall_left" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Vis" unique_id=2066599922]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4.5, -2)
 size = Vector3(1, 10, 19)
 
-[node name="wall_far" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=1925770421]
+[node name="wall_far" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Vis" unique_id=1925770421]
 transform = Transform3D(1, 0, 0, 0, 0.92718387, 0.37460658, 0, -0.37460658, 0.92718387, 0, 3.6152034, -9.757273)
 size = Vector3(29, 10, 1)
 
-[node name="Room_0_Inv" type="CSGCombiner3D" parent="Room_0" unique_id=677467103]
+[node name="Room_0_Inv" type="CSGCombiner3D" parent="NavigationRegion3D/Room_0" unique_id=677467103]
 transparency = 1.0
 cast_shadow = 0
 use_collision = true
 collision_mask = 15
 
-[node name="inv_col_right" type="CSGBox3D" parent="Room_0/Room_0_Inv" unique_id=953442018]
-transform = Transform3D(0.75477827, 0, -0.65598, 0, 1, 0, 0.65598, 0, 0.75477827, 12.44497, 0, 2.572476)
+[node name="inv_col_right" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Inv" unique_id=953442018]
+transform = Transform3D(0.75477827, 0, -0.65598, 0, 1, 0, 0.65598, 0, 0.75477827, 12.44497, 3, 2.572476)
 material_override = SubResource("StandardMaterial3D_nb301")
 transparency = 1.0
 cast_shadow = 0
-size = Vector3(1, 1, 16)
+size = Vector3(1, 7, 16)
 material = SubResource("StandardMaterial3D_2av8n")
 
-[node name="inv_col_left" type="CSGBox3D" parent="Room_0/Room_0_Inv" unique_id=1806452944]
-transform = Transform3D(0.7547096, 0, 0.656059, 0, 1, 0, -0.656059, 0, 0.7547096, -12.140826, 0, 2.572476)
+[node name="inv_col_left" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Inv" unique_id=1806452944]
+transform = Transform3D(0.7547096, 0, 0.656059, 0, 1, 0, -0.656059, 0, 0.7547096, -12.140826, 3, 2.572476)
 transparency = 1.0
 cast_shadow = 0
-size = Vector3(1, 1, 16)
+size = Vector3(1, 7, 16)
 
-[node name="wall_close" type="CSGBox3D" parent="Room_0/Room_0_Inv" unique_id=1081565932]
+[node name="wall_close" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Inv" unique_id=1081565932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 8)
 size = Vector3(29, 10, 1)
+
+[node name="enemies" type="Node" parent="NavigationRegion3D" unique_id=452215817]
+
+[node name="Mandrake" parent="NavigationRegion3D/enemies" unique_id=1050916115 instance=ExtResource("2_nb301")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.013594, 0.6390177, -4.59978)
+
+[node name="Slime" parent="NavigationRegion3D/enemies" unique_id=454864309 instance=ExtResource("3_wbqvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4384127, 0.57606304, -5.3845434)
 
 [node name="players" type="Node" parent="." unique_id=288650930]
 
@@ -105,10 +122,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0349817, 0.032012463, -0.68
 player_count = 2
 player_colour = 3
 
-[node name="enemies" type="Node" parent="." unique_id=452215817]
-
-[node name="Mandrake" parent="enemies" unique_id=1050916115 instance=ExtResource("2_nb301")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.013594, 0.6938499, -4.59978)
-
-[node name="Slime" parent="enemies" unique_id=454864309 instance=ExtResource("3_wbqvx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4384127, 0.9669666, -5.3845434)
+[node name="Spawner" parent="." unique_id=1742698435 instance=ExtResource("5_obwlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -8,6 +8,8 @@ func choose_target() -> Vector3:
 	var current_target = targets[0]
 	
 	for i in targets:
+		if i.is_dead:
+			pass
 		if position.distance_to(i.position) < position.distance_to(current_target.position):
 			current_target = i
 	return current_target.position
@@ -26,7 +28,7 @@ func choose_target_position() -> Vector3:
 		return position - direction
 	
 	return position
-	
+
 func _ready() -> void:
 	patterns.append(burst_shot)
 	

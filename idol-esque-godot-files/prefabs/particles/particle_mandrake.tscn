@@ -14,7 +14,7 @@ _data = [Vector2(0, 0.65625), 0.0, 0.0, 0, 0, Vector2(0.3081571, 1), 0.0, 0.0, 0
 point_count = 3
 
 [node name="Mandrake_particle" type="CPUParticles3D" unique_id=1991056628]
-transform = Transform3D(0.13345003, -0.99105555, 0, -0.12443534, -0.01675577, -0.99208623, 0.9832126, 0.13239394, -0.12555839, 0, 0, 0)
+transform = Transform3D(0.98972, 0.06894627, -0.125303, -0.12443535, -0.016755773, -0.99208623, -0.07050022, 0.99747974, -0.008004153, 0, 0.7067132, 0)
 emitting = false
 amount = 12
 lifetime = 0.4

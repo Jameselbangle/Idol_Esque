@@ -27,6 +27,7 @@ var num : int = denominator  - 1
 @export_group("Timers")
 @export var firerate : float = 0.2
 @export var chargerate : float = firerate * 2
+@export var revive_time : float = 3.0
 
 @export_group("Is Keyboard?")
 @export var keyboard_mode : bool = false
@@ -46,12 +47,17 @@ var sprites = {
 @onready var charge_rate_timer : Timer = $ChargeRate
 @onready var dash_cooldown_timer : Timer = $DashCooldown
 @onready var dash_length_timer : Timer = $DashLength
+@onready var revive_timer : Timer = $revive_timer
 
 @onready var bar_charging : ProgressBar3D = $ChargeProgressBar
 @onready var bar_dash_cooldown : ProgressBar3D = $DashProgressBar
+@onready var bar_revive : ProgressBar3D = $revive_progress_bar
 
 @onready var neck : Node3D = $neck
 @onready var character_body = get_node(".")
+
+@onready var revive_area : Area3D = $revive_area
+var players_reviving : int = 0
 
 var joy_move : Vector2
 var joy_look : Vector2
@@ -76,11 +82,12 @@ func _ready() -> void:
 	## Set initial wait times for Progress Bar
 	charge_rate_timer.wait_time = charge_time_seconds
 	bar_charging.max_value = charge_time_seconds
+	bar_dash_cooldown.max_value = dash_cooldown
 	
 	## Set wait times for timers
 	dash_cooldown_timer.wait_time = dash_cooldown
-	bar_dash_cooldown.max_value = dash_cooldown
 	dash_length_timer.wait_time = dash_length_seconds
+	revive_timer.wait_time = revive_time
 	
 	## TEMP Colour for sprites
 	match player_colour:
@@ -280,11 +287,6 @@ func KEY_rotate(rot: float):
 	target_angle = neck.rotation.y + (rot * (PI / 2))
 	neck.rotation.y = target_angle
 
-func dead():
-	player_sprite.texture = sprites["dead"]
-	velocity = Vector3.ZERO
-	move_and_slide()
-
 ## Creating Bullets and firing
 func shoot():
 	fire_rate_timer.start()
@@ -376,7 +378,51 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 	if health <= 0:
 		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
 		is_dead = true
+		revive_area.visible = true
+		revive_area.monitoring = true
+		player_sprite.texture = sprites["dead"]
+		velocity = Vector3.ZERO
 
+
+func dead():
+	if players_reviving <= 0:
+		return
+	
+	bar_revive.value = (revive_time - revive_timer.time_left) * 33
+
+func _on_revive_area_body_entered(body: Node3D) -> void:
+	if !('player' in body.name):
+		return
+	if body.is_dead:
+		return
+	
+	players_reviving += 1
+	
+	if revive_timer.is_stopped():
+		revive_timer.start()
+		bar_revive.visible = true
+
+func _on_revive_area_body_exited(body: Node3D) -> void:
+	if !('player' in body.name):
+		return
+	
+	players_reviving -=1
+	if players_reviving < 0:
+		players_reviving = 0
+	
+	if players_reviving < 1:
+		revive_timer.stop()
+		bar_revive.visible = false
+
+## Revive timer
+func _on_revive_timer_timeout() -> void:
+	health = 5
+	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+	is_dead = false
+	revive_area.visible = false
+	revive_area.monitoring = false
+	bar_revive.visible = false
+	player_sprite.texture = sprites["front"]
 
 
 func capture_mouse():

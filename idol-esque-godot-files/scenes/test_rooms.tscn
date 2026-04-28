@@ -181,7 +181,6 @@ script = ExtResource("1_tclbf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.36611, 0.032012463, -3.803069)
 player_colour = 1
 charge_time_seconds = 0.8
-keyboard_mode = true
 
 [node name="player_2" parent="players" unique_id=225536931 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.36611, 0.032012463, -3.803069)

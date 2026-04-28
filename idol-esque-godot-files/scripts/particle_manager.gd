@@ -24,9 +24,9 @@ func create_particles(Pname, Pposition):
 	
 	
 	
-	effect.global_position = Pposition
+	effect.position = Pposition + Vector3(0,.5,0)
 	
 	## Used for mandrakes to appear slick
-	effect.rotation.x += 70
+	#effect.rotation.x += 70
 	
 	add_child(effect)
