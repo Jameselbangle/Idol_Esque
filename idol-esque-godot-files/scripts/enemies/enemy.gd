@@ -44,7 +44,7 @@ func set_movement_target(movement_target: Vector3) -> void:
 
 #TODO: Should be made ABSTRACT
 func shoot() -> void:
-	var bullet_manager : Node = get_tree().current_scene.get_node("BulletManager")
+	var bullet_manager : Node = get_tree().current_scene.get_node("bullet_manager")
 	for bullet in _bullet_buffer:
 		bullet_manager.add_child(bullet)
 	_bullet_buffer.clear()
@@ -75,3 +75,8 @@ func damage(hit : int, bullet_config : BulletConfig = null):
 		return
 	
 	_health -= hit
+	
+	## Add death command
+	if _health <= 0:
+		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+		queue_free()

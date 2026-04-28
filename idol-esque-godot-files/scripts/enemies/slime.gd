@@ -15,7 +15,7 @@ func choose_target() -> Vector3:
 func choose_target_position() -> Vector3:
 	var closest_target : Vector3 = choose_target()
 	var distance = position.distance_to(closest_target)
-	print(distance)
+	#print(distance)
 	if distance < 2:
 		var direction : Vector3  = (position - closest_target).normalized()
 		direction *= 4

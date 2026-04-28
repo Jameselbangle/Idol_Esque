@@ -14,6 +14,10 @@ config/name="Idol_Esque_Godot_files"
 run/main_scene="uid://c4nlhvb38baor"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[autoload]
+
+GlobalSignals="*uid://dg5d23y0u1d46"
+
 [dotnet]
 
 project/assembly_name="Idol_Esque_Godot_files"

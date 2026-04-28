@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://b6ofm38gpjmoy"]
+
+[ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="1_2av8n"]
+[ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_hq8ac"]
+[ext_resource type="PackedScene" uid="uid://dxlobb1sm4bde" path="res://prefabs/enemies/mandrake.tscn" id="2_nb301"]
+[ext_resource type="PackedScene" uid="uid://co7jmjwp5sh5s" path="res://prefabs/enemies/slime.tscn" id="3_wbqvx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2av8n"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_nb301"]
+sky_material = SubResource("ProceduralSkyMaterial_2av8n")
+
+[sub_resource type="Environment" id="Environment_wbqvx"]
+background_mode = 2
+sky = SubResource("Sky_nb301")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nb301"]
+transparency = 1
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2av8n"]
+transparency = 1
+
+[node name="PlaytestRoom" type="Node" unique_id=1494677471]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=870073511]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=260406162]
+environment = SubResource("Environment_wbqvx")
+
+[node name="active_camera" type="Camera3D" parent="." unique_id=1317594723]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 8, 11.271)
+fov = 60.0
+
+[node name="particle_manager" type="Node" parent="." unique_id=2127873408]
+script = ExtResource("1_hq8ac")
+
+[node name="bullet_manager" type="Node" parent="." unique_id=206797378]
+
+[node name="Room_0" type="Node" parent="." unique_id=50402358]
+
+[node name="Room_0_Vis" type="CSGCombiner3D" parent="Room_0" unique_id=1547174819]
+use_collision = true
+collision_mask = 15
+
+[node name="floor" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=408193601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032865524, -1.0262585, 0.023942947)
+size = Vector3(29, 2, 16)
+
+[node name="wall_right" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=1638047116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.5, -2)
+size = Vector3(1, 10, 19)
+
+[node name="wall_left" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=2066599922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4.5, -2)
+size = Vector3(1, 10, 19)
+
+[node name="wall_far" type="CSGBox3D" parent="Room_0/Room_0_Vis" unique_id=1925770421]
+transform = Transform3D(1, 0, 0, 0, 0.92718387, 0.37460658, 0, -0.37460658, 0.92718387, 0, 3.6152034, -9.757273)
+size = Vector3(29, 10, 1)
+
+[node name="Room_0_Inv" type="CSGCombiner3D" parent="Room_0" unique_id=677467103]
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_mask = 15
+
+[node name="inv_col_right" type="CSGBox3D" parent="Room_0/Room_0_Inv" unique_id=953442018]
+transform = Transform3D(0.75477827, 0, -0.65598, 0, 1, 0, 0.65598, 0, 0.75477827, 12.44497, 0, 2.572476)
+material_override = SubResource("StandardMaterial3D_nb301")
+transparency = 1.0
+cast_shadow = 0
+size = Vector3(1, 1, 16)
+material = SubResource("StandardMaterial3D_2av8n")
+
+[node name="inv_col_left" type="CSGBox3D" parent="Room_0/Room_0_Inv" unique_id=1806452944]
+transform = Transform3D(0.7547096, 0, 0.656059, 0, 1, 0, -0.656059, 0, 0.7547096, -12.140826, 0, 2.572476)
+transparency = 1.0
+cast_shadow = 0
+size = Vector3(1, 1, 16)
+
+[node name="wall_close" type="CSGBox3D" parent="Room_0/Room_0_Inv" unique_id=1081565932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 8)
+size = Vector3(29, 10, 1)
+
+[node name="players" type="Node" parent="." unique_id=288650930]
+
+[node name="player_1" parent="players" unique_id=1761623861 instance=ExtResource("1_2av8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9650183, 0.032012463, -0.68884945)
+player_colour = 1
+
+[node name="player_2" parent="players" unique_id=968089026 instance=ExtResource("1_2av8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034981728, 0.032012463, -0.68884945)
+player_count = 1
+player_colour = 2
+
+[node name="player_3" parent="players" unique_id=1546687309 instance=ExtResource("1_2av8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0349817, 0.032012463, -0.68884945)
+player_count = 2
+player_colour = 3
+
+[node name="enemies" type="Node" parent="." unique_id=452215817]
+
+[node name="Mandrake" parent="enemies" unique_id=1050916115 instance=ExtResource("2_nb301")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.013594, 0.6938499, -4.59978)
+
+[node name="Slime" parent="enemies" unique_id=454864309 instance=ExtResource("3_wbqvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4384127, 0.9669666, -5.3845434)

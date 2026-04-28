@@ -49,6 +49,7 @@ var sprites = {
 @onready var bar_dash_cooldown : ProgressBar3D = $DashProgressBar
 
 @onready var neck : Node3D = $neck
+@onready var character_body = get_node(".")
 
 var joy_move : Vector2
 var joy_look : Vector2
@@ -135,7 +136,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			is_shooting = false
 		
 		## Dash
-		if (event.is_action_pressed("dash_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
+		if (can_dash and event.is_action_pressed("dash_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
 			dash()
 		
 		## Charge
@@ -302,19 +303,21 @@ func charge_shoot():
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 10.0
 	
-	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
+	var direction := Vector3(sin(neck.rotation.y), 0, cos(neck.rotation.y))
 	
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 	config[0].direction = direction
 	config[0].speed = speed
 	config[0].bullet_colour = player_colour
 	config[0].size = 2.0
+	config[0].damage = 5.0
 	
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
 
+## Dash begin
 func dash():
 	bar_dash_cooldown.visible = true
 	
@@ -324,6 +327,8 @@ func dash():
 	dash_cooldown_timer.start()
 	dash_length_timer.start()
 	
+	character_body.set_collision_layer_value(2, false)
+	
 	## Dash Movement enabled
 	#velocity = velocity.normalized() * dash_speed
 	slipperyness_lerp = 0
@@ -332,6 +337,7 @@ func dash():
 func _on_dash_length_timeout() -> void:
 	is_dashing = false
 	slipperyness_lerp = base_slipperyness_lerp
+	character_body.set_collision_layer_value(2, true)
 	
 	## Enable/disable for precise stopping/starting
 	#velocity = velocity / dash_speed 

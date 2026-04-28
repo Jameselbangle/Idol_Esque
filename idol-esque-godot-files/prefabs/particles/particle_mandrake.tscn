@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bhpxvkhx7xfsd"]
+
+[ext_resource type="Script" uid="uid://bc55y130t2h4t" path="res://prefabs/particles/particle.gd" id="1_vx2y2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_got8t"]
+albedo_color = Color(0.926936, 0.49898404, 0.7939966, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kkj6c"]
+material = SubResource("StandardMaterial3D_got8t")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_73ydi"]
+_data = [Vector2(0, 0.65625), 0.0, 0.0, 0, 0, Vector2(0.3081571, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Mandrake_particle" type="CPUParticles3D" unique_id=1991056628]
+transform = Transform3D(0.13345003, -0.99105555, 0, -0.12443534, -0.01675577, -0.99208623, 0.9832126, 0.13239394, -0.12555839, 0, 0, 0)
+emitting = false
+amount = 12
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.6
+explosiveness = 1.0
+mesh = SubResource("PlaneMesh_kkj6c")
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, -3, 0)
+initial_velocity_max = 9.0
+scale_amount_curve = SubResource("Curve_73ydi")
+script = ExtResource("1_vx2y2")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
