@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://4lu6ovrtbgsj"]
+
+[ext_resource type="Script" uid="uid://bc0453lsuq0ln" path="res://scripts/bullets/bullet_tester.gd" id="1_8dvgp"]
+[ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_87sy2"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ysrml"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8dvgp"]
+size = Vector3(1, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_87sy2"]
+
+[node name="BulletTest" type="Node3D" unique_id=649448446]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=284096630]
+navigation_mesh = SubResource("NavigationMesh_ysrml")
+use_edge_connections = false
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1489809226]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground" unique_id=1274264639]
+shape = SubResource("BoxShape3D_8dvgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground" unique_id=135505481]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_87sy2")
+
+[node name="Wall" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1018503990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall" unique_id=1833532582]
+shape = SubResource("BoxShape3D_8dvgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Wall" unique_id=976358300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_87sy2")
+
+[node name="Wall2" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1581808251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall2" unique_id=1566655662]
+shape = SubResource("BoxShape3D_8dvgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Wall2" unique_id=560085361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_87sy2")
+
+[node name="Wall3" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1865785009]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, 4.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall3" unique_id=1640356939]
+shape = SubResource("BoxShape3D_8dvgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Wall3" unique_id=1936495582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_87sy2")
+
+[node name="Wall4" type="StaticBody3D" parent="NavigationRegion3D" unique_id=743288249]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, -4.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Wall4" unique_id=348960654]
+shape = SubResource("BoxShape3D_8dvgp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Wall4" unique_id=1059789239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_87sy2")
+
+[node name="Tester" type="CharacterBody3D" parent="NavigationRegion3D" unique_id=1419437017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_8dvgp")
+_bullet_scene = ExtResource("2_87sy2")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="NavigationRegion3D/Tester" unique_id=736325986]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=541020554]
+transform = Transform3D(1, 0, 0, 0, 0.53256613, 0.84638846, 0, -0.84638846, 0.53256613, 0, 6.5414925, 5.27748)
+
+[node name="BulletManager" type="Node" parent="." unique_id=800795356]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1184840555]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)

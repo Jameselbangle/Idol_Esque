@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f5mwyb6gqr8w"
-path.s3tc="res://.godot/imported/mandrake_classic_v2_gothic.jpg-11c7c5e733ebaf73c565c96fc129c85d.s3tc.ctex"
+uid="uid://cay4irm1p2jok"
+path.s3tc="res://.godot/imported/mandrake_original_forward_scream.png-e888c077728ff236f27502407a8ab6c3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/characters/enemies/mandrake_classic_v2_gothic.jpg"
-dest_files=["res://.godot/imported/mandrake_classic_v2_gothic.jpg-11c7c5e733ebaf73c565c96fc129c85d.s3tc.ctex"]
+source_file="res://art/characters/enemies/mandrake/original/mandrake_original_forward_scream.png"
+dest_files=["res://.godot/imported/mandrake_original_forward_scream.png-e888c077728ff236f27502407a8ab6c3.s3tc.ctex"]
 
 [params]
 

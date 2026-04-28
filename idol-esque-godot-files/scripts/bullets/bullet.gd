@@ -4,15 +4,19 @@ class_name EnemyBullet extends CharacterBody3D
 
 @onready var sprite: Sprite3D = $Sprite3D
 
+var tick_step = 0
+
 func setup(_config : Array[BulletConfig], _position : Vector3 = Vector3.ZERO) :
-	position = _position
 	config = _config
+	position = _position + Vector3(0, config[0].size/2, 0)
+	
+	scale = Vector3(config[0].size, config[0].size, config[0].size)
 	
 	var collision_object : Area3D = $Area3D
 	
 	collision_object.collision_mask = 0
 	
-	match config[0].bullet_colour:
+	match config[tick_step].bullet_colour:
 		BulletConfig.BulletColour.RED:
 			$Sprite3D.modulate = Color.RED
 			collision_object.set_collision_mask_value(1, true)
@@ -28,48 +32,52 @@ func setup(_config : Array[BulletConfig], _position : Vector3 = Vector3.ZERO) :
 		BulletConfig.BulletColour.ENEMY:
 			collision_object.set_collision_mask_value(1, true)
 			collision_object.set_collision_mask_value(2, true)
-	
 
 func _process(delta: float) -> void:
 	if config.is_empty():
 		return
 	
-	if (config.size() > 0 && config[0].tick_timer <= 0):
+	if (config[tick_step].tick_timer <= 0):
 		tick()
 		return
-	config[0].tick_timer -= delta
+	else:
+		config[tick_step].tick_timer -= delta
 
 func _physics_process(_delta: float) -> void:
 	if config.is_empty():
 		return
-	match config[0].movement_type:
+	match config[tick_step].movement_type:
 		BulletConfig.MoveFunction.LINEAR:
-			velocity = config[0].direction * config[0].speed
+			velocity = config[tick_step].direction * config[tick_step].speed
 		BulletConfig.MoveFunction.QUADRATIC:
-			velocity = config[0].direction * config[0].speed
-			velocity += config[0].acc * _delta
-			config[0].direction = velocity / config[0].speed
+			velocity = config[tick_step].direction * config[tick_step].speed
+			velocity += config[tick_step].acc * _delta
+			config[tick_step].direction = velocity / config[tick_step].speed
 		BulletConfig.MoveFunction.HOMING:
-			var direction = config[0].target - position
+			var direction = config[tick_step].target - position
 			direction = direction.normalized()
-			velocity += direction * config[0].speed
+			velocity += direction * config[tick_step].speed
 		BulletConfig.MoveFunction.WAVE:
-			push_error("Function not implemented") 
+			push_error("Function not implemented")
+		BulletConfig.MoveFunction.TARGET:
+			var dir = config[tick_step].target - position
+			dir = dir.normalized()
+			config[tick_step].direction = dir
+			velocity = dir * config[tick_step].speed
 	
 	move_and_slide()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is Enemy:
-		body.damage(1, config)
+		body.damage(1, config[tick_step])
 	queue_free()
-
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	print("area UNHANDLED " + area.name)
 
 func tick() -> void:
-	config.pop_front()
-	if (config.size() == 0):
+	tick_step += 1
+	if (config.size() <= tick_step):
 		queue_free()
 		return

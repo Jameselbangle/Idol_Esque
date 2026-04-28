@@ -15,15 +15,16 @@ static func line_formation(source : Enemy, start_position : Vector3, end_positio
 
 	while t <= 1:
 		var spawn_pos : Vector3 = source.position + start_position.lerp(end_position, t)
-		var bullet = source.enemy_bullet_scene.instantiate()
+		var bullet = source._bullet_scene.instantiate()
 		bullet.setup(bullet_config, spawn_pos)
 		bullet.transform = bullet.transform.rotated(Vector3.UP, rotation)
-		source.bullet_buffer.append(bullet)
+		source._bullet_buffer.append(bullet)
 		t += step_size
 
 static func circle_formation(source : Enemy, offset : Vector3, radius : float, 
 						bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0):
 	assert(radius > 0, "Radius needs to be larger than 0")
+	
 	var step_size : float = 2 * PI / bullet_count
 	var theta : float = 0
 	
@@ -39,10 +40,10 @@ static func circle_formation(source : Enemy, offset : Vector3, radius : float,
 		spawn_pos.x += x_pos 
 		spawn_pos.z += z_pos
 		
-		var bullet = source.enemy_bullet_scene.instantiate()
+		var bullet = source._bullet_scene.instantiate()
 		bullet.setup(bullet_config, spawn_pos)
 		bullet.transform = bullet.transform.rotated(Vector3.UP, rotation)
-		source.bullet_buffer.append(bullet)
+		source._bullet_buffer.append(bullet)
 		theta += step_size
 
 static func polygon_formation(source : Enemy, offset : Vector3, radius : float, sides : int,

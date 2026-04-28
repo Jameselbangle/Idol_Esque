@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dxlobb1sm4bde"]
+
+[ext_resource type="Script" uid="uid://cnrrt1lhlq70p" path="res://scripts/enemies/mandrake.gd" id="1_vnqm5"]
+[ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_jt5h8"]
+[ext_resource type="Texture2D" uid="uid://bcw51iyq5q05g" path="res://art/characters/enemies/mandrake/original/mandrake_original_forward.png" id="2_uvdid"]
+[ext_resource type="BehaviorTree" uid="uid://b1ijp7cxnqnsp" path="res://ai/BT/mandrake.tres" id="3_uvdid"]
+
+[sub_resource type="Animation" id="Animation_jt5h8"]
+resource_name = "idle"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_31a65"]
+resource_name = "scream"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iawsw"]
+_data = {
+&"idle": SubResource("Animation_jt5h8"),
+&"scream": SubResource("Animation_31a65")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iawsw"]
+size = Vector3(0.42769623, 0.9950714, 0.5734863)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_jt5h8"]
+
+[node name="Mandrake" type="CharacterBody3D" unique_id=1050916115]
+collision_layer = 4
+script = ExtResource("1_vnqm5")
+_bullet_scene = ExtResource("2_jt5h8")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1082717938]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+texture = ExtResource("2_uvdid")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=342161148]
+libraries/ = SubResource("AnimationLibrary_iawsw")
+
+[node name="BulletSpawn" type="Marker3D" parent="." unique_id=1373801589]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=984615604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0128479, 0.00019073486, 0.03161621)
+shape = SubResource("BoxShape3D_iawsw")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1579455540]
+target_desired_distance = 0.5
+debug_enabled = true
+
+[node name="BTPlayer" type="BTPlayer" parent="." unique_id=939788757]
+behavior_tree = ExtResource("3_uvdid")
+blackboard_plan = SubResource("BlackboardPlan_jt5h8")
