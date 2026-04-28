@@ -10,8 +10,6 @@ func _ready() -> void:
 
 func create_particles(Pname, Pposition):
 	
-	print("creating particle...")
-	
 	var effect = null
 	
 	for p in Particles:

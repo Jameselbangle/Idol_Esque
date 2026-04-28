@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export_group("Player Info")
 @export var player_count : int = 0
 @export var player_colour : BulletConfig.BulletColour
+@export var health : int = 5
 
 @export_group("Speeds")
 @export var move_speed : float = 7.0
@@ -37,7 +38,8 @@ var sprites = {
 	"front" : preload("res://art/characters/players/front.png"),
 	"back" : preload("res://art/characters/players/back.png"),
 	"left" : preload("res://art/characters/players/left.png"),
-	"right" : preload("res://art/characters/players/right.png")
+	"right" : preload("res://art/characters/players/right.png"),
+	"dead" : preload("res://art/characters/players/dead.png")
 }
 
 @onready var fire_rate_timer : Timer = $FireRate
@@ -58,6 +60,7 @@ var is_shooting: bool = false
 var is_charging: bool = false
 var is_dashing: bool = false
 var can_dash : bool = true
+var is_dead : bool = false
 
 ## rotating character with joystick
 var deadzone: float = 0.3
@@ -86,16 +89,19 @@ func _ready() -> void:
 			sprites["back"] = load("res://art/characters/players/Stella/Stella_Back.png")
 			sprites["left"] = load("res://art/characters/players/Stella/Stella_Left.png")
 			sprites["right"] = load("res://art/characters/players/Stella/Stella_Right.png")
+			sprites["dead"] = load("res://art/characters/players/Stella/Stella_Dead.png")
 		BulletConfig.BulletColour.BLUE:
 			sprites["front"] = load("res://art/characters/players/Iris/Iris_Front.png")
 			sprites["back"] = load("res://art/characters/players/Iris/Iris_Back.png")
 			sprites["left"] = load("res://art/characters/players/Iris/Iris_Left.png")
 			sprites["right"] = load("res://art/characters/players/Iris/Iris_Right.png")
+			sprites["dead"] = load("res://art/characters/players/Iris/Iris_Dead.png")
 		BulletConfig.BulletColour.YELLOW:
 			sprites["front"] = load("res://art/characters/players/Bee/Bee_Front.png")
 			sprites["back"] = load("res://art/characters/players/Bee/Bee_Back.png")
 			sprites["left"] = load("res://art/characters/players/Bee/Bee_Left.png")
 			sprites["right"] = load("res://art/characters/players/Bee/Bee_Right.png")
+			sprites["dead"] = load("res://art/characters/players/Bee/Bee_Dead.png")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -105,6 +111,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		capture_mouse()
 	if event.is_action("escape"):
 		release_mouse()
+	
+	## dead check
+	if is_dead:
+		return
 	
 	## -------------------------------- 
 	## KEYBOARD MODE
@@ -191,6 +201,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
+	if is_dead:
+		dead()
+		return
+	
 	### --------------
 	### TEMP MOVEMENT
 	
@@ -203,6 +217,7 @@ func _physics_process(delta: float) -> void:
 			joy_move = Input.get_vector("left3","right3","up3","down3").normalized()
 	
 	### --------------
+	
 	
 	## progress bar checker
 	if !charge_rate_timer.is_stopped():
@@ -255,6 +270,8 @@ func _physics_process(delta: float) -> void:
 		var temp_speed = dash_speed - diff
 		velocity = velocity.normalized() * temp_speed
 	
+	
+	
 	## Use velocity to actually move
 	move_and_slide()
 
@@ -262,6 +279,11 @@ func _physics_process(delta: float) -> void:
 func KEY_rotate(rot: float):
 	target_angle = neck.rotation.y + (rot * (PI / 2))
 	neck.rotation.y = target_angle
+
+func dead():
+	player_sprite.texture = sprites["dead"]
+	velocity = Vector3.ZERO
+	move_and_slide()
 
 ## Creating Bullets and firing
 func shoot():
@@ -346,6 +368,15 @@ func _on_dash_length_timeout() -> void:
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 	bar_dash_cooldown.visible = false
+
+func damage(hit : int, _bullet_config : BulletConfig = null):
+	health -= hit
+	
+	## Add death command
+	if health <= 0:
+		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+		is_dead = true
+
 
 
 func capture_mouse():

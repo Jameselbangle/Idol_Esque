@@ -69,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body is Enemy:
+	if body is Enemy or 'player' in body.name:
 		body.damage(config[0].damage, config[tick_step])
 	queue_free()
 

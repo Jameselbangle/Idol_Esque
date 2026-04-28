@@ -45,7 +45,9 @@ size = Vector2(1, 0.1)
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_tpop7")
+health = 1
 charge_time_seconds = 0.9
+keyboard_mode = true
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81677246, -0.002)

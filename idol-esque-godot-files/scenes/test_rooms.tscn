@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c4nlhvb38baor"]
 
+[ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_tclbf"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="1_w5gxa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w5gxa"]
@@ -171,21 +172,24 @@ transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0
 
 [node name="de_perent" type="Node" parent="." unique_id=1312768846]
 
-[node name="playrers" type="Node" parent="." unique_id=439986479]
+[node name="particle_manager" type="Node" parent="." unique_id=1524869651]
+script = ExtResource("1_tclbf")
 
-[node name="player_1" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
+[node name="players" type="Node" parent="." unique_id=439986479]
+
+[node name="player_1" parent="players" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.36611, 0.032012463, -3.803069)
 player_colour = 1
 charge_time_seconds = 0.8
 keyboard_mode = true
 
-[node name="player_2" parent="playrers" unique_id=225536931 instance=ExtResource("1_w5gxa")]
+[node name="player_2" parent="players" unique_id=225536931 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.36611, 0.032012463, -3.803069)
 player_count = 1
 player_colour = 2
 charge_time_seconds = 0.8
 
-[node name="player_3" parent="playrers" unique_id=1527669421 instance=ExtResource("1_w5gxa")]
+[node name="player_3" parent="players" unique_id=1527669421 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.36611, 0.032012463, -3.803069)
 player_count = 2
 player_colour = 3
