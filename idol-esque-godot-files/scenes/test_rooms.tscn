@@ -176,6 +176,7 @@ transform = Transform3D(-1.6070986e-08, -0.31612742, 0.24118705, 0, 0.5475487, 0
 [node name="player_1" parent="playrers" unique_id=1761623861 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.36611, 0.032012463, -3.803069)
 player_colour = 1
+keyboard_mode = true
 
 [node name="player_2" parent="playrers" unique_id=225536931 instance=ExtResource("1_w5gxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.36611, 0.032012463, -3.803069)
