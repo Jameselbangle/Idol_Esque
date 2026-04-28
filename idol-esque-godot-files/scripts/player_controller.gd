@@ -288,7 +288,7 @@ func charge_shoot():
 	config[0].direction = direction
 	config[0].speed = speed
 	config[0].bullet_colour = player_colour
-	config[0].size = 4.0
+	config[0].size = 2.0
 	
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
