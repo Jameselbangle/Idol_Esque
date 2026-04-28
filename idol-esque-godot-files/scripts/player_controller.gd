@@ -135,7 +135,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			is_shooting = false
 		
 		## Dash
-		if (event.is_action_pressed("dash_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
+		if (can_dash and event.is_action_pressed("dash_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
 			dash()
 		
 		## Charge
@@ -302,7 +302,7 @@ func charge_shoot():
 	var spawn_pos = bullet_spawn.global_position
 	var speed : float = 10.0
 	
-	var direction := Vector3(sin(rotation.y), 0, cos(rotation.y))
+	var direction := Vector3(sin(neck.rotation.y), 0, cos(neck.rotation.y))
 	
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 	config[0].direction = direction
