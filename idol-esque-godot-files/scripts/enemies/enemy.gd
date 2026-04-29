@@ -62,14 +62,12 @@ func set_shield(col : BulletConfig.BulletColour):
 		BulletConfig.BulletColour.ENEMY:
 			$Sprite3D.modulate = Color.WHITE
 
-#TODO: Should be made ABSTRACT
 func remove_shield():
 	_shield = BulletConfig.BulletColour.ENEMY
 	$Sprite3D.modulate = Color.WHITE
 
-#TODO: Should be made ABSTRACT
 func damage(hit : int, bullet_config : BulletConfig = null):
-	if _shield != BulletConfig.BulletColour.ENEMY:
+	if _shield != BulletConfig.BulletColour.ENEMY and bullet_config != null:
 		if _shield == bullet_config.bullet_colour:
 			remove_shield()
 		return

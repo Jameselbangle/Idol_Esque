@@ -3,7 +3,7 @@ extends Node3D
 var slime := preload("res://prefabs/enemies/slime.tscn")
 var mandrake := preload("res://prefabs/enemies/mandrake.tscn")
 
-var switch : bool = false
+@export var switch : bool = false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -23,5 +23,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		for p in get_node("/root/PlaytestRoom/players").get_children():
 			p.revive()
 	
+	
+			
 	if instance != null:
-		add_child(instance)
+		var rng = RandomNumberGenerator.new()
+		match rng.randi_range(1, 6):
+			1:
+				instance.set_shield(BulletConfig.BulletColour.RED)
+			2:
+				instance.set_shield(BulletConfig.BulletColour.BLUE)
+			3:
+				instance.set_shield(BulletConfig.BulletColour.YELLOW)
+			4:
+				pass
+			5:
+				pass
+			6:
+				pass
+		var enemies_node = get_node("/root/PlaytestRoom/NavigationRegion3D/enemies")
+
+		instance.global_transform = global_transform
+		enemies_node.add_child(instance)
+		#instance.global_transform = global_transform

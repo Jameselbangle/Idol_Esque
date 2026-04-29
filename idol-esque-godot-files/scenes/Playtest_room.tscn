@@ -127,3 +127,10 @@ player_colour = 3
 
 [node name="Spawner" parent="." unique_id=1742698435 instance=ExtResource("5_obwlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6.565428)
+
+[node name="Spawner4" parent="." unique_id=979272183 instance=ExtResource("5_obwlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3976912, 0.5, -1.7483997)
+switch = true
+
+[node name="Spawner5" parent="." unique_id=39625765 instance=ExtResource("5_obwlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.042871, 0.5, -1.7483997)

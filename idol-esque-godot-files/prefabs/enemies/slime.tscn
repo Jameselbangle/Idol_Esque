@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d13x3j3euevdd" path="res://art/characters/enemies/slime/cute_slime_forward.png" id="1_5jc4t"]
 [ext_resource type="Script" uid="uid://4n6wx6cfecvo" path="res://scripts/enemies/slime.gd" id="1_qrp3d"]
-[ext_resource type="BehaviorTree" uid="uid://xkugsms15caq" path="res://slime.tres" id="2_uocvo"]
+[ext_resource type="BehaviorTree" uid="uid://xkugsms15caq" path="res://ai/BT/slime.tres" id="2_uocvo"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_v3pje"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5jc4t"]

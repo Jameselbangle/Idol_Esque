@@ -173,6 +173,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	#if event.device != player_count:
 	#	return
 	
+	
 	## Handles firing bullets seperate from PhysicsProcess 
 	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging:
 		if fire_rate_timer.is_stopped():
