@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [autoload]
 
 GlobalSignals="*uid://dg5d23y0u1d46"
+DebugMenu="*uid://cggqb75a8w8r"
 
 [dotnet]
 
@@ -24,7 +25,7 @@ project/assembly_name="Idol_Esque_Godot_files"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/progress_bar_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/progress_bar_3d/plugin.cfg")
 
 [file_customization]
 

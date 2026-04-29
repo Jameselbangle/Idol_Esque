@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b6ofm38gpjmoy"]
 
+[ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="1_0qifr"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="1_2av8n"]
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_hq8ac"]
 [ext_resource type="PackedScene" uid="uid://dxlobb1sm4bde" path="res://prefabs/enemies/mandrake.tscn" id="2_nb301"]
@@ -42,6 +43,8 @@ environment = SubResource("Environment_wbqvx")
 [node name="active_camera" type="Camera3D" parent="." unique_id=1317594723]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 8, 11.271)
 fov = 60.0
+
+[node name="Debug" parent="active_camera" unique_id=246858611 instance=ExtResource("1_0qifr")]
 
 [node name="particle_manager" type="Node" parent="." unique_id=2127873408]
 script = ExtResource("1_hq8ac")
