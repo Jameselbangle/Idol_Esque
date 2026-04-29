@@ -39,7 +39,7 @@ shadow_enabled = true
 environment = SubResource("Environment_wbqvx")
 
 [node name="active_camera" type="Camera3D" parent="." unique_id=1317594723]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 8, 11.271)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.894102, 11.271)
 
 [node name="Debug" parent="active_camera" unique_id=246858611 instance=ExtResource("1_0qifr")]
 
