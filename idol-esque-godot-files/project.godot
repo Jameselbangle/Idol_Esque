@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Idol_Esque_Godot_files"
-run/main_scene="uid://c4nlhvb38baor"
+run/main_scene="uid://b6ofm38gpjmoy"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
