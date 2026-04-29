@@ -119,6 +119,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("escape"):
 		release_mouse()
 	
+	if event.is_action_pressed("KeyToController"):
+		keyboard_mode = !keyboard_mode
+		print(keyboard_mode)
+	
 	## dead check
 	if is_dead:
 		return
@@ -161,11 +165,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			charge_shot_charge()
 		elif is_charging and (event.is_action_released("charge_1") and player_count == 0):# or (event.is_action_pressed("dash_2") and player_count == 1) or (event.is_action_pressed("dash_3") and player_count == 2):
 			charge_shot_fire()
+		
+		return
 	## -------------------------------- 
 	
 	## Sort for individual players
-	if event.device != player_count:
-		return
+	#if event.device != player_count:
+	#	return
 	
 	## Handles firing bullets seperate from PhysicsProcess 
 	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging:
@@ -184,7 +190,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
 		dash()
-		bar_dash_cooldown.visible = true
 	
 	## Movement
 	#if (event.is_action("left") or event.is_action("right") or event.is_action("up") or event.is_action("down")) and event.device == player_count:
@@ -205,8 +210,8 @@ func _unhandled_input(event: InputEvent) -> void:
 ## TODO: Move input and moving code to _unhandled input
 func _physics_process(delta: float) -> void:
 	## Apply gravity to velocity
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	#if not is_on_floor():
+		#velocity += get_gravity() * delta
 	
 	if is_dead:
 		dead()
@@ -227,9 +232,9 @@ func _physics_process(delta: float) -> void:
 	
 	
 	## progress bar checker
-	if !charge_rate_timer.is_stopped():
+	if is_charging:
 		bar_charging.value = bar_charging.max_value - charge_rate_timer.time_left
-	if !dash_cooldown_timer.is_stopped():
+	if is_dashing:
 		bar_dash_cooldown.value = bar_dash_cooldown.max_value - dash_cooldown_timer.time_left
 	
 	## Deadzone checker & apply velocity
@@ -245,6 +250,7 @@ func _physics_process(delta: float) -> void:
 
 	if joy_look.length() >= deadzone:
 		target_angle = -joy_look.angle() + deg_to_rad(90.0)
+	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
 	if neck.rotation.y != target_angle:
 		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
 		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
