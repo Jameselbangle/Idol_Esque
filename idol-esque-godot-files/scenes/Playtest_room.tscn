@@ -126,4 +126,4 @@ player_count = 2
 player_colour = 3
 
 [node name="Spawner" parent="." unique_id=1742698435 instance=ExtResource("5_obwlg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6.565428)
