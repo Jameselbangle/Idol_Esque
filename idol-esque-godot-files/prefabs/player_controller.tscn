@@ -59,26 +59,17 @@ size = Vector2(1, 0.1)
 height = 0.8213867
 radius = 1.6586914
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io705"]
-transparency = 1
-cull_mode = 2
-depth_draw_mode = 2
-no_depth_test = true
-shading_mode = 0
-albedo_color = Color(0.007945761, 0.7395529, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51y0g"]
+albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_51y0g"]
-material = SubResource("StandardMaterial3D_io705")
-top_radius = 1.5
-bottom_radius = 1.5
-height = 0.3
+[sub_resource type="PlaneMesh" id="PlaneMesh_bnhpu"]
+material = SubResource("StandardMaterial3D_51y0g")
 
 [node name="player_controller" type="CharacterBody3D" unique_id=1761623861 groups=["players"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_tpop7")
 charge_time_seconds = 0.9
-keyboard_mode = true
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81677246, -0.002)
@@ -151,10 +142,9 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4288619, 0)
 shape = SubResource("CylinderShape3D_io705")
 
-[node name="revive_circle" type="MeshInstance3D" parent="revive_area" unique_id=612475710]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1740269, 0)
-transparency = 0.8
-mesh = SubResource("CylinderMesh_51y0g")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="revive_area" unique_id=1301415557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044165134, 0)
+mesh = SubResource("PlaneMesh_bnhpu")
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]

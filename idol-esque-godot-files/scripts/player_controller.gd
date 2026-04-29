@@ -235,7 +235,7 @@ func _physics_process(delta: float) -> void:
 	## progress bar checker
 	if is_charging:
 		bar_charging.value = bar_charging.max_value - charge_rate_timer.time_left
-	if is_dashing:
+	if !can_dash:
 		bar_dash_cooldown.value = bar_dash_cooldown.max_value - dash_cooldown_timer.time_left
 	
 	## Deadzone checker & apply velocity

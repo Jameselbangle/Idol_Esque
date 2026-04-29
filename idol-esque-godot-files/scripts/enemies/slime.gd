@@ -5,12 +5,11 @@ func choose_target() -> Vector3:
 	var targets = get_tree().get_nodes_in_group("players")
 	assert(!targets.is_empty(), "'players' group is empty")
 	
+	## Dead player bug solution?
 	var current_target = targets[0]
 	
 	for i in targets:
-		if i.is_dead:
-			pass
-		elif position.distance_to(i.position) < position.distance_to(current_target.position):
+		if position.distance_to(i.position) < position.distance_to(current_target.position) and !(i.is_dead):
 			current_target = i
 	return current_target.position
 
