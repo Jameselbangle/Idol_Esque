@@ -13,6 +13,14 @@ height = 1.604248
 radius = 0.3
 height = 0.4
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io705"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_io705"]
+material = SubResource("StandardMaterial3D_io705")
+top_radius = 0.1
+bottom_radius = 0.2
+height = 1.5
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bnhpu"]
 resource_local_to_scene = true
 render_priority = 0
@@ -80,6 +88,11 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, -0
 billboard = 1
 texture = ExtResource("2_km0ln")
 
+[node name="Shadow" type="MeshInstance3D" parent="." unique_id=934179183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, 0.21, 0)
+cast_shadow = 3
+mesh = SubResource("SphereMesh_io705")
+
 [node name="FireRate" type="Timer" parent="." unique_id=644492934]
 wait_time = 0.001
 one_shot = true
@@ -101,10 +114,13 @@ wait_time = 3.0
 [node name="BulletSpawn" type="Marker3D" parent="neck" unique_id=1953609992]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4754212, 0.688)
 
-[node name="Shadow" type="MeshInstance3D" parent="." unique_id=934179183]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, 0.21, 0)
-cast_shadow = 3
-mesh = SubResource("SphereMesh_io705")
+[node name="Pointer" type="Node3D" parent="neck" unique_id=263196583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.55)
+visible = false
+
+[node name="PointerCylinder" type="MeshInstance3D" parent="neck/Pointer" unique_id=2118411790]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.74999994)
+mesh = SubResource("CylinderMesh_io705")
 
 [node name="ChargeProgressBar" type="MeshInstance3D" parent="." unique_id=1774778579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.658744)

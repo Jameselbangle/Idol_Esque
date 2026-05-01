@@ -54,6 +54,7 @@ var sprites = {
 @onready var bar_revive : ProgressBar3D = $revive_progress_bar
 
 @onready var neck : Node3D = $neck
+@onready var pointer : Node3D = $neck/Pointer
 @onready var character_body = get_node(".")
 
 @onready var revive_area : Area3D = $revive_area
@@ -75,7 +76,6 @@ var target_angle: float
 
 var mouse_captured : bool = false
 
-
 func _ready() -> void:
 	add_to_group("player")
 	
@@ -89,26 +89,33 @@ func _ready() -> void:
 	dash_length_timer.wait_time = dash_length_seconds
 	revive_timer.wait_time = revive_time
 	
+	var mat : StandardMaterial3D = StandardMaterial3D.new()
+	var pointer_cylinder : Node3D = $neck/Pointer/PointerCylinder
+	
 	## TEMP Colour for sprites
 	match player_colour:
 		BulletConfig.BulletColour.RED:
+			mat.albedo_color = Color.RED
 			sprites["front"] = load("res://art/characters/players/Stella/Stella_front.png")
 			sprites["back"] = load("res://art/characters/players/Stella/Stella_Back.png")
 			sprites["left"] = load("res://art/characters/players/Stella/Stella_Left.png")
 			sprites["right"] = load("res://art/characters/players/Stella/Stella_Right.png")
 			sprites["dead"] = load("res://art/characters/players/Stella/Stella_Dead.png")
 		BulletConfig.BulletColour.BLUE:
+			mat.albedo_color = Color.NAVY_BLUE
 			sprites["front"] = load("res://art/characters/players/Iris/Iris_Front.png")
 			sprites["back"] = load("res://art/characters/players/Iris/Iris_Back.png")
 			sprites["left"] = load("res://art/characters/players/Iris/Iris_Left.png")
 			sprites["right"] = load("res://art/characters/players/Iris/Iris_Right.png")
 			sprites["dead"] = load("res://art/characters/players/Iris/Iris_Dead.png")
 		BulletConfig.BulletColour.YELLOW:
+			mat.albedo_color = Color.YELLOW
 			sprites["front"] = load("res://art/characters/players/Bee/Bee_Front.png")
 			sprites["back"] = load("res://art/characters/players/Bee/Bee_Back.png")
 			sprites["left"] = load("res://art/characters/players/Bee/Bee_Left.png")
 			sprites["right"] = load("res://art/characters/players/Bee/Bee_Right.png")
 			sprites["dead"] = load("res://art/characters/players/Bee/Bee_Dead.png")
+	pointer_cylinder.set_surface_override_material(0, mat)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -121,7 +128,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("KeyToController"):
 		keyboard_mode = !keyboard_mode
-		print(keyboard_mode)
 	
 	## dead check
 	if is_dead:
@@ -234,9 +240,11 @@ func _physics_process(delta: float) -> void:
 	
 	## progress bar checker
 	if is_charging:
-		bar_charging.value = bar_charging.max_value - charge_rate_timer.time_left
+		var fill = (1 / charge_rate_timer.wait_time) * (charge_rate_timer.wait_time - charge_rate_timer.time_left)
+		bar_charging.value = fill
+		pointer.scale.z = fill
 	if !can_dash:
-		bar_dash_cooldown.value = bar_dash_cooldown.max_value - dash_cooldown_timer.time_left
+		bar_dash_cooldown.value = (1 / dash_cooldown_timer.wait_time) * (dash_cooldown_timer.wait_time - dash_cooldown_timer.time_left)
 	
 	## Deadzone checker & apply velocity
 	var movement_vector = sqrt(joy_move.x **2 + joy_move.y **2)
@@ -320,6 +328,8 @@ func charge_shot_charge():
 	charge_rate_timer.start()
 	is_charging = true
 	bar_charging.visible = true
+	pointer.scale.z = 0
+	pointer.visible = true
 
 func charge_shot_fire():
 	## Allows for a 1/5 allowance (e.g. since charge time is 1s, if its been .9s you can shoot anyway)
@@ -327,6 +337,7 @@ func charge_shot_fire():
 		charge_shoot()
 	is_charging = false
 	bar_charging.visible = false
+	pointer.visible = false
 	if fire_rate_timer.is_stopped():
 		fire_rate_timer.start()
 
@@ -389,6 +400,7 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 		revive_area.monitoring = true
 		player_sprite.texture = sprites["dead"]
 		velocity = Vector3.ZERO
+		is_shooting = false
 
 
 func dead():
