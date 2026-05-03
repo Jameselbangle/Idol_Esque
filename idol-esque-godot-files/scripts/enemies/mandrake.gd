@@ -18,6 +18,7 @@ func choose_target_position() -> Vector3:
 
 func _ready() -> void:
 	patterns.append(circle_burst)
+	set_shield(BulletConfig.BulletColour.ENEMY)
 
 func circle_burst(_target):
 	var config : Array[BulletConfig] = [BulletConfig.new()]
