@@ -5,11 +5,18 @@ func choose_target() -> Vector3:
 	var targets = get_tree().get_nodes_in_group("players")
 	assert(!targets.is_empty(), "'players' group is empty")
 	
-	var current_target = targets[0]
+	var current_target
 	
 	for i in targets:
-		if position.distance_to(i.position) < position.distance_to(current_target.position) and (!i.is_dead):
+		if current_target == null:
+			if (i.is_dead): continue
 			current_target = i
+		
+		if position.distance_to(i.position) < position.distance_to(current_target.position):
+			if (i.is_dead): continue
+			current_target = i
+	
+	if current_target == null: return Vector3.ZERO
 	return current_target.position
 
 func choose_target_position() -> Vector3:
