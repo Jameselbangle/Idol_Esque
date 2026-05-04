@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://j8ggnltygy01"]
 
 [ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_tpop7"]
-[ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://art/characters/players/front.png" id="2_km0ln"]
+[ext_resource type="Texture2D" uid="uid://cvdxd8tsrull" path="res://art/characters/players/Stella/Stella_front.png" id="2_io705"]
 [ext_resource type="Shader" uid="uid://ci6kbqhc1mw3u" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="3_io705"]
 [ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
 
@@ -80,13 +80,13 @@ script = ExtResource("1_tpop7")
 charge_time_seconds = 0.9
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81677246, -0.002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82092094, -0.002)
 shape = SubResource("CapsuleShape3D_io705")
 
 [node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, -0.3)
 billboard = 1
-texture = ExtResource("2_km0ln")
+texture = ExtResource("2_io705")
 
 [node name="Shadow" type="MeshInstance3D" parent="." unique_id=934179183]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, 0.21, 0)

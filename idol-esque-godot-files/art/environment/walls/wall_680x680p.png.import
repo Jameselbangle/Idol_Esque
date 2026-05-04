@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvdxd8tsrull"
-path.s3tc="res://.godot/imported/Stella_front.png-7694aec2188f141c49203b0589b3c7d0.s3tc.ctex"
+uid="uid://ctnyniv2fxtw1"
+path.s3tc="res://.godot/imported/wall_680x680p.png-7937237b0a47b30bb68f70393b2c3ac5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/characters/players/Stella/Stella_front.png"
-dest_files=["res://.godot/imported/Stella_front.png-7694aec2188f141c49203b0589b3c7d0.s3tc.ctex"]
+source_file="res://art/environment/walls/wall_680x680p.png"
+dest_files=["res://.godot/imported/wall_680x680p.png-7937237b0a47b30bb68f70393b2c3ac5.s3tc.ctex"]
 
 [params]
 

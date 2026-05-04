@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="1_0qifr"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="1_2av8n"]
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_hq8ac"]
+[ext_resource type="Texture2D" uid="uid://ctnyniv2fxtw1" path="res://art/environment/walls/wall_680x680p.png" id="3_obwlg"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="5_obwlg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2av8n"]
@@ -21,6 +22,11 @@ glow_enabled = true
 [sub_resource type="NavigationMesh" id="NavigationMesh_hq8ac"]
 vertices = PackedVector3Array(-13.858955, 0.49067688, -1.5737705, -13.858955, 0.49067688, 1.4262295, -4.8589554, 0.49067688, 9.9262295, 4.6410446, 0.49067688, 9.9262295, 13.891045, 0.49067688, 1.4262295, 13.891045, 0.49067688, -1.5737705, 11.641045, 6.990677, 5.4262295, 13.391045, 6.990677, 3.6762295, 12.891045, 6.990677, 3.4262295, 11.141045, 6.990677, 5.1762295, -10.858955, 6.990677, 6.1762295, -10.358955, 6.990677, 6.1762295, -12.358955, 6.990677, 3.9262295, -12.858955, 6.990677, 3.9262295, -14.108955, 0.49067688, 9.9262295, -8.358955, 0.49067688, 9.9262295, -13.608955, 0.49067688, 4.6762295, -14.108955, 0.49067688, 7.9262295, 14.141045, 0.49067688, 9.9262295, 13.891045, 0.49067688, 4.6762295, 8.641045, 0.49067688, 9.6762295, 8.141045, 0.49067688, 9.6762295, 8.141045, 6.990677, 8.6762295, 9.891045, 6.990677, 6.9262295, 9.391045, 6.990677, 6.6762295, 7.6410446, 6.990677, 8.4262295, -7.1089554, 6.990677, 9.6762295, -6.6089554, 6.990677, 9.6762295, -8.608955, 6.990677, 7.4262295, -9.108955, 6.990677, 7.4262295)
 polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(9, 8, 6), PackedInt32Array(6, 8, 7), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15), PackedInt32Array(20, 19, 18), PackedInt32Array(20, 18, 21), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(29, 28, 26), PackedInt32Array(26, 28, 27)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qifr"]
+albedo_texture = ExtResource("3_obwlg")
+uv1_scale = Vector3(0.125, 0.125, 0.125)
+uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nb301"]
 transparency = 1
@@ -56,6 +62,7 @@ use_edge_connections = false
 [node name="Room_0" type="Node" parent="NavigationRegion3D" unique_id=50402358]
 
 [node name="Room_0_Vis" type="CSGCombiner3D" parent="NavigationRegion3D/Room_0" unique_id=1547174819]
+material_override = SubResource("StandardMaterial3D_0qifr")
 use_collision = true
 collision_mask = 15
 
