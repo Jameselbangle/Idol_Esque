@@ -36,6 +36,7 @@ folder_colors={
 [global_group]
 
 players="Player Characters and any other target"
+enemies="Group for hostile entities"
 
 [input]
 
