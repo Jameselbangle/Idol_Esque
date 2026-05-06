@@ -1,19 +1,25 @@
 [gd_scene format=3 uid="uid://pdahav4akuvt"]
 
 [ext_resource type="PackedScene" uid="uid://co7jmjwp5sh5s" path="res://prefabs/enemies/slime.tscn" id="1_44dbt"]
-[ext_resource type="Texture2D" uid="uid://inogxuw3mg7c" path="res://art/characters/players/front.png" id="2_q02w0"]
-[ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="3_v3rb3"]
+[ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_wtxvo"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ysrml"]
-vertices = PackedVector3Array(-4.5, 2, -4.5, -4.5, 2, -4, 4.5, 2, -4, 4.5, 2, -4.5, -3.25, 1, -3.25, -3.25, 1, 3.5, 3.5, 1, 3.5, 3.5, 1, -3.25)
+vertices = PackedVector3Array(-10, 2, -4.5000005, -10, 2, -4.0000005, 10, 2, -4.0000005, 10, 2, -4.5000005, -8.75, 1, -3.2500005, -8.75, 1, 3.4999995, 9, 1, 3.4999995, 9, 1, -3.2500005)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dvgp"]
-size = Vector3(1, 1, 10)
+size = Vector3(20, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_87sy2"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_q02w0"]
+size = Vector3(1, 1, 10)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_v3rb3"]
+size = Vector3(1, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wtxvo"]
+size = Vector3(1, 1, 20)
 
 [node name="BulletTest" type="Node3D" unique_id=649448446]
 
@@ -29,24 +35,24 @@ use_edge_connections = false
 shape = SubResource("BoxShape3D_8dvgp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Environment/Ground" unique_id=135505481]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("BoxMesh_87sy2")
 
 [node name="Wall" type="StaticBody3D" parent="NavigationRegion3D/Environment" unique_id=1018503990]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/Wall" unique_id=1833532582]
-shape = SubResource("BoxShape3D_8dvgp")
+shape = SubResource("BoxShape3D_q02w0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Environment/Wall" unique_id=976358300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("BoxMesh_87sy2")
 
 [node name="Wall2" type="StaticBody3D" parent="NavigationRegion3D/Environment" unique_id=1581808251]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/Wall2" unique_id=1566655662]
-shape = SubResource("BoxShape3D_8dvgp")
+shape = SubResource("BoxShape3D_v3rb3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Environment/Wall2" unique_id=560085361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
@@ -56,43 +62,36 @@ mesh = SubResource("BoxMesh_87sy2")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, 4.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/Wall3" unique_id=1640356939]
-shape = SubResource("BoxShape3D_8dvgp")
+shape = SubResource("BoxShape3D_wtxvo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Environment/Wall3" unique_id=1936495582]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("BoxMesh_87sy2")
 
-[node name="Wall4" type="StaticBody3D" parent="NavigationRegion3D/Environment" unique_id=743288249]
+[node name="Wall4" type="StaticBody3D" parent="NavigationRegion3D/Environment" unique_id=333497444]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, -4.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/Wall4" unique_id=348960654]
-shape = SubResource("BoxShape3D_8dvgp")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Environment/Wall4" unique_id=1170331278]
+shape = SubResource("BoxShape3D_wtxvo")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Environment/Wall4" unique_id=1059789239]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Environment/Wall4" unique_id=46773378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("BoxMesh_87sy2")
-
-[node name="Slime" parent="NavigationRegion3D" unique_id=454864309 instance=ExtResource("1_44dbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.408, 1, -1.6504889)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=541020554]
 transform = Transform3D(1, 0, 0, 0, 0.53256613, 0.84638846, 0, -0.84638846, 0.53256613, 0, 6.5414925, 5.27748)
 
-[node name="BulletManager" type="Node" parent="." unique_id=800795356]
+[node name="bullet_manager" type="Node" parent="." unique_id=800795356]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1184840555]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
 
-[node name="Target" type="StaticBody3D" parent="." unique_id=170181526 groups=["players"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 2
+[node name="player_controller" parent="." unique_id=1761623861 instance=ExtResource("3_wtxvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008675337, 0.7036226, 3.269239)
+god_mode = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Target" unique_id=468252701]
-shape = SubResource("BoxShape3D_v3rb3")
+[node name="Slime" parent="." unique_id=454864309 instance=ExtResource("1_44dbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5132136, 0.99407697, -1.6658354)
 
-[node name="Sprite3D" type="Sprite3D" parent="Target" unique_id=1551503382]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
-texture = ExtResource("2_q02w0")
-
-[node name="Spawner" parent="." unique_id=1742698435 instance=ExtResource("3_v3rb3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+[node name="Slime2" parent="." unique_id=692904464 instance=ExtResource("1_44dbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8594446, 0.99407697, -1.6658354)
