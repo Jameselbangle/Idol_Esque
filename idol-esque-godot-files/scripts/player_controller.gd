@@ -32,6 +32,9 @@ var num : int = denominator  - 1
 @export_group("Is Keyboard?")
 @export var keyboard_mode : bool = false
 
+@export_group("DEBUG")
+@export var god_mode : bool = false
+
 @onready var player_sprite : Sprite3D = $player_spr
 @onready var bullet_spawn : Marker3D = $neck/BulletSpawn
 var bulletScene = preload("res://prefabs/bullet.tscn")
@@ -390,6 +393,8 @@ func _on_dash_cooldown_timeout() -> void:
 	bar_dash_cooldown.visible = false
 
 func damage(hit : int, _bullet_config : BulletConfig = null):
+	if god_mode: return
+	
 	health -= hit
 	
 	## Add death command
