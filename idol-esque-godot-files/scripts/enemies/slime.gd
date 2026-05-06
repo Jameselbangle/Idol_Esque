@@ -1,5 +1,7 @@
 extends Enemy
 
+@export var enemy_spacing = 1.0
+
 func choose_target() -> Vector3:
 	#TODO: Consider caching targets
 	var targets = get_tree().get_nodes_in_group("players")
@@ -22,17 +24,25 @@ func choose_target() -> Vector3:
 func choose_target_position() -> Vector3:
 	var closest_target : Vector3 = choose_target()
 	var distance = position.distance_to(closest_target)
+	var current_target = null
 	#print(distance)
 	if distance < 2:
 		var direction : Vector3  = (position - closest_target).normalized()
 		direction *= 4
-		return position + direction
+		current_target = position + direction
 	if distance > 6:
 		var direction : Vector3  = (position - closest_target).normalized()
 		direction *= 4
-		return position - direction
+		current_target = position - direction
 	
-	return position
+	if current_target == null: return position
+	
+	for e in get_tree().get_nodes_in_group("enemies"):
+		if current_target.distance_to(e._navigation_agent.target_position) < enemy_spacing:
+			var perp_pos = Vector3(-current_target.z, current_target.y, current_target.x)
+			return perp_pos
+	return current_target
+	
 
 func _ready() -> void:
 	patterns.append(burst_shot)
