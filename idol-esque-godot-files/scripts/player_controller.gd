@@ -197,6 +197,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_released("charge_fire") and event.device == player_count and is_charging:
 		charge_shot_fire()
 	
+	if event.is_action_pressed("special_fire") and event.device == player_count:
+		match player_colour:
+			BulletConfig.BulletColour.RED:
+				## Delete all bullets in radius
+				pass
+			BulletConfig.BulletColour.BLUE:
+				## Shield to block bullets (has set hp)
+				pass
+			BulletConfig.BulletColour.YELLOW:
+				## Buff player movement speed
+				pass
+	
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
 		dash()
