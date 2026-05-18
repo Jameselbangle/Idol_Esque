@@ -201,14 +201,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		match player_colour:
 			BulletConfig.BulletColour.RED:
 				## Delete all bullets in radius
-				pass
+				for area in $Special/delete.get_overlapping_areas():
+					if "bullet" in area.name:
+						area.explode()
 			BulletConfig.BulletColour.BLUE:
 				## Shield to block bullets (has set hp)
 				pass
+				## Create shield scene
+				## Instanciate shield with HP that only targets enemy bullets
+				## & enemy hitboxes..?
 			BulletConfig.BulletColour.YELLOW:
 				## Buff player movement speed
-				pass
-	
+				for area in $Special/buff.get_overlapping_bodies():
+					if "player" in area.name:
+						pass
+						## Buff players
+						## Movement speed..? 
+						## Attack speed..? could be tricky
+						## Charge shot rate..? could be tricky
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
 		dash()
