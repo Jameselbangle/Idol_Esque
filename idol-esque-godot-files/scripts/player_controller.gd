@@ -31,6 +31,9 @@ var num : int = denominator  - 1
 @export var chargerate : float = firerate * 2
 @export var revive_time : float = 3.0
 
+@export_group("Shield")
+@export var shield_health : int = 10
+
 @export_group("Is Keyboard?")
 @export var keyboard_mode : bool = false
 
@@ -40,6 +43,8 @@ var num : int = denominator  - 1
 @onready var player_sprite : Sprite3D = $player_spr
 @onready var bullet_spawn : Marker3D = $neck/BulletSpawn
 var bulletScene = preload("res://prefabs/bullet.tscn")
+var player_shield = preload("res://prefabs/player_shield.tscn")
+var shield_count : int = 0
 var sprites = {
 	"front" : preload("res://art/characters/players/front.png"),
 	"back" : preload("res://art/characters/players/back.png"),
@@ -222,10 +227,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			BulletConfig.BulletColour.BLUE:
 				## Shield to block bullets (has set hp)
-				pass
-				## Create shield scene
-				## Instanciate shield with HP that only targets enemy bullets
-				## & enemy hitboxes..?
+				var shield = player_shield.instantiate()
+				shield.setup(shield_count, global_position, shield_health)
+				shield_count += 1
+				get_tree().current_scene.get_node("bullet_manager").add_child(shield)
 	
 	if event.is_action_released("special_fire") and event.device == player_count:
 		if player_colour == BulletConfig.BulletColour.YELLOW:

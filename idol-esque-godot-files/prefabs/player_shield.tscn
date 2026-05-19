@@ -1,3 +1,51 @@
 [gd_scene format=3 uid="uid://bgbff70g3w8p2"]
 
-[node name="PlayerShield" type="Node3D" unique_id=611321701]
+[ext_resource type="Script" uid="uid://blwvgvpgmfmtd" path="res://scripts/player_shield.gd" id="1_gvrug"]
+[ext_resource type="Texture2D" uid="uid://cvdxd8tsrull" path="res://art/characters/players/Stella/Stella_front.png" id="2_rga1e"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nrqht"]
+height = 2.25
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udtrj"]
+transparency = 1
+blend_mode = 1
+cull_mode = 1
+depth_draw_mode = 1
+no_depth_test = true
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gvrug"]
+material = SubResource("StandardMaterial3D_udtrj")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_udtrj"]
+radius = 0.3
+height = 1.604248
+
+[node name="player_shield" type="Area3D" unique_id=319706431]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_gvrug")
+
+[node name="player_shield_collider" type="CollisionShape3D" parent="." unique_id=976954464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0)
+shape = SubResource("CylinderShape3D_nrqht")
+
+[node name="player_shield_mesh" type="MeshInstance3D" parent="." unique_id=979964284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2522192, 0)
+mesh = SubResource("CylinderMesh_gvrug")
+
+[node name="temp_player_scale" type="Node3D" parent="." unique_id=1507361208]
+visible = false
+
+[node name="player_col" type="CollisionShape3D" parent="temp_player_scale" unique_id=148774946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82092094, -0.002)
+shape = SubResource("CapsuleShape3D_udtrj")
+
+[node name="player_spr" type="Sprite3D" parent="temp_player_scale" unique_id=329984159]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, -0.3)
+billboard = 1
+texture = ExtResource("2_rga1e")
