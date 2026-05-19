@@ -12,7 +12,7 @@ func setup(_config : Array[BulletConfig], _position : Vector3 = Vector3.ZERO) :
 	
 	scale = Vector3(config[0].size, config[0].size, config[0].size)
 	
-	var collision_object : Area3D = $Area3D
+	var collision_object : Area3D = $bullet_area
 	
 	collision_object.collision_mask = 0
 	
@@ -76,9 +76,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func explode():
 	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
 	queue_free()
-
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	print("area UNHANDLED " + area.name)
 
 func tick() -> void:
 	tick_step += 1

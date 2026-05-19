@@ -6,7 +6,9 @@ extends CharacterBody3D
 @export var health : int = 5
 
 @export_group("Speeds")
-@export var move_speed : float = 7.0
+@export var base_move_speed : float = 7.0
+@export var buff_move_speed : float = 14.0
+var move_speed : float = base_move_speed
 @export var base_slipperyness_lerp : float = 7
 var slipperyness_lerp : float = base_slipperyness_lerp
 
@@ -71,6 +73,7 @@ var is_charging: bool = false
 var is_dashing: bool = false
 var can_dash : bool = true
 var is_dead : bool = false
+var is_buffed : bool = false
 
 ## rotating character with joystick
 var deadzone: float = 0.3
@@ -200,25 +203,40 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("special_fire") and event.device == player_count:
 		match player_colour:
 			BulletConfig.BulletColour.RED:
+				print("SPECIAL bullet delete")
 				## Delete all bullets in radius
 				for area in $Special/delete.get_overlapping_areas():
 					if "bullet" in area.name:
-						area.explode()
+						if area.get_parent().config[0].bullet_colour == BulletConfig.BulletColour.ENEMY:
+							area.get_parent().explode()
+			BulletConfig.BulletColour.YELLOW:
+				## Buff player movement speed
+				for body in $Special/buff.get_overlapping_bodies():
+					body.stats_buff()
+					## Buff players
+					## Movement speed..? 
+					## Attack speed..? could be tricky
+					## Charge shot rate..? could be tricky
 			BulletConfig.BulletColour.BLUE:
 				## Shield to block bullets (has set hp)
 				pass
 				## Create shield scene
 				## Instanciate shield with HP that only targets enemy bullets
 				## & enemy hitboxes..?
+	
+	if event.is_action_released("special_fire") and event.device == player_count:
+		match player_colour:
 			BulletConfig.BulletColour.YELLOW:
 				## Buff player movement speed
-				for area in $Special/buff.get_overlapping_bodies():
-					if "player" in area.name:
-						pass
-						## Buff players
-						## Movement speed..? 
-						## Attack speed..? could be tricky
-						## Charge shot rate..? could be tricky
+				for body in get_tree().get_nodes_in_group("players"):
+					body.stats_reset()
+					## Buff players
+					## Movement speed..? 
+					## Attack speed..? could be tricky
+					## Charge shot rate..? could be tricky
+			BulletConfig.BulletColour.BLUE:
+				pass
+	
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
 		dash()
@@ -428,6 +446,15 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 		player_sprite.texture = sprites["dead"]
 		velocity = Vector3.ZERO
 		is_shooting = false
+
+
+func stats_buff():
+	move_speed = buff_move_speed 
+	is_buffed = true
+
+func stats_reset():
+	move_speed = base_move_speed
+	is_buffed = false
 
 
 func dead():

@@ -23,11 +23,11 @@ double_sided = false
 texture_filter = 0
 texture = ExtResource("3_db0hv")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=1434270476]
+[node name="bullet_area" type="Area3D" parent="." unique_id=1434270476]
 collision_layer = 8
 collision_mask = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1712136748]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bullet_area" unique_id=1712136748]
 shape = SubResource("BoxShape3D_lv25w")
 
 [node name="Shadow" type="MeshInstance3D" parent="." unique_id=1248795878]
@@ -35,5 +35,4 @@ transform = Transform3D(0.4140423, 0, 0, 0, 0.4140423, 0, 0, 0, 0.4140423, 0, -0
 cast_shadow = 3
 mesh = SubResource("SphereMesh_lv25w")
 
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="bullet_area" to="." method="_on_area_3d_body_entered"]

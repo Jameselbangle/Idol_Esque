@@ -73,17 +73,13 @@ albedo_color = Color(0, 1, 0, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_bnhpu"]
 material = SubResource("StandardMaterial3D_51y0g")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_51y0g"]
-height = 1.0
-radius = 2.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_bnhpu"]
-height = 1.0
-radius = 5.0
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a22ng"]
-height = 1.0
-radius = 3.0
+height = 2.5
+radius = 6.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_51y0g"]
+height = 2.5
+radius = 9.0
 
 [node name="player_controller" type="CharacterBody3D" unique_id=1761623861 groups=["players"]]
 collision_layer = 2
@@ -124,7 +120,7 @@ wait_time = 3.0
 [node name="neck" type="Node3D" parent="." unique_id=659936507]
 
 [node name="BulletSpawn" type="Marker3D" parent="neck" unique_id=1953609992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4754212, 0.688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23614109, 0.688)
 
 [node name="Pointer" type="Node3D" parent="neck" unique_id=263196583]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.55)
@@ -174,25 +170,23 @@ shape = SubResource("CylinderShape3D_io705")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044165134, 0)
 mesh = SubResource("PlaneMesh_bnhpu")
 
-[node name="Special" type="Node" parent="." unique_id=1181539669]
+[node name="Special" type="Node3D" parent="." unique_id=43498030]
 
-[node name="shield" type="Area3D" parent="Special" unique_id=16239076]
+[node name="delete" type="Area3D" parent="Special" unique_id=1768995993]
+collision_layer = 8
+collision_mask = 2
 
-[node name="shield_col" type="CollisionShape3D" parent="Special/shield" unique_id=1468458920]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_51y0g")
-
-[node name="buff" type="Area3D" parent="Special" unique_id=349470483]
-
-[node name="buff_col" type="CollisionShape3D" parent="Special/buff" unique_id=1863042131]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_bnhpu")
-
-[node name="delete" type="Area3D" parent="Special" unique_id=1409944461]
-
-[node name="delete_col" type="CollisionShape3D" parent="Special/delete" unique_id=1516499086]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="delete_col" type="CollisionShape3D" parent="Special/delete" unique_id=1900012627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("CylinderShape3D_a22ng")
+
+[node name="buff" type="Area3D" parent="Special" unique_id=836292579]
+collision_layer = 8
+collision_mask = 2
+
+[node name="buff_col" type="CollisionShape3D" parent="Special/buff" unique_id=1421756118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CylinderShape3D_51y0g")
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
