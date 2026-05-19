@@ -74,6 +74,7 @@ var is_dashing: bool = false
 var can_dash : bool = true
 var is_dead : bool = false
 var is_buffed : bool = false
+var is_buffing : bool = false
 
 ## rotating character with joystick
 var deadzone: float = 0.3
@@ -203,7 +204,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("special_fire") and event.device == player_count:
 		match player_colour:
 			BulletConfig.BulletColour.RED:
-				print("SPECIAL bullet delete")
 				## Delete all bullets in radius
 				for area in $Special/delete.get_overlapping_areas():
 					if "bullet" in area.name:
@@ -211,6 +211,7 @@ func _unhandled_input(event: InputEvent) -> void:
 							area.get_parent().explode()
 			BulletConfig.BulletColour.YELLOW:
 				## Buff player movement speed
+				is_buffing = true
 				for body in $Special/buff.get_overlapping_bodies():
 					body.stats_buff()
 					## Buff players
@@ -227,6 +228,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("special_fire") and event.device == player_count:
 		if player_colour == BulletConfig.BulletColour.YELLOW:
 			## Buff player movement speed
+			is_buffing = false
 			for body in get_tree().get_nodes_in_group("players"):
 				body.stats_reset()
 	
@@ -487,14 +489,23 @@ func revive():
 
 func stats_buff():
 	move_speed = buff_move_speed 
+	
+	
+	
 	is_buffed = true
 
 func stats_reset():
 	move_speed = base_move_speed
+	
+	
+	
 	is_buffed = false
 
 func _on_buff_body_entered(body: Node3D) -> void:
 	if !(player_colour == BulletConfig.BulletColour.YELLOW):
+		return
+	
+	if !is_buffing:
 		return
 	
 	if body.is_buffed:
@@ -504,6 +515,9 @@ func _on_buff_body_entered(body: Node3D) -> void:
 
 func _on_buff_body_exited(body: Node3D) -> void:
 	if !(player_colour == BulletConfig.BulletColour.YELLOW):
+		return
+	
+	if !is_buffing:
 		return
 	
 	if !body.is_buffed:
