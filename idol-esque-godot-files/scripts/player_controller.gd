@@ -95,6 +95,7 @@ func _ready() -> void:
 	dash_cooldown_timer.wait_time = dash_cooldown
 	dash_length_timer.wait_time = dash_length_seconds
 	revive_timer.wait_time = revive_time
+	fire_rate_timer.wait_time = firerate
 	
 	var mat : StandardMaterial3D = StandardMaterial3D.new()
 	var pointer_cylinder : Node3D = $neck/Pointer/PointerCylinder
@@ -188,7 +189,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	
 	## Handles firing bullets seperate from PhysicsProcess 
-	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging:
+	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging and !is_buffing:
 		if fire_rate_timer.is_stopped():
 			shoot()
 		is_shooting = true
@@ -196,28 +197,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_shooting = false
 	
 	## Charge fire attack
-	if event.is_action_pressed("charge_fire") and event.device == player_count and !is_charging:
+	if event.is_action_pressed("charge_fire") and event.device == player_count and !is_charging and !is_buffing:
 		charge_shot_charge()
 	elif event.is_action_released("charge_fire") and event.device == player_count and is_charging:
 		charge_shot_fire()
 	
 	if event.is_action_pressed("special_fire") and event.device == player_count:
 		match player_colour:
+			
 			BulletConfig.BulletColour.RED:
 				## Delete all bullets in radius
 				for area in $Special/delete.get_overlapping_areas():
 					if "bullet" in area.name:
 						if area.get_parent().config[0].bullet_colour == BulletConfig.BulletColour.ENEMY:
 							area.get_parent().explode()
+			
 			BulletConfig.BulletColour.YELLOW:
-				## Buff player movement speed
+				## Buff player
 				is_buffing = true
+				if is_charging:
+					charge_shot_fire()
 				for body in $Special/buff.get_overlapping_bodies():
 					body.stats_buff()
-					## Buff players
-					## Movement speed..? 
-					## Attack speed..? could be tricky
-					## Charge shot rate..? could be tricky
+			
 			BulletConfig.BulletColour.BLUE:
 				## Shield to block bullets (has set hp)
 				pass
@@ -233,7 +235,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				body.stats_reset()
 	
 	## Dash
-	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
+	if event.is_action_pressed("dash") and event.device == player_count and can_dash and !is_buffing:
 		dash()
 	
 	## Movement
@@ -262,6 +264,7 @@ func _physics_process(delta: float) -> void:
 		dead()
 		return
 	
+	
 	### --------------
 	### TEMP MOVEMENT
 	
@@ -289,8 +292,15 @@ func _physics_process(delta: float) -> void:
 	if abs(movement_vector) < deadzone:
 		joy_move = Vector2.ZERO
 	
+	if is_buffing:
+		joy_move = Vector2.ZERO
+	
 	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
 	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
+	
+	if is_buffing:
+		move_and_slide()
+		return
 	
 	## Rotation code
 	## source: https://www.youtube.com/watch?v=1C2AAiNxoc8
@@ -343,7 +353,6 @@ func KEY_rotate(rot: float):
 ## Creating Bullets and firing
 func shoot():
 	fire_rate_timer.start()
-	fire_rate_timer.start(firerate)
 	
 	var spawn_pos = bullet_spawn.global_position
 	var direction := Vector3(sin(neck.rotation.y), 0, cos(neck.rotation.y))
@@ -490,14 +499,16 @@ func revive():
 func stats_buff():
 	move_speed = buff_move_speed 
 	
-	
+	fire_rate_timer.wait_time = fire_rate_timer.wait_time / 2
+	charge_rate_timer.wait_time = charge_rate_timer.wait_time / 2
 	
 	is_buffed = true
 
 func stats_reset():
 	move_speed = base_move_speed
 	
-	
+	fire_rate_timer.wait_time = fire_rate_timer.wait_time * 2
+	charge_rate_timer.wait_time = charge_rate_timer.wait_time * 2
 	
 	is_buffed = false
 
