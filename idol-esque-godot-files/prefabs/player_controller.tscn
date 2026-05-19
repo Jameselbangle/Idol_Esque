@@ -21,13 +21,27 @@ top_radius = 0.1
 bottom_radius = 0.2
 height = 1.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a22ng"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_io705")
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/progress_color = Color(0.8, 0.27450982, 0.8745098, 1)
+shader_parameter/progress_value = 0.2
+shader_parameter/billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_m11dk"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_a22ng")
+size = Vector2(1, 0.1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bnhpu"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_io705")
 shader_parameter/background_color = Color(0, 0, 0, 1)
 shader_parameter/progress_color = Color(0, 1, 0, 1)
-shader_parameter/progress_value = 50.0
+shader_parameter/progress_value = 0.68
 shader_parameter/billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_a22ng"]
@@ -77,9 +91,29 @@ material = SubResource("StandardMaterial3D_51y0g")
 height = 2.5
 radius = 6.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnhpu"]
+blend_mode = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a22ng"]
+material = SubResource("StandardMaterial3D_bnhpu")
+top_radius = 6.0
+bottom_radius = 6.0
+height = 0.1
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_51y0g"]
 height = 2.5
 radius = 9.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a22ng"]
+blend_mode = 1
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m11dk"]
+material = SubResource("StandardMaterial3D_a22ng")
+top_radius = 9.0
+bottom_radius = 9.0
+height = 0.1
 
 [node name="player_controller" type="CharacterBody3D" unique_id=1761623861 groups=["players"]]
 collision_layer = 2
@@ -117,6 +151,13 @@ one_shot = true
 [node name="revive_timer" type="Timer" parent="." unique_id=509174880]
 wait_time = 3.0
 
+[node name="special_attack_timer" type="Timer" parent="." unique_id=221611594]
+one_shot = true
+
+[node name="special_red_flash" type="Timer" parent="." unique_id=1967571343]
+wait_time = 0.2
+one_shot = true
+
 [node name="neck" type="Node3D" parent="." unique_id=659936507]
 
 [node name="BulletSpawn" type="Marker3D" parent="neck" unique_id=1953609992]
@@ -130,11 +171,21 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.74999994)
 mesh = SubResource("CylinderMesh_io705")
 
+[node name="special_attack_bar" type="MeshInstance3D" parent="." unique_id=404978889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2632799)
+visible = false
+mesh = SubResource("QuadMesh_m11dk")
+script = ExtResource("4_51y0g")
+value = 20.0
+progress_color = Color(0.8, 0.27450982, 0.8745098, 1)
+metadata/_custom_type_script = "uid://dmrc357wou0bo"
+
 [node name="ChargeProgressBar" type="MeshInstance3D" parent="." unique_id=1774778579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.658744)
 visible = false
 mesh = SubResource("QuadMesh_a22ng")
 script = ExtResource("4_51y0g")
+value = 0.68
 max_value = 1.0
 
 [node name="DashProgressBar" type="MeshInstance3D" parent="." unique_id=808747772]
@@ -173,25 +224,37 @@ mesh = SubResource("PlaneMesh_bnhpu")
 [node name="Special" type="Node3D" parent="." unique_id=43498030]
 
 [node name="delete" type="Area3D" parent="Special" unique_id=1768995993]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 2
+collision_mask = 8
 
 [node name="delete_col" type="CollisionShape3D" parent="Special/delete" unique_id=1900012627]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("CylinderShape3D_a22ng")
 
+[node name="delete_mesh" type="MeshInstance3D" parent="Special/delete" unique_id=1978690392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+visible = false
+mesh = SubResource("CylinderMesh_a22ng")
+
 [node name="buff" type="Area3D" parent="Special" unique_id=836292579]
-collision_layer = 8
+collision_layer = 2
 collision_mask = 2
 
 [node name="buff_col" type="CollisionShape3D" parent="Special/buff" unique_id=1421756118]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("CylinderShape3D_51y0g")
 
+[node name="buff_mesh" type="MeshInstance3D" parent="Special/buff" unique_id=944399278]
+visible = false
+transparency = 0.8
+mesh = SubResource("CylinderMesh_m11dk")
+
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]
 [connection signal="timeout" from="revive_timer" to="." method="_on_revive_timer_timeout"]
+[connection signal="timeout" from="special_attack_timer" to="." method="_on_special_attack_timer_timeout"]
+[connection signal="timeout" from="special_red_flash" to="." method="_on_special_red_flash_timeout"]
 [connection signal="body_entered" from="revive_area" to="." method="_on_revive_area_body_entered"]
 [connection signal="body_exited" from="revive_area" to="." method="_on_revive_area_body_exited"]
 [connection signal="body_entered" from="Special/buff" to="." method="_on_buff_body_entered"]

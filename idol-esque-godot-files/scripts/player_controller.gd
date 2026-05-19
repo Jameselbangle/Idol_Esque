@@ -30,6 +30,7 @@ var num : int = denominator  - 1
 @export var firerate : float = 0.2
 @export var chargerate : float = firerate * 2
 @export var revive_time : float = 3.0
+@export var special_cooldown : float = 5.0
 
 @export_group("Shield")
 @export var shield_health : int = 10
@@ -58,14 +59,15 @@ var sprites = {
 @onready var dash_cooldown_timer : Timer = $DashCooldown
 @onready var dash_length_timer : Timer = $DashLength
 @onready var revive_timer : Timer = $revive_timer
+@onready var special_attack_timer : Timer = $special_attack_timer
 
 @onready var bar_charging : ProgressBar3D = $ChargeProgressBar
 @onready var bar_dash_cooldown : ProgressBar3D = $DashProgressBar
 @onready var bar_revive : ProgressBar3D = $revive_progress_bar
+@onready var bar_special : ProgressBar3D = $special_attack_bar
 
 @onready var neck : Node3D = $neck
 @onready var pointer : Node3D = $neck/Pointer
-@onready var character_body = get_node(".")
 
 @onready var revive_area : Area3D = $revive_area
 var players_reviving : int = 0
@@ -76,14 +78,15 @@ var joy_look : Vector2
 var is_shooting: bool = false
 var is_charging: bool = false
 var is_dashing: bool = false
-var can_dash : bool = true
 var is_dead : bool = false
 var is_buffed : bool = false
 var is_buffing : bool = false
+var can_dash : bool = true
+var can_special : bool = true
 
 ## rotating character with joystick
 var deadzone: float = 0.3
-var rotation_speed: float = 5.0
+var rotation_speed: float = 7.0
 var target_angle: float
 
 var mouse_captured : bool = false
@@ -94,10 +97,14 @@ func _ready() -> void:
 	## Set initial wait times for Progress Bar
 	charge_rate_timer.wait_time = charge_time_seconds
 	bar_charging.max_value = charge_time_seconds
+	
+	dash_cooldown_timer.wait_time = dash_cooldown
 	bar_dash_cooldown.max_value = dash_cooldown
 	
+	special_attack_timer.wait_time = special_cooldown
+	bar_special.max_value = special_cooldown
+	
 	## Set wait times for timers
-	dash_cooldown_timer.wait_time = dash_cooldown
 	dash_length_timer.wait_time = dash_length_seconds
 	revive_timer.wait_time = revive_time
 	fire_rate_timer.wait_time = firerate
@@ -211,11 +218,31 @@ func _unhandled_input(event: InputEvent) -> void:
 		match player_colour:
 			
 			BulletConfig.BulletColour.RED:
+				if !can_special:
+					return
+				
 				## Delete all bullets in radius
 				for area in $Special/delete.get_overlapping_areas():
 					if "bullet" in area.name:
 						if area.get_parent().config[0].bullet_colour == BulletConfig.BulletColour.ENEMY:
 							area.get_parent().explode()
+				
+				$Special/delete/delete_mesh.visible = true
+				$special_red_flash.start()
+				
+				special_attack_recharge()
+			
+			BulletConfig.BulletColour.BLUE:
+				if !can_special:
+					return
+				
+				## Shield to block bullets (has set hp)
+				var shield = player_shield.instantiate()
+				shield.setup(shield_count, global_position, shield_health)
+				shield_count += 1
+				get_tree().current_scene.get_node("bullet_manager").add_child(shield)
+				
+				special_attack_recharge()
 			
 			BulletConfig.BulletColour.YELLOW:
 				## Buff player
@@ -224,13 +251,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					charge_shot_fire()
 				for body in $Special/buff.get_overlapping_bodies():
 					body.stats_buff()
-			
-			BulletConfig.BulletColour.BLUE:
-				## Shield to block bullets (has set hp)
-				var shield = player_shield.instantiate()
-				shield.setup(shield_count, global_position, shield_health)
-				shield_count += 1
-				get_tree().current_scene.get_node("bullet_manager").add_child(shield)
+				
+				$Special/buff/buff_mesh.visible = true
 	
 	if event.is_action_released("special_fire") and event.device == player_count:
 		if player_colour == BulletConfig.BulletColour.YELLOW:
@@ -238,6 +260,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			is_buffing = false
 			for body in get_tree().get_nodes_in_group("players"):
 				body.stats_reset()
+			$Special/buff/buff_mesh.visible = false
 	
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash and !is_buffing:
@@ -291,6 +314,8 @@ func _physics_process(delta: float) -> void:
 		pointer.scale.z = fill
 	if !can_dash:
 		bar_dash_cooldown.value = (1 / dash_cooldown_timer.wait_time) * (dash_cooldown_timer.wait_time - dash_cooldown_timer.time_left)
+	if !can_special:
+		bar_special.value = special_attack_timer.wait_time - special_attack_timer.time_left
 	
 	## Deadzone checker & apply velocity
 	var movement_vector = sqrt(joy_move.x **2 + joy_move.y **2)
@@ -421,7 +446,7 @@ func dash():
 	dash_cooldown_timer.start()
 	dash_length_timer.start()
 	
-	character_body.set_collision_layer_value(2, false)
+	set_collision_layer_value(2, false)
 	
 	## Dash Movement enabled
 	#velocity = velocity.normalized() * dash_speed
@@ -431,7 +456,7 @@ func dash():
 func _on_dash_length_timeout() -> void:
 	is_dashing = false
 	slipperyness_lerp = base_slipperyness_lerp
-	character_body.set_collision_layer_value(2, true)
+	set_collision_layer_value(2, true)
 	
 	## Enable/disable for precise stopping/starting
 	#velocity = velocity / dash_speed 
@@ -500,6 +525,20 @@ func revive():
 	bar_revive.visible = false
 	player_sprite.texture = sprites["front"]
 
+
+func _on_special_red_flash_timeout() -> void:
+	$Special/delete/delete_mesh.visible = false
+
+func special_attack_recharge():
+	can_special = false
+	
+	special_attack_timer.start()
+	bar_special.visible = true
+
+func _on_special_attack_timer_timeout() -> void:
+	can_special = true
+	
+	bar_special.visible = false
 
 func stats_buff():
 	move_speed = buff_move_speed 
