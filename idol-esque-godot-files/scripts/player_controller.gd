@@ -225,17 +225,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				## & enemy hitboxes..?
 	
 	if event.is_action_released("special_fire") and event.device == player_count:
-		match player_colour:
-			BulletConfig.BulletColour.YELLOW:
-				## Buff player movement speed
-				for body in get_tree().get_nodes_in_group("players"):
-					body.stats_reset()
-					## Buff players
-					## Movement speed..? 
-					## Attack speed..? could be tricky
-					## Charge shot rate..? could be tricky
-			BulletConfig.BulletColour.BLUE:
-				pass
+		if player_colour == BulletConfig.BulletColour.YELLOW:
+			## Buff player movement speed
+			for body in get_tree().get_nodes_in_group("players"):
+				body.stats_reset()
 	
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
@@ -448,15 +441,6 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 		is_shooting = false
 
 
-func stats_buff():
-	move_speed = buff_move_speed 
-	is_buffed = true
-
-func stats_reset():
-	move_speed = base_move_speed
-	is_buffed = false
-
-
 func dead():
 	if players_reviving <= 0:
 		return
@@ -499,6 +483,34 @@ func revive():
 	revive_area.monitoring = false
 	bar_revive.visible = false
 	player_sprite.texture = sprites["front"]
+
+
+func stats_buff():
+	move_speed = buff_move_speed 
+	is_buffed = true
+
+func stats_reset():
+	move_speed = base_move_speed
+	is_buffed = false
+
+func _on_buff_body_entered(body: Node3D) -> void:
+	if !(player_colour == BulletConfig.BulletColour.YELLOW):
+		return
+	
+	if body.is_buffed:
+		return
+	
+	body.stats_buff()
+
+func _on_buff_body_exited(body: Node3D) -> void:
+	if !(player_colour == BulletConfig.BulletColour.YELLOW):
+		return
+	
+	if !body.is_buffed:
+		return
+	
+	body.stats_reset()
+
 
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

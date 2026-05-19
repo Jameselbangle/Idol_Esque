@@ -194,3 +194,5 @@ shape = SubResource("CylinderShape3D_51y0g")
 [connection signal="timeout" from="revive_timer" to="." method="_on_revive_timer_timeout"]
 [connection signal="body_entered" from="revive_area" to="." method="_on_revive_area_body_entered"]
 [connection signal="body_exited" from="revive_area" to="." method="_on_revive_area_body_exited"]
+[connection signal="body_entered" from="Special/buff" to="." method="_on_buff_body_entered"]
+[connection signal="body_exited" from="Special/buff" to="." method="_on_buff_body_exited"]
