@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_hq8ac"]
 [ext_resource type="Texture2D" uid="uid://ctnyniv2fxtw1" path="res://art/environment/walls/wall_680x680p.png" id="3_obwlg"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="5_obwlg"]
+[ext_resource type="PackedScene" uid="uid://dwqe8xn8i664d" path="res://prefabs/ui/health_ui.tscn" id="6_0qifr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2av8n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -133,3 +134,32 @@ switch = true
 
 [node name="Spawner5" parent="." unique_id=39625765 instance=ExtResource("5_obwlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.042871, 0.5, -0.63153934)
+
+[node name="Control" type="Control" parent="." unique_id=788766018]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerHealth" parent="Control" unique_id=128702165 instance=ExtResource("6_0qifr")]
+layout_mode = 0
+
+[node name="PlayerHealth2" parent="Control" unique_id=1954289341 instance=ExtResource("6_0qifr")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.5
+offset_right = 77.5
+grow_horizontal = 2
+
+[node name="PlayerHealth3" parent="Control" unique_id=435697479 instance=ExtResource("6_0qifr")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
+offset_right = 0.0
+grow_horizontal = 0
