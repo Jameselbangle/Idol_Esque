@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bv37w7clm8bxg"]
+
+[ext_resource type="Texture2D" uid="uid://cq3k35sjqovoo" path="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_06.png" id="1_orjuh"]
+[ext_resource type="Texture2D" uid="uid://bv2ykdw5mjliw" path="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_01.png" id="2_ikm5l"]
+[ext_resource type="Texture2D" uid="uid://cwk8qr3mx1iof" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_06.png" id="2_nwcj4"]
+[ext_resource type="Texture2D" uid="uid://dtfq7xtofybro" path="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_03.png" id="3_hw07a"]
+[ext_resource type="Texture2D" uid="uid://ch5hrrnmfcrki" path="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_07.png" id="4_cdt5p"]
+[ext_resource type="Texture2D" uid="uid://555uv33pmc01" path="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_02.png" id="5_qximw"]
+[ext_resource type="Texture2D" uid="uid://uxk1pcjq2fcf" path="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_04.png" id="6_ku2nv"]
+[ext_resource type="Texture2D" uid="uid://dj7ndgrfdfc5a" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_05.png" id="7_2ya7i"]
+[ext_resource type="Texture2D" uid="uid://7kpdfa662wyo" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_03.png" id="8_vr4po"]
+[ext_resource type="Texture2D" uid="uid://q7lv3sbi7cje" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_01.png" id="9_jgpuk"]
+[ext_resource type="Texture2D" uid="uid://c5o0smdjkna3p" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_07.png" id="11_w0gws"]
+[ext_resource type="Texture2D" uid="uid://coympljwobxrq" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_02.png" id="12_trkr4"]
+[ext_resource type="Texture2D" uid="uid://dthfmrs3vtyo6" path="res://art/environment/environment_objects/Rock_4.png" id="13_ahjxx"]
+[ext_resource type="Texture2D" uid="uid://b6tf1nktkxmin" path="res://art/environment/floor_tiles/FloorTile_Test.png" id="13_vr4po"]
+[ext_resource type="Texture2D" uid="uid://by5qv6mpkh7xr" path="res://art/environment/environment_objects/Rock_2.png" id="14_ainht"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgpuk"]
+albedo_texture = ExtResource("13_vr4po")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w0gws"]
+
+[node name="WallTest" type="Node3D" unique_id=294609644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12400341, 0, 0)
+
+[node name="Og_Left_Wall_06" type="Sprite3D" parent="." unique_id=326607797]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -5.4861264, 2.7092106, 5.896273)
+texture = ExtResource("1_orjuh")
+
+[node name="Og_Left_Wall_07" type="Sprite3D" parent="." unique_id=1082241298]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -5.540894, 2.7092106, 5.150071)
+texture = ExtResource("2_ikm5l")
+
+[node name="Og_Left_Wall_08" type="Sprite3D" parent="." unique_id=1413510623]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -5.3943653, 2.7092106, 4.3768287)
+texture = ExtResource("3_hw07a")
+
+[node name="Og_Left_Wall_09" type="Sprite3D" parent="." unique_id=451416683]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -5.6036296, 2.7092106, 3.4319358)
+texture = ExtResource("4_cdt5p")
+
+[node name="Og_Left_Wall_10" type="Sprite3D" parent="." unique_id=2102419900]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -5.4861264, 2.7092106, 2.4834094)
+texture = ExtResource("5_qximw")
+
+[node name="Og_Left_Wall_11" type="Sprite3D" parent="." unique_id=470061387]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, -5.4861264, 2.7092106, 1.5377917)
+texture = ExtResource("6_ku2nv")
+
+[node name="Og_Right_Wall_06" type="Sprite3D" parent="." unique_id=1312045452]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 5.5777364, 2.7053514, 5.861271)
+texture = ExtResource("7_2ya7i")
+
+[node name="Og_Right_Wall_07" type="Sprite3D" parent="." unique_id=846875621]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 5.5777364, 2.7053514, 4.976437)
+texture = ExtResource("8_vr4po")
+
+[node name="Og_Right_Wall_08" type="Sprite3D" parent="." unique_id=1063905843]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 5.5777364, 2.7053514, 4.223194)
+texture = ExtResource("9_jgpuk")
+
+[node name="Og_Right_Wall_09" type="Sprite3D" parent="." unique_id=986780629]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 5.5777364, 2.7053514, 3.2147431)
+texture = ExtResource("2_nwcj4")
+
+[node name="Og_Right_Wall_10" type="Sprite3D" parent="." unique_id=544455769]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 5.5777364, 2.7053514, 2.2200918)
+texture = ExtResource("11_w0gws")
+
+[node name="Og_Right_Wall_11" type="Sprite3D" parent="." unique_id=552583201]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 5.5777364, 2.7053514, 1.0956554)
+texture = ExtResource("12_trkr4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1365475585]
+transform = Transform3D(6.435801, 0, 0, 0, 0.15953368, 0, 0, 0, 6.2060595, 0.049442768, -0.10796809, 2.4409714)
+material_override = SubResource("StandardMaterial3D_jgpuk")
+mesh = SubResource("PlaneMesh_w0gws")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=416823090]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.6070476, 9.012972)
+
+[node name="Og_Environment_Object" type="Sprite3D" parent="." unique_id=1874873032]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 2.989748, 0.48910224, 5.926409)
+texture = ExtResource("13_ahjxx")
+
+[node name="Og_Environment_Object2" type="Sprite3D" parent="." unique_id=557936902]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, -2.4483154, 0.643723, 3.2871685)
+texture = ExtResource("14_ainht")
