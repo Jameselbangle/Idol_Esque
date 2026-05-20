@@ -3,7 +3,21 @@
 [ext_resource type="Script" uid="uid://cnrrt1lhlq70p" path="res://scripts/enemies/mandrake.gd" id="1_vnqm5"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_jt5h8"]
 [ext_resource type="Texture2D" uid="uid://bcw51iyq5q05g" path="res://art/characters/enemies/mandrake/original/mandrake_original_forward.png" id="2_uvdid"]
+[ext_resource type="Script" uid="uid://yn0eojbx44xy" path="res://bullet_config_group.gd" id="3_iawsw"]
 [ext_resource type="BehaviorTree" uid="uid://b1ijp7cxnqnsp" path="res://ai/BT/mandrake.tres" id="3_uvdid"]
+[ext_resource type="Script" uid="uid://djuwhyhdhfi2v" path="res://scripts/bullets/bullet_config.gd" id="4_7c17s"]
+
+[sub_resource type="Resource" id="Resource_8m6qa"]
+script = ExtResource("4_7c17s")
+speed = -2.0
+movement_type = 4
+tick_timer = 600.0
+metadata/_custom_type_script = "uid://djuwhyhdhfi2v"
+
+[sub_resource type="Resource" id="Resource_sr5k1"]
+script = ExtResource("3_iawsw")
+configs = Array[ExtResource("4_7c17s")]([SubResource("Resource_8m6qa")])
+metadata/_custom_type_script = "uid://yn0eojbx44xy"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jt5h8"]
 
@@ -31,6 +45,7 @@ height = 0.4
 collision_layer = 4
 script = ExtResource("1_vnqm5")
 _bullet_scene = ExtResource("2_jt5h8")
+_configs = Array[ExtResource("3_iawsw")]([SubResource("Resource_sr5k1")])
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1082717938]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)

@@ -10,6 +10,8 @@
 
 @export var _shield : BulletConfig.BulletColour
 
+@export var _configs : Array[BulletConfigGroup]
+
 var _bullet_buffer = []
 
 # Setup pattern functions in ready

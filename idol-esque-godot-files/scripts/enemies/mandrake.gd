@@ -28,13 +28,9 @@ func _ready() -> void:
 	set_shield(BulletConfig.BulletColour.ENEMY)
 
 func circle_burst(_target):
-	var config : Array[BulletConfig] = [BulletConfig.new()]
-
-	config[0].speed = -2
-	config[0].movement_type = BulletConfig.MoveFunction.TARGET
-	config[0].target = position
-	config[0].tick_timer = 600
+	var group : BulletConfigGroup = _configs[0]
+	group.configs[0].target = position
 	
-	Bullet_Factory.circle_formation(self, Vector3.ZERO, 1, 8, config)
+	Bullet_Factory.circle_formation(self, Vector3.ZERO, 1, 8, group.configs)
 	
 	shoot()
