@@ -76,7 +76,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.5, -2)
 size = Vector3(1, 10, 19)
 
 [node name="wall_left" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Vis" unique_id=2066599922]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 9.049809, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4.5, -2)
 size = Vector3(1, 10, 19)
 
 [node name="wall_far" type="CSGBox3D" parent="NavigationRegion3D/Room_0/Room_0_Vis" unique_id=1925770421]

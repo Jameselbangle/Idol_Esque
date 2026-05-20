@@ -12,7 +12,7 @@ func setup(_config : Array[BulletConfig], _position : Vector3 = Vector3.ZERO) :
 	
 	scale = Vector3(config[0].size, config[0].size, config[0].size)
 	
-	var collision_object : Area3D = $Area3D
+	var collision_object : Area3D = $bullet_area
 	
 	collision_object.collision_mask = 0
 	
@@ -69,12 +69,20 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body is Enemy or 'player' in body.name:
+	if (body is Enemy) or ('player' in body.name):
 		body.damage(config[0].damage, config[tick_step])
-	queue_free()
+	explode()
 
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	print("area UNHANDLED " + area.name)
+func _on_bullet_area_area_entered(area: Area3D) -> void:
+	if ('player' in area.name):
+		area.damage(config[0].damage, config[tick_step])
+		explode()
+	print(area.name)
+
+
+func explode():
+	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+	queue_free()
 
 func tick() -> void:
 	tick_step += 1
