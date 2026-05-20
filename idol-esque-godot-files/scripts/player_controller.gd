@@ -9,7 +9,7 @@ extends CharacterBody3D
 @export var base_move_speed : float = 7.0
 @export var buff_move_speed : float = 14.0
 var move_speed : float = base_move_speed
-@export var base_slipperyness_lerp : float = 7
+@export var base_slipperyness_lerp : float = 15
 var slipperyness_lerp : float = base_slipperyness_lerp
 
 @export_group("Dash")
@@ -25,9 +25,13 @@ var num : int = denominator  - 1
 @export_group("Bullets")
 @export var bullet_speed : float = 20.0
 @export var charge_time_seconds : float = 0.8
+var charge_time_seconds_base = charge_time_seconds
+var charge_time_seconds_buff = charge_time_seconds / 2
 
 @export_group("Timers")
 @export var firerate : float = 0.2
+var firerate_base := firerate
+var firerate_buff := firerate / 2
 @export var chargerate : float = firerate * 2
 @export var revive_time : float = 3.0
 @export var special_cooldown : float = 5.0
@@ -86,7 +90,7 @@ var can_special : bool = true
 
 ## rotating character with joystick
 var deadzone: float = 0.3
-var rotation_speed: float = 7.0
+#var rotation_speed: float = 20.0
 var target_angle: float
 
 var mouse_captured : bool = false
@@ -251,7 +255,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					charge_shot_fire()
 				for body in $Special/buff.get_overlapping_bodies():
 					body.stats_buff()
-				
+				is_shooting = false
 				$Special/buff/buff_mesh.visible = true
 	
 	if event.is_action_released("special_fire") and event.device == player_count:
@@ -261,6 +265,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			for body in get_tree().get_nodes_in_group("players"):
 				body.stats_reset()
 			$Special/buff/buff_mesh.visible = false
+			if fire_rate_timer.is_stopped():
+				fire_rate_timer.start()
+			
 	
 	## Dash
 	if event.is_action_pressed("dash") and event.device == player_count and can_dash and !is_buffing:
@@ -339,8 +346,9 @@ func _physics_process(delta: float) -> void:
 		target_angle = -joy_look.angle() + deg_to_rad(90.0)
 	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
 	if neck.rotation.y != target_angle:
-		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
-		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
+		#var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
+		#neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
+		neck.rotation.y = target_angle
 	
 	## Sprite rotation code
 	if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
@@ -543,16 +551,16 @@ func _on_special_attack_timer_timeout() -> void:
 func stats_buff():
 	move_speed = buff_move_speed 
 	
-	fire_rate_timer.wait_time = fire_rate_timer.wait_time / 2
-	charge_rate_timer.wait_time = charge_rate_timer.wait_time / 2
+	fire_rate_timer.wait_time = firerate_buff
+	charge_rate_timer.wait_time = charge_time_seconds_buff
 	
 	is_buffed = true
 
 func stats_reset():
 	move_speed = base_move_speed
 	
-	fire_rate_timer.wait_time = fire_rate_timer.wait_time * 2
-	charge_rate_timer.wait_time = charge_rate_timer.wait_time * 2
+	fire_rate_timer.wait_time = firerate_base
+	charge_rate_timer.wait_time = charge_time_seconds_base
 	
 	is_buffed = false
 

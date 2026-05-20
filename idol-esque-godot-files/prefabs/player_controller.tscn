@@ -119,7 +119,11 @@ height = 0.1
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_tpop7")
+base_move_speed = 1000.0
+base_slipperyness_lerp = 1.0
+dash_length_seconds = 0.2
 charge_time_seconds = 0.9
+revive_time = 2.0
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82092094, -0.002)

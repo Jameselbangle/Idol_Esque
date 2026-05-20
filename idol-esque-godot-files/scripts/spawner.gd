@@ -18,6 +18,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("kill_all"):
 		for e in get_node("/root/PlaytestRoom/NavigationRegion3D/enemies").get_children():
 			e.damage(999)
+		
+		for b in get_node("/root/PlaytestRoom/bullet_manager").get_children():
+			b.explode()
 	
 	if event.is_action_pressed("revive_all"):
 		for p in get_node("/root/PlaytestRoom/players").get_children():
