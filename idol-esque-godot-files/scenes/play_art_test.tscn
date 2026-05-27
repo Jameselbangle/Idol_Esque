@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://defa2crq4ftud"]
+
+[ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://prefabs/environments/wall_test.tscn" id="1_dhcy0"]
+[ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="2_11x7p"]
+[ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4oot"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_11x7p"]
+sky_material = SubResource("ProceduralSkyMaterial_c4oot")
+
+[sub_resource type="Environment" id="Environment_mk2pl"]
+background_mode = 2
+sky = SubResource("Sky_11x7p")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="PlayArtTest" type="Node3D" unique_id=2112553745]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=949190964]
+environment = SubResource("Environment_mk2pl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1898701058]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WallTest" parent="." unique_id=294609644 instance=ExtResource("1_dhcy0")]
+
+[node name="csg_collisions" type="CSGCombiner3D" parent="." unique_id=1734424177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_mask = 14
+
+[node name="floor" type="CSGBox3D" parent="csg_collisions" unique_id=1440559892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.553406, 3)
+size = Vector3(10, 1, 9)
+
+[node name="left_wall" type="CSGBox3D" parent="csg_collisions" unique_id=761228251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3210096, 0, 3)
+size = Vector3(1, 1, 9)
+
+[node name="right_wall" type="CSGBox3D" parent="csg_collisions" unique_id=1634391969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.618459, 0, 3)
+size = Vector3(1, 1, 9)
+
+[node name="close_wall" type="CSGBox3D" parent="csg_collisions" unique_id=1133102009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, 7.120031)
+size = Vector3(9, 1, 1)
+
+[node name="far_wall" type="CSGBox3D" parent="csg_collisions" unique_id=884806968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, -1.5611135)
+size = Vector3(9, 1, 1)
+
+[node name="particle_manager" type="Node" parent="." unique_id=1798723023]
+script = ExtResource("2_11x7p")
+
+[node name="bullet_manager" type="Node" parent="." unique_id=121080574]
+
+[node name="players" type="Node" parent="." unique_id=1959000736]
+
+[node name="player_1" parent="players" unique_id=1761623861 instance=ExtResource("3_mk2pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9650183, 0.032012463, 0.082977295)
+player_colour = 1
+
+[node name="player_2" parent="players" unique_id=922460121 instance=ExtResource("3_mk2pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034981728, 0.032012463, 0.15174484)
+player_count = 1
+player_colour = 2
+
+[node name="player_3" parent="players" unique_id=885552090 instance=ExtResource("3_mk2pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0349817, 0.032012463, 0.16546774)
+player_count = 2
+player_colour = 3
