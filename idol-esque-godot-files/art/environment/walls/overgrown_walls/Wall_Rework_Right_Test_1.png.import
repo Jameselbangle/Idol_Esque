@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uxk1pcjq2fcf"
-path.s3tc="res://.godot/imported/Overgrown_Left_Wall_04.png-c06b8ee997d3c11a215bfe3bbd2ef747.s3tc.ctex"
+uid="uid://bruw0usmbbobs"
+path.s3tc="res://.godot/imported/Wall_Rework_Right_Test_1.png-0c8fc12daeb2210715b35553559c8917.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/environment/walls/overgrown_walls/Overgrown_Left_Wall_04.png"
-dest_files=["res://.godot/imported/Overgrown_Left_Wall_04.png-c06b8ee997d3c11a215bfe3bbd2ef747.s3tc.ctex"]
+source_file="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_1.png"
+dest_files=["res://.godot/imported/Wall_Rework_Right_Test_1.png-0c8fc12daeb2210715b35553559c8917.s3tc.ctex"]
 
 [params]
 

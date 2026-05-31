@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://defa2crq4ftud"]
 
-[ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://prefabs/environments/wall_test.tscn" id="1_dhcy0"]
+[ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="2_11x7p"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
 
