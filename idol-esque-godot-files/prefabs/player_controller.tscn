@@ -84,8 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82092094, -0.002)
 shape = SubResource("CapsuleShape3D_io705")
 
 [node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.75, -0.3)
-billboard = 1
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, 0, 0.75, -0.3)
 texture = ExtResource("2_io705")
 
 [node name="Shadow" type="MeshInstance3D" parent="." unique_id=934179183]

@@ -6,7 +6,10 @@ var Particles = {
 }
 
 func _ready() -> void:
-	GlobalSignals.connect("create_particles", Callable(self, "create_particles"))
+	if GlobalSignals:
+		GlobalSignals.connect("create_particles", Callable(self, "create_particles"))
+	else:
+		push_error("GlobalSignals autoload not found!")
 
 func create_particles(Pname, Pposition):
 	
