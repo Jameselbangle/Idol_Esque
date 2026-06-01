@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bruw0usmbbobs" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_1.png" id="13_02jf8"]
 [ext_resource type="Texture2D" uid="uid://djgr4lh2qytmh" path="res://art/environment/floor_tiles/DirtTile.png" id="14_vfyrs"]
 [ext_resource type="Texture2D" uid="uid://dkvgm414j7ncx" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_3.png" id="15_1proe"]
+[ext_resource type="Texture2D" uid="uid://qd6taklp4wjm" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_3.png" id="16_iwdf3"]
+[ext_resource type="Texture2D" uid="uid://que6pdv7sf2p" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Back_Test.png" id="17_1dtc0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njboa"]
 albedo_texture = ExtResource("3_1dtc0")
@@ -63,10 +65,14 @@ transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81
 
 [node name="Og_Environment_Object" type="Sprite3D" parent="." unique_id=1874873032]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, 2.6463275, 0.56131256, 5.926409)
+cast_shadow = 0
+alpha_cut = 1
 texture = ExtResource("1_1proe")
 
 [node name="Og_Environment_Object2" type="Sprite3D" parent="." unique_id=557936902]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, -2.4483154, 0.7434473, 3.2871685)
+cast_shadow = 0
+alpha_cut = 1
 texture = ExtResource("2_iwdf3")
 
 [node name="Grass_Tile_Centre" type="MeshInstance3D" parent="." unique_id=1365475585]
@@ -120,38 +126,51 @@ material_override = SubResource("StandardMaterial3D_2aeyr")
 mesh = SubResource("PlaneMesh_ikm5l")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=727466880]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.208687, 8.434506)
-pixel_size = 0.001
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.1649647, 8.38206)
+pixel_size = 0.0011
+alpha_cut = 1
 texture = ExtResource("9_uystj")
 
 [node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1227688899]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.370411, 3.1504586, -1.9943457)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.370411, 2.861314, -1.9943457)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("10_1proe")
 
 [node name="Sprite3D3" type="Sprite3D" parent="." unique_id=1026143278]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -8.197932, 3.0606432, 3.935193)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -8.163839, 2.9990292, 3.935193)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("11_iwdf3")
 
 [node name="Sprite3D4" type="Sprite3D" parent="." unique_id=458831173]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 8.303059, 3.0280814, 3.820283)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 8.303059, 2.874569, 3.820283)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("12_1dtc0")
 
 [node name="Sprite3D5" type="Sprite3D" parent="." unique_id=1088252299]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -7.106867, 3.281941, 1.4139538)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -7.106867, 2.9985032, 1.4139538)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("11_iwdf3")
 
 [node name="Sprite3D6" type="Sprite3D" parent="." unique_id=1776457659]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 6.7187757, 3.0854514, -2.5424988)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 7.3564224, 3.0854514, -2.5424988)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("13_02jf8")
 
 [node name="Sprite3D8" type="Sprite3D" parent="." unique_id=1818002632]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 7.8050003, 2.9890833, 1.3674219)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("12_1dtc0")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=828411318]
@@ -210,6 +229,36 @@ material_override = SubResource("StandardMaterial3D_8uyel")
 mesh = SubResource("PlaneMesh_42p50")
 
 [node name="Sprite3D7" type="Sprite3D" parent="." unique_id=639174111]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -6.2741494, 2.2151246, 3.2495644)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.488821, 2.5234895, 3.5333316)
+cast_shadow = 0
 pixel_size = 0.007
+alpha_cut = 1
 texture = ExtResource("15_1proe")
+
+[node name="Sprite3D9" type="Sprite3D" parent="." unique_id=30208607]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.598325, 2.5234895, -0.32624936)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("15_1proe")
+
+[node name="Sprite3D10" type="Sprite3D" parent="." unique_id=812128606]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 5.6961727, 2.5234895, 0.1485846)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("16_iwdf3")
+
+[node name="Sprite3D11" type="Sprite3D" parent="." unique_id=699484672]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 6.37251, 2.5234895, 3.1853323)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("16_iwdf3")
+
+[node name="Sprite3D12" type="Sprite3D" parent="." unique_id=548450781]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0.22598648, 3.465681, -3.7162023)
+cast_shadow = 0
+pixel_size = 0.0035
+alpha_cut = 1
+texture = ExtResource("17_1dtc0")
