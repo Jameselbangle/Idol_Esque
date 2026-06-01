@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://wt5af3o12857" path="res://art/environment/floor_tiles/GrassDirtRightTile.png" id="5_vfyrs"]
 [ext_resource type="Texture2D" uid="uid://dxu63b7ylv023" path="res://art/environment/floor_tiles/GrassTopLeftTile.png" id="6_8uyel"]
 [ext_resource type="Texture2D" uid="uid://cgvhscexp0b8n" path="res://art/environment/floor_tiles/GrassTopRightTile.png" id="7_42p50"]
-[ext_resource type="Texture2D" uid="uid://s32llnkpdfr5" path="res://art/environment/background_assets/Overgrown_Ruins_Void.png" id="8_vmluw"]
 [ext_resource type="Texture2D" uid="uid://cnbtpyqgsieu4" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_2.png" id="10_1proe"]
 [ext_resource type="Texture2D" uid="uid://u0us4e61wgg3" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_1.png" id="11_iwdf3"]
 [ext_resource type="Texture2D" uid="uid://cljxtxji3ou5p" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_2.png" id="12_1dtc0"]
@@ -16,11 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dkvgm414j7ncx" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_3.png" id="15_1proe"]
 [ext_resource type="Texture2D" uid="uid://qd6taklp4wjm" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_3.png" id="16_iwdf3"]
 [ext_resource type="Texture2D" uid="uid://que6pdv7sf2p" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Back_Test.png" id="17_1dtc0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2aeyr"]
-albedo_texture = ExtResource("8_vmluw")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ikm5l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njboa"]
 albedo_texture = ExtResource("3_1dtc0")
@@ -118,29 +112,25 @@ size = Vector3(2, 0.001, 2)
 
 [node name="WallTest" type="Node3D" unique_id=294609644]
 
-[node name="Og_Environment_Object" type="Sprite3D" parent="." unique_id=1874873032]
+[node name="Rock_Front" type="Sprite3D" parent="." unique_id=1874873032]
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, 2.6463275, 0.56131256, 5.926409)
 alpha_cut = 1
 texture = ExtResource("1_1proe")
 
-[node name="Og_Environment_Object2" type="Sprite3D" parent="." unique_id=557936902]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, -2.4483154, 0.42455804, 3.2871685)
+[node name="Rock_Mid" type="Sprite3D" parent="." unique_id=557936902]
+transform = Transform3D(1.0176072, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, -2.4483154, 0.42455804, 3.2871685)
 alpha_cut = 1
 texture = ExtResource("2_iwdf3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1043990663]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1, -58.831)
-material_override = SubResource("StandardMaterial3D_2aeyr")
-mesh = SubResource("PlaneMesh_ikm5l")
-
-[node name="Sprite3D12" type="Sprite3D" parent="." unique_id=548450781]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0.22598648, 3.465681, -3.7162023)
+[node name="Wall_Back" type="Sprite3D" parent="." unique_id=548450781]
+transform = Transform3D(1.5, 0, 0, 0, 1.228728, 0.8603647, 0, -0.8603647, 1.228728, 0.22598648, 3.465681, -3.7162023)
 cast_shadow = 0
 pixel_size = 0.0035
 alpha_cut = 1
 texture = ExtResource("17_1dtc0")
 
 [node name="Floor" type="Node3D" parent="." unique_id=315617516]
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Grass_Tile_Centre" type="MeshInstance3D" parent="Floor" unique_id=1365475585]
 transform = Transform3D(1.3, 0, 0, 0, 0.161, 0, 0, 0, 1.305, 0, 0, 2.8249898)
@@ -344,72 +334,72 @@ shape = SubResource("BoxShape3D_if2fm")
 
 [node name="Wall" type="Node3D" parent="." unique_id=2111848478]
 
-[node name="Sprite3D2" type="Sprite3D" parent="Wall" unique_id=1227688899]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.370411, 2.861314, -1.9943457)
+[node name="Left_1" type="Sprite3D" parent="Wall" unique_id=1227688899]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -7.5561175, 2.861314, -1.9943457)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("10_1proe")
 
-[node name="Sprite3D3" type="Sprite3D" parent="Wall" unique_id=1026143278]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -8.163839, 2.9990292, 3.935193)
+[node name="Left_2" type="Sprite3D" parent="Wall" unique_id=30208607]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -7.7840314, 2.5234895, -0.32624936)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("15_1proe")
+
+[node name="Left_3" type="Sprite3D" parent="Wall" unique_id=1088252299]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -9.292574, 2.9985032, 1.4139538)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("11_iwdf3")
 
-[node name="Sprite3D4" type="Sprite3D" parent="Wall" unique_id=458831173]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 8.303059, 2.874569, 3.820283)
+[node name="Left_4" type="Sprite3D" parent="Wall" unique_id=639174111]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -7.6745276, 2.5234895, 3.5333316)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
-texture = ExtResource("12_1dtc0")
+texture = ExtResource("15_1proe")
 
-[node name="Sprite3D5" type="Sprite3D" parent="Wall" unique_id=1088252299]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -7.106867, 2.9985032, 1.4139538)
+[node name="Left_5" type="Sprite3D" parent="Wall" unique_id=1026143278]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -10.349546, 2.9990292, 3.935193)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("11_iwdf3")
 
-[node name="Sprite3D6" type="Sprite3D" parent="Wall" unique_id=1776457659]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 7.3564224, 3.0854514, -2.5424988)
+[node name="Right_1" type="Sprite3D" parent="Wall" unique_id=1776457659]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 9.623389, 3.0854514, -2.5424988)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("13_02jf8")
 
-[node name="Sprite3D8" type="Sprite3D" parent="Wall" unique_id=1818002632]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 7.8050003, 2.9890833, 1.3674219)
+[node name="Right_3" type="Sprite3D" parent="Wall" unique_id=1818002632]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 10.071967, 2.9890833, 1.3674219)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("12_1dtc0")
 
-[node name="Sprite3D7" type="Sprite3D" parent="Wall" unique_id=639174111]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.488821, 2.5234895, 3.5333316)
-cast_shadow = 0
-pixel_size = 0.007
-alpha_cut = 1
-texture = ExtResource("15_1proe")
-
-[node name="Sprite3D9" type="Sprite3D" parent="Wall" unique_id=30208607]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.598325, 2.5234895, -0.32624936)
-cast_shadow = 0
-pixel_size = 0.007
-alpha_cut = 1
-texture = ExtResource("15_1proe")
-
-[node name="Sprite3D10" type="Sprite3D" parent="Wall" unique_id=812128606]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 5.6961727, 2.5234895, 0.1485846)
+[node name="Right_2" type="Sprite3D" parent="Wall" unique_id=812128606]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 7.9631395, 2.5234895, 0.1485846)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("16_iwdf3")
 
-[node name="Sprite3D11" type="Sprite3D" parent="Wall" unique_id=699484672]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 6.37251, 2.5234895, 3.1853323)
+[node name="Right_4" type="Sprite3D" parent="Wall" unique_id=699484672]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 8.639477, 2.5234895, 3.1853323)
 cast_shadow = 0
 pixel_size = 0.007
 alpha_cut = 1
 texture = ExtResource("16_iwdf3")
+
+[node name="Right_5" type="Sprite3D" parent="Wall" unique_id=458831173]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 10.570025, 2.874569, 3.820283)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("12_1dtc0")

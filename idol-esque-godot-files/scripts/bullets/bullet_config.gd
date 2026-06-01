@@ -9,6 +9,6 @@ enum BulletColour {ENEMY, RED, YELLOW, BLUE}
 @export var target : Vector3
 @export var movement_type : MoveFunction = MoveFunction.LINEAR 
 @export var bullet_colour : BulletColour = BulletColour.ENEMY
-@export var tick_timer : float = 6000.0
+@export var tick_timer : float = 3.0 # 6000.0, Really? 100 mins?
 @export var size : float = 1.0
 @export var damage : float = 1.0

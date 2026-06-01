@@ -130,7 +130,7 @@ enemies_node = NodePath("../NavigationRegion3D/enemies")
 players_node = NodePath("../players")
 
 [node name="Spawner2" parent="." unique_id=383998498 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0.44209242, 3.929162)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0, 6.397684)
 switch = true
 enemies_node = NodePath("../NavigationRegion3D/enemies")
 players_node = NodePath("../players")
