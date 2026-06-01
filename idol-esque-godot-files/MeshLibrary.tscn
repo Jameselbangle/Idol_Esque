@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://cagklyxbhmebu"]
+
+[ext_resource type="Texture2D" uid="uid://dqp4f7ispsmd3" path="res://art/environment/floor_tiles/GrassTile.png" id="1_l7ahu"]
+[ext_resource type="Texture2D" uid="uid://bivlolyfu6dw6" path="res://art/environment/floor_tiles/GrassDirtTopTile.png" id="2_qp35t"]
+[ext_resource type="Texture2D" uid="uid://wt5af3o12857" path="res://art/environment/floor_tiles/GrassDirtRightTile.png" id="3_qruvw"]
+[ext_resource type="Texture2D" uid="uid://dxu63b7ylv023" path="res://art/environment/floor_tiles/GrassTopLeftTile.png" id="4_ka0ki"]
+[ext_resource type="Texture2D" uid="uid://cgvhscexp0b8n" path="res://art/environment/floor_tiles/GrassTopRightTile.png" id="5_pnhew"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5q3p"]
+albedo_texture = ExtResource("1_l7ahu")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x0skc"]
+material = SubResource("StandardMaterial3D_q5q3p")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_efk0y"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0a4e"]
+albedo_texture = ExtResource("2_qp35t")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l7ahu"]
+material = SubResource("StandardMaterial3D_h0a4e")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q38eo"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wiwkt"]
+albedo_texture = ExtResource("3_qruvw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qp35t"]
+material = SubResource("StandardMaterial3D_wiwkt")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dn6ni"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6d3t"]
+albedo_texture = ExtResource("2_qp35t")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qruvw"]
+material = SubResource("StandardMaterial3D_g6d3t")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hc84a"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr568"]
+albedo_texture = ExtResource("2_qp35t")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ka0ki"]
+material = SubResource("StandardMaterial3D_hr568")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tgce5"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nm41d"]
+albedo_texture = ExtResource("4_ka0ki")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pnhew"]
+material = SubResource("StandardMaterial3D_nm41d")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q5r78"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmkr7"]
+albedo_texture = ExtResource("5_pnhew")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q5q3p"]
+material = SubResource("StandardMaterial3D_pmkr7")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_capoh"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pd5p2"]
+albedo_texture = ExtResource("5_pnhew")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h0a4e"]
+material = SubResource("StandardMaterial3D_pd5p2")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gakqt"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h206g"]
+albedo_texture = ExtResource("4_ka0ki")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wiwkt"]
+material = SubResource("StandardMaterial3D_h206g")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pj5wf"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[node name="Scene Root" type="Node3D" unique_id=1497202411]
+
+[node name="Grass_Tile_Centre" type="MeshInstance3D" parent="." unique_id=1464474876]
+transform = Transform3D(1.3, 0, 0, 0, 0.161, 0, 0, 0, 1.305, 0, 0, 2.8249898)
+mesh = SubResource("PlaneMesh_x0skc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Centre" unique_id=384575829]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Centre/StaticBody3D" unique_id=649509403]
+shape = SubResource("ConvexPolygonShape3D_efk0y")
+
+[node name="Grass_Tile_Left" type="MeshInstance3D" parent="." unique_id=295914199]
+transform = Transform3D(-5.6824803e-08, 0, 1.305, 0, 0.161, 0, -1.3, 0, -5.704336e-08, -2.604, 0, 2.8249898)
+mesh = SubResource("PlaneMesh_l7ahu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Left" unique_id=89260261]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Left/StaticBody3D" unique_id=425188482]
+shape = SubResource("ConvexPolygonShape3D_q38eo")
+
+[node name="Grass_Tile_Right" type="MeshInstance3D" parent="." unique_id=757019124]
+transform = Transform3D(1.3, 0, 0, 0, 0.161, 0, 0, 0, 1.305, 2.6, 0, 2.8249898)
+mesh = SubResource("PlaneMesh_qp35t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Right" unique_id=1081712072]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Right/StaticBody3D" unique_id=237577570]
+shape = SubResource("ConvexPolygonShape3D_dn6ni")
+
+[node name="Grass_Tile_Top" type="MeshInstance3D" parent="." unique_id=1223753681]
+transform = Transform3D(1.3, 0, 0, 0, 0.161, 0, 0, 0, 1.305, 0, 0, 0.21798968)
+mesh = SubResource("PlaneMesh_qruvw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Top" unique_id=2114376414]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Top/StaticBody3D" unique_id=1926399067]
+shape = SubResource("ConvexPolygonShape3D_hc84a")
+
+[node name="Grass_Tile_Bottom" type="MeshInstance3D" parent="." unique_id=59809569]
+transform = Transform3D(-1.3, 0, -1.1408672e-07, 0, 0.161, 0, 1.13649605e-07, 0, -1.305, 0, 0, 5.4249897)
+mesh = SubResource("PlaneMesh_ka0ki")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Bottom" unique_id=678213560]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Bottom/StaticBody3D" unique_id=1665730239]
+shape = SubResource("ConvexPolygonShape3D_tgce5")
+
+[node name="Grass_Tile_Bottom_Right_Corner" type="MeshInstance3D" parent="." unique_id=2002191946]
+transform = Transform3D(1.3, 0, 0, 0, 0.161, 0, 0, 0, 1.305, 2.6, 0, 5.4249897)
+mesh = SubResource("PlaneMesh_pnhew")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Bottom_Right_Corner" unique_id=131269527]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Bottom_Right_Corner/StaticBody3D" unique_id=896254940]
+shape = SubResource("ConvexPolygonShape3D_q5r78")
+
+[node name="Grass_Tile_Bottom_Left_Corner" type="MeshInstance3D" parent="." unique_id=469961029]
+transform = Transform3D(1.3, 0, 0, 0, 0.161, 0, 0, 0, 1.305, -2.6, 0, 5.4249897)
+mesh = SubResource("PlaneMesh_q5q3p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Bottom_Left_Corner" unique_id=1952716400]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Bottom_Left_Corner/StaticBody3D" unique_id=1074663700]
+shape = SubResource("ConvexPolygonShape3D_capoh")
+
+[node name="Grass_Tile_Top_Left_Corner" type="MeshInstance3D" parent="." unique_id=1286771633]
+transform = Transform3D(1.5502344e-08, 0, -1.305, 0, 0.161, 0, 1.3, 0, 1.556197e-08, -2.6, 0, 0.22498989)
+mesh = SubResource("PlaneMesh_h0a4e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Top_Left_Corner" unique_id=1793083605]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Top_Left_Corner/StaticBody3D" unique_id=1628825393]
+shape = SubResource("ConvexPolygonShape3D_gakqt")
+
+[node name="Grass_Tile_Top_Right_Corner" type="MeshInstance3D" parent="." unique_id=763830801]
+transform = Transform3D(-5.6824803e-08, 0, 1.305, 0, 0.161, 0, -1.3, 0, -5.704336e-08, 2.6, 0, 0.22498989)
+mesh = SubResource("PlaneMesh_wiwkt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Grass_Tile_Top_Right_Corner" unique_id=845260507]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass_Tile_Top_Right_Corner/StaticBody3D" unique_id=1957289959]
+shape = SubResource("ConvexPolygonShape3D_pj5wf")

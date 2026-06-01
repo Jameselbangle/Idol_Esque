@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://defa2crq4ftud"]
 
 [ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
-[ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="2_11x7p"]
+[ext_resource type="Texture2D" uid="uid://ce1qsa3w5jmw8" path="res://art/environment/foreground_assets/Foreground_Assets_TEst.png" id="1_mk2pl"]
+[ext_resource type="Script" path="res://scripts/particle_manager.gd" id="2_11x7p"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4oot"]
@@ -16,11 +17,22 @@ background_mode = 2
 sky = SubResource("Sky_11x7p")
 tonemap_mode = 2
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
 [node name="PlayArtTest" type="Node3D" unique_id=2112553745]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=949190964]
 environment = SubResource("Environment_mk2pl")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1849936746]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.6070476, 9.012972)
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D" unique_id=1960293626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00025701523, -0.770381)
+pixel_size = 0.0011
+alpha_cut = 1
+texture = ExtResource("1_mk2pl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1898701058]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -65,13 +77,3 @@ script = ExtResource("2_11x7p")
 [node name="player_1" parent="players" unique_id=1761623861 instance=ExtResource("3_mk2pl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9650183, 0.032012463, 0.082977295)
 player_colour = 1
-
-[node name="player_2" parent="players" unique_id=922460121 instance=ExtResource("3_mk2pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034981728, 0.032012463, 0.15174484)
-player_count = 1
-player_colour = 2
-
-[node name="player_3" parent="players" unique_id=885552090 instance=ExtResource("3_mk2pl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0349817, 0.032012463, 0.16546774)
-player_count = 2
-player_colour = 3
