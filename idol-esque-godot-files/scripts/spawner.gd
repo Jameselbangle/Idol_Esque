@@ -4,26 +4,27 @@ var slime := preload("res://prefabs/enemies/slime.tscn")
 var mandrake := preload("res://prefabs/enemies/mandrake.tscn")
 
 @export var switch : bool = false
-
+@export var enemies_node : Node
+@export var players_node : Node
 
 func _unhandled_input(event: InputEvent) -> void:
 	var instance
 	
 	if event.is_action_pressed("spawn_1"):
-		instance = mandrake.instantiate() if switch else slime.instantiate()
+		instance = slime.instantiate() #mandrake.instantiate() if switch else slime.instantiate()
 	
 	if event.is_action_pressed("spawn_2"):
 		instance = slime.instantiate() if switch else mandrake.instantiate()
 	
 	if event.is_action_pressed("kill_all"):
-		for e in get_node("/root/PlaytestRoom/NavigationRegion3D/enemies").get_children():
+		for e in enemies_node.get_children():
 			e.damage(999)
 		
 		for b in get_node("/root/PlaytestRoom/bullet_manager").get_children():
 			b.explode()
 	
 	if event.is_action_pressed("revive_all"):
-		for p in get_node("/root/PlaytestRoom/players").get_children():
+		for p in players_node.get_children():
 			p.revive()
 	
 	
@@ -43,7 +44,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				pass
 			6:
 				pass
-		var enemies_node = get_node("/root/PlaytestRoom/NavigationRegion3D/enemies")
 
 		instance.global_transform = global_transform
 		enemies_node.add_child(instance)

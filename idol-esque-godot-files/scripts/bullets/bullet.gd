@@ -89,3 +89,6 @@ func tick() -> void:
 	if (config.size() <= tick_step):
 		queue_free()
 		return
+
+func _on_death_timer_timeout() -> void:
+	queue_free()

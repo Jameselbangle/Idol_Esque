@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="1_hq8ac"]
 [ext_resource type="Texture2D" uid="uid://ctnyniv2fxtw1" path="res://art/environment/walls/wall_680x680p.png" id="3_obwlg"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="5_obwlg"]
-[ext_resource type="PackedScene" uid="uid://dwqe8xn8i664d" path="res://prefabs/ui/health_ui.tscn" id="6_0qifr"]
+[ext_resource type="Texture2D" uid="uid://cvdxd8tsrull" path="res://art/characters/players/Stella/Stella_front.png" id="6_0qifr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2av8n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -135,31 +135,68 @@ switch = true
 [node name="Spawner5" parent="." unique_id=39625765 instance=ExtResource("5_obwlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.042871, 0.5, -0.63153934)
 
-[node name="Control" type="Control" parent="." unique_id=788766018]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Node" type="Node" parent="." unique_id=1321877847]
 
-[node name="PlayerHealth" parent="Control" unique_id=128702165 instance=ExtResource("6_0qifr")]
-layout_mode = 0
+[node name="scalebox_1" type="CSGBox3D" parent="Node" unique_id=1334568701]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.296439, 0.77579796, 0)
+size = Vector3(1, 1.5440674, 1)
 
-[node name="PlayerHealth2" parent="Control" unique_id=1954289341 instance=ExtResource("6_0qifr")]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -77.5
-offset_right = 77.5
-grow_horizontal = 2
+[node name="scalebox_2" type="CSGBox3D" parent="Node" unique_id=1749517089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.296439, 0.77579796, 4.5094233)
+size = Vector3(1, 1.5440674, 1)
 
-[node name="PlayerHealth3" parent="Control" unique_id=435697479 instance=ExtResource("6_0qifr")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -155.0
-offset_right = 0.0
-grow_horizontal = 0
+[node name="scalebox_3" type="CSGBox3D" parent="Node" unique_id=1438604111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.296439, 0.77579796, 8.194614)
+size = Vector3(1, 1.5440674, 1)
+
+[node name="scalebox_4" type="CSGBox3D" parent="Node" unique_id=1790358747]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.11391735, 1.4892114, 8.194614)
+size = Vector3(1, 1.5440674, 1)
+
+[node name="scalebox_5" type="CSGBox3D" parent="Node" unique_id=409290301]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.11391735, 1.512297, 4.230842)
+size = Vector3(1, 1.5440674, 1)
+
+[node name="scalebox_6" type="CSGBox3D" parent="Node" unique_id=1598519789]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.11391735, 1.512297, 0.3875997)
+size = Vector3(1, 1.5440674, 1)
+
+[node name="scalebox_7" type="CSGBox3D" parent="Node" unique_id=11155378]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 7.4676685, 3.0733552, 0.3875997)
+size = Vector3(1, 1.5440674, 1)
+
+[node name="scalebox_8" type="CSGBox3D" parent="Node" unique_id=207499189]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 7.4676685, 3.0733552, 7.612321)
+size = Vector3(1, 1.5440674, 1)
+
+[node name="scale_sprite_" type="Sprite3D" parent="Node" unique_id=1121396376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.918378, 0.91702366, 0.010560036)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_2" type="Sprite3D" parent="Node" unique_id=2027095143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.918378, 0.91702366, 4.3155003)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_3" type="Sprite3D" parent="Node" unique_id=1246161312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.918378, 0.91702366, 8.2760315)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_4" type="Sprite3D" parent="Node" unique_id=1877303386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0399525, 0.91702366, 8.2760315)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_5" type="Sprite3D" parent="Node" unique_id=560304510]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0399525, 0.91702366, 4.503411)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_6" type="Sprite3D" parent="Node" unique_id=67177286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0399525, 0.91702366, -0.0011606216)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_7" type="Sprite3D" parent="Node" unique_id=1700451543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.821432, 0.91702366, -0.0011606216)
+texture = ExtResource("6_0qifr")
+
+[node name="scale_sprite_8" type="Sprite3D" parent="Node" unique_id=874686353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.821432, 0.91702366, 6.526044)
+texture = ExtResource("6_0qifr")
