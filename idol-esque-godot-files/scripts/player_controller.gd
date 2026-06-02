@@ -399,7 +399,7 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 	
 	## Add death command
 	if health <= 0:
-		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+#		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
 		is_dead = true
 		revive_area.visible = true
 		revive_area.monitoring = true
@@ -444,7 +444,7 @@ func _on_revive_timer_timeout() -> void:
 
 func revive():
 	health = 5
-	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+#	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
 	is_dead = false
 	revive_area.visible = false
 	revive_area.monitoring = false
