@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://defa2crq4ftud"]
+[gd_scene format=3 uid="uid://b8wn1cid2d45k"]
 
-[ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
+[ext_resource type="PackedScene" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
 [ext_resource type="Texture2D" uid="uid://ce1qsa3w5jmw8" path="res://art/environment/foreground_assets/Foreground_Assets_TEst.png" id="1_mk2pl"]
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="2_11x7p"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
-[ext_resource type="PackedScene" uid="uid://c75ftsi3woasi" path="res://prefabs/lantern.tscn" id="5_w3j1i"]
+[ext_resource type="PackedScene" path="res://prefabs/lantern.tscn" id="5_w3j1i"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="6_3prlv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4oot"]
@@ -55,7 +55,6 @@ shadow_enabled = true
 shadow_blur = 1.715
 
 [node name="WallTest" parent="." unique_id=294609644 instance=ExtResource("1_dhcy0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.054980278, 0, -0.0008611679)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=967241649]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0, 2.9074392)
