@@ -1,7 +1,8 @@
 extends Node
 
 var Particles = {
-	"mandrake" : preload("res://prefabs/particles/particle_ult.tscn"), ## Mandrake
+	"mandrake" : preload("res://prefabs/particles/particle_mandrake.tscn"), ## Mandrake
+	"slime" : preload("res://prefabs/particles/particle_ult.tscn")
 	## New particles here...
 }
 
