@@ -24,6 +24,7 @@ func choose_target_position() -> Vector3:
 	return choose_target()
 
 func _ready() -> void:
+	$AnimationPlayer.play("idle") #trial of animation for enemies
 	patterns.append(circle_burst)
 	set_shield(BulletConfig.BulletColour.ENEMY)
 
