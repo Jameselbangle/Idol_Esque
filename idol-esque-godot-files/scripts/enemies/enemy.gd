@@ -78,3 +78,4 @@ func damage(hit : int, bullet_config : BulletConfig = null):
 	if _health <= 0:
 		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
 		queue_free()
+		
