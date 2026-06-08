@@ -49,8 +49,10 @@ func choose_target_position() -> Vector3:
 func _ready() -> void:
 	$AnimationPlayer.play("idle") #trial of animation for enemies
 	patterns.append(burst_shot)
-	
-	
+
+func _process(delta: float) -> void:
+	return
+
 func burst_shot(_target : Vector3):
 	var config : Array[BulletConfig] = [BulletConfig.new()]
 	

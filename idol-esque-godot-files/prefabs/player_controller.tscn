@@ -161,6 +161,8 @@ shape = SubResource("CylinderShape3D_io705")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044165134, 0)
 mesh = SubResource("PlaneMesh_bnhpu")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=337602906]
+
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="DashLength" to="." method="_on_dash_length_timeout"]

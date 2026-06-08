@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b8wn1cid2d45k"]
+[gd_scene format=3 uid="uid://c2ii54nal7uv0"]
 
 [ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
 [ext_resource type="Texture2D" uid="uid://ce1qsa3w5jmw8" path="res://art/environment/foreground_assets/Foreground_Assets_TEst.png" id="1_mk2pl"]
