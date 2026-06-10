@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
 [ext_resource type="PackedScene" path="res://prefabs/lantern.tscn" id="5_w3j1i"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="6_3prlv"]
-[ext_resource type="Texture2D" uid="uid://c76roao1k8oqb" path="res://art/environment/environment_objects/MushroomsSmall.png" id="7_70mnq"]
+[ext_resource type="Script" uid="uid://djq7afsoigixl" path="res://scripts/pause_menu.gd" id="7_70mnq"]
 [ext_resource type="Texture2D" uid="uid://ckd0gr7drogbg" path="res://art/environment/environment_objects/FlowersSet1.png" id="8_k8hi5"]
 [ext_resource type="Texture2D" uid="uid://ncuksnspqpcw" path="res://art/environment/environment_objects/FlowersSmall.png" id="8_oskgc"]
 [ext_resource type="Texture2D" uid="uid://c367vuw6eu3sd" path="res://art/environment/environment_objects/MushroomsMedium.png" id="8_ylj65"]
 [ext_resource type="Texture2D" uid="uid://daxgfhelngmos" path="res://art/environment/environment_objects/CloversSmall.png" id="9_tevsk"]
 [ext_resource type="Texture2D" uid="uid://ccjtxwtc83tmp" path="res://art/environment/environment_objects/CloversSecretTile.png" id="12_us2ju"]
 [ext_resource type="Texture2D" uid="uid://bkpfj3gcrx174" path="res://art/environment/environment_objects/CloversSet1.png" id="13_a6ddh"]
+[ext_resource type="Texture2D" uid="uid://dfnh2hbmjabf4" path="res://art/ui/blank_button1.png" id="14_yvk1f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4oot"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -214,13 +215,11 @@ texture = ExtResource("8_oskgc")
 [node name="Mushroom1" type="Sprite3D" parent="Enviromental Assets" unique_id=1925843235]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.661853, 0.42617702, 5.5524144)
 pixel_size = 0.005
-texture = ExtResource("7_70mnq")
 
 [node name="MushroomShadow1" type="Sprite3D" parent="Enviromental Assets/Mushroom1" unique_id=640930016]
 transform = Transform3D(1.0280156, -0.14435703, 0.025133695, 0.068850145, 0.93545145, 0.6762232, -0.098328196, -0.85423464, 0.7362679, -0.036401987, -0.0057942867, -0.23838568)
 modulate = Color(0, 0, 0, 0.63529414)
 pixel_size = 0.005
-texture = ExtResource("7_70mnq")
 
 [node name="Mushroom2" type="Sprite3D" parent="Enviromental Assets" unique_id=773294726]
 transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.49999997, 0, -0.49999997, 0.86602545, 3.0971813, 0.30494732, 0.56879234)
@@ -252,3 +251,51 @@ texture = ExtResource("12_us2ju")
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, 2.2173343, 0.45596576, 3.1621485)
 pixel_size = 0.005
 texture = ExtResource("13_a6ddh")
+
+[node name="Control" type="Control" parent="." unique_id=1399424221]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_70mnq")
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=710240621]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -70.0
+offset_right = 256.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_yvk1f")
+
+[node name="PauseText" type="Label" parent="Control/TextureRect" unique_id=2138698843]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.05434
+offset_top = -49.25
+offset_right = 122.05434
+offset_bottom = 49.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 58
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
