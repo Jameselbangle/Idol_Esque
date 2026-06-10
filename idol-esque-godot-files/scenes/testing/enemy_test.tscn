@@ -88,6 +88,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5
 
 [node name="player_controller" parent="." unique_id=1761623861 instance=ExtResource("3_wtxvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008675337, 0.7036226, 3.269239)
+player_colour = 1
 god_mode = true
 
 [node name="Mandrake" parent="." unique_id=1050916115 instance=ExtResource("2_q02w0")]

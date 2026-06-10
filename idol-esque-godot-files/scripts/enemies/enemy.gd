@@ -17,6 +17,8 @@ var _bullet_buffer = []
 # Setup pattern functions in ready
 var patterns : Array[Callable] = []
 
+@export var death_particle_name : String = ""
+
 @abstract func choose_target() -> Vector3
 @abstract func choose_target_position() -> Vector3
 
@@ -78,5 +80,5 @@ func damage(hit : int, bullet_config : BulletConfig = null):
 	
 	## Add death command
 	if _health <= 0:
-		GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
+		GlobalSignals.emit_signal("create_particles", death_particle_name, global_position)
 		queue_free()

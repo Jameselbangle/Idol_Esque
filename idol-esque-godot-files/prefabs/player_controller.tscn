@@ -251,6 +251,7 @@ shape = SubResource("CylinderShape3D_51y0g")
 visible = false
 transparency = 0.8
 mesh = SubResource("CylinderMesh_m11dk")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=337602906]
 
 [connection signal="timeout" from="FireRate" to="." method="_on_fire_rate_timeout"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]

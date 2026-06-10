@@ -74,6 +74,9 @@ var sprites = {
 @onready var pointer : Node3D = $neck/Pointer
 
 @onready var revive_area : Area3D = $revive_area
+
+@onready var _animation_player = $AnimationPlayer
+
 var players_reviving : int = 0
 
 var joy_move : Vector2
@@ -351,14 +354,25 @@ func _physics_process(delta: float) -> void:
 		neck.rotation.y = target_angle
 	
 	## Sprite rotation code
-	if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
-		player_sprite.texture = sprites["back"]
-	elif neck.rotation.y > (PI/denominator ):
-		player_sprite.texture = sprites["right"]
-	elif neck.rotation.y < -(PI/denominator ):
-		player_sprite.texture = sprites["left"]
+	print(joy_move.length())
+	if joy_move.length() > 0.4:
+		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
+			_animation_player.play("walk_back")
+		elif neck.rotation.y > (PI/denominator ):
+			_animation_player.play("walk_right")
+		elif neck.rotation.y < -(PI/denominator ):
+			_animation_player.play("walk_left")
+		else:
+			_animation_player.play("walk_front")
 	else:
-		player_sprite.texture = sprites["front"]
+		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
+			player_sprite.texture = sprites["back"]
+		elif neck.rotation.y > (PI/denominator ):
+			player_sprite.texture = sprites["right"]
+		elif neck.rotation.y < -(PI/denominator ):
+			player_sprite.texture = sprites["left"]
+		else:
+			player_sprite.texture = sprites["front"]
 	## Fixes if it goes over or under values
 	if neck.rotation.y > (PI):
 		neck.rotation.y -= 2 * PI

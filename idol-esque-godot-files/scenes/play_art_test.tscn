@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b8wn1cid2d45k"]
+[gd_scene format=3 uid="uid://c2ii54nal7uv0"]
 
 [ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
 [ext_resource type="Texture2D" uid="uid://ce1qsa3w5jmw8" path="res://art/environment/foreground_assets/Foreground_Assets_TEst.png" id="1_mk2pl"]
@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
 [ext_resource type="PackedScene" path="res://prefabs/lantern.tscn" id="5_w3j1i"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="6_3prlv"]
+[ext_resource type="Texture2D" uid="uid://c76roao1k8oqb" path="res://art/environment/environment_objects/MushroomsSmall.png" id="7_70mnq"]
+[ext_resource type="Texture2D" uid="uid://ckd0gr7drogbg" path="res://art/environment/environment_objects/FlowersSet1.png" id="8_k8hi5"]
+[ext_resource type="Texture2D" uid="uid://ncuksnspqpcw" path="res://art/environment/environment_objects/FlowersSmall.png" id="8_oskgc"]
+[ext_resource type="Texture2D" uid="uid://c367vuw6eu3sd" path="res://art/environment/environment_objects/MushroomsMedium.png" id="8_ylj65"]
+[ext_resource type="Texture2D" uid="uid://daxgfhelngmos" path="res://art/environment/environment_objects/CloversSmall.png" id="9_tevsk"]
+[ext_resource type="Texture2D" uid="uid://ccjtxwtc83tmp" path="res://art/environment/environment_objects/CloversSecretTile.png" id="12_us2ju"]
+[ext_resource type="Texture2D" uid="uid://bkpfj3gcrx174" path="res://art/environment/environment_objects/CloversSet1.png" id="13_a6ddh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4oot"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -98,6 +105,7 @@ transform = Transform3D(-0.39695573, 0, -0.9178377, 0, 1, 0, 0.9178377, 0, -0.39
 size = Vector3(1, 1, 8)
 
 [node name="enemies" type="Node" parent="WorldEnvironment/NavigationRegion3D" unique_id=1923202654]
+[node name="WallTest" parent="." unique_id=294609644 instance=ExtResource("1_dhcy0")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1849936746]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.6070476, 9.012972)
@@ -113,6 +121,47 @@ texture = ExtResource("1_mk2pl")
 transform = Transform3D(-0.37584254, 0.6758859, 0.6339722, 0.4250831, -0.4821622, 0.76604456, 0.82343596, 0.55740297, -0.10609061, 0, 8.67632, 0)
 shadow_enabled = true
 shadow_blur = 1.715
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=967241649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0, 2.9074392)
+navigation_mesh = SubResource("NavigationMesh_3prlv")
+
+[node name="csg_collisions" type="CSGCombiner3D" parent="NavigationRegion3D" unique_id=1734424177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0914903, 0.1, -2.9074392)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_mask = 14
+
+[node name="floor" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1440559892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.553406, 3)
+size = Vector3(15, 1, 12)
+
+[node name="left_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=761228251]
+transform = Transform3D(0.99314433, 0, -0.11689609, 0, 1, 0, 0.11689609, 0, 0.99314433, -6.1509113, 0, 3)
+size = Vector3(1, 1, 9)
+
+[node name="right_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1634391969]
+transform = Transform3D(0.9843252, 0, 0.17636323, 0, 1, 0, -0.17636323, 0, 0.9843252, 6.1616197, 0, 3)
+size = Vector3(1, 1, 9)
+
+[node name="close_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1133102009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, 8.120031)
+size = Vector3(14, 1, 1)
+
+[node name="far_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=884806968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, -1.5611135)
+size = Vector3(15, 1, 1)
+
+[node name="rock_right" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1789640051]
+transform = Transform3D(0.43117258, 0, -0.9022694, 0, 1, 0, 0.9022694, 0, 0.43117258, 5.651985, 0, 7.0373774)
+size = Vector3(1, 1, 8)
+
+[node name="rock_left" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=501041731]
+transform = Transform3D(-0.39695573, 0, -0.9178377, 0, 1, 0, 0.9178377, 0, -0.39695573, -3.3382614, 0, 7.541526)
+size = Vector3(1, 1, 8)
+
+[node name="enemies" type="Node" parent="NavigationRegion3D" unique_id=1923202654]
 
 [node name="particle_manager" type="Node" parent="." unique_id=1798723023]
 script = ExtResource("2_11x7p")
@@ -133,3 +182,74 @@ player_colour = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1262026, 0, 0)
 player_count = 2
 player_colour = 3
+
+[node name="Lantern" parent="." unique_id=222458714 instance=ExtResource("5_w3j1i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.034893, 3.9013624, 1.9265375)
+
+[node name="Lantern2" parent="." unique_id=2051800722 instance=ExtResource("5_w3j1i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.281929, 3.912846, 1.9265375)
+
+[node name="Spawner" parent="." unique_id=1742698435 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0.61184597, 3.7540712)
+enemies_node = NodePath("../NavigationRegion3D/enemies")
+players_node = NodePath("../players")
+
+[node name="Spawner2" parent="." unique_id=383998498 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0.44209242, 3.929162)
+switch = true
+enemies_node = NodePath("../NavigationRegion3D/enemies")
+players_node = NodePath("../players")
+
+[node name="Enviromental Assets" type="Node" parent="." unique_id=764604788]
+
+[node name="BlueFlower1" type="Sprite3D" parent="Enviromental Assets" unique_id=1433031332]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660255, 0, -0.8660255, 0.5, 0.44001842, 0.42617667, 1.9446876)
+pixel_size = 0.005
+texture = ExtResource("8_k8hi5")
+
+[node name="BlueFlower2" type="Sprite3D" parent="Enviromental Assets" unique_id=1483825247]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 1.7195051, 0.3081901, 4.9296074)
+pixel_size = 0.005
+texture = ExtResource("8_oskgc")
+
+[node name="Mushroom1" type="Sprite3D" parent="Enviromental Assets" unique_id=1925843235]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.661853, 0.42617702, 5.5524144)
+pixel_size = 0.005
+texture = ExtResource("7_70mnq")
+
+[node name="MushroomShadow1" type="Sprite3D" parent="Enviromental Assets/Mushroom1" unique_id=640930016]
+transform = Transform3D(1.0280156, -0.14435703, 0.025133695, 0.068850145, 0.93545145, 0.6762232, -0.098328196, -0.85423464, 0.7362679, -0.036401987, -0.0057942867, -0.23838568)
+modulate = Color(0, 0, 0, 0.63529414)
+pixel_size = 0.005
+texture = ExtResource("7_70mnq")
+
+[node name="Mushroom2" type="Sprite3D" parent="Enviromental Assets" unique_id=773294726]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.49999997, 0, -0.49999997, 0.86602545, 3.0971813, 0.30494732, 0.56879234)
+pixel_size = 0.005
+texture = ExtResource("8_ylj65")
+
+[node name="MushroomShadow2" type="Sprite3D" parent="Enviromental Assets/Mushroom2" unique_id=330521436]
+transform = Transform3D(1.0750002, 0, 0, 0, 0.73441136, 0.84663016, 0, -1.1683497, 0.53218216, 0.054190874, -0.029187705, -0.44882447)
+modulate = Color(0, 0, 0, 0.63529414)
+pixel_size = 0.005
+texture = ExtResource("8_ylj65")
+
+[node name="Clove1" type="Sprite3D" parent="Enviromental Assets" unique_id=396285299]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.069506645, 0.88815475, 3.467988)
+pixel_size = 0.005
+texture = ExtResource("9_tevsk")
+
+[node name="Clove2" type="Sprite3D" parent="Enviromental Assets" unique_id=458826300]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -2.7372358, 0.26823354, 2.0785775)
+pixel_size = 0.0075
+texture = ExtResource("9_tevsk")
+
+[node name="Clove3" type="Sprite3D" parent="Enviromental Assets" unique_id=38953196]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -0.7458731, 0.45596576, 5.1769943)
+pixel_size = 0.005
+texture = ExtResource("12_us2ju")
+
+[node name="Clove4" type="Sprite3D" parent="Enviromental Assets" unique_id=385653447]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, 2.2173343, 0.45596576, 3.1621485)
+pixel_size = 0.005
+texture = ExtResource("13_a6ddh")
