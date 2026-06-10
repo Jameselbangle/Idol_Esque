@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b8wn1cid2d45k"]
 
-[ext_resource type="PackedScene" uid="uid://db680tv6ko240" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
+[ext_resource type="PackedScene" uid="uid://bv37w7clm8bxg" path="res://scenes/testing/wall_test.tscn" id="1_dhcy0"]
 [ext_resource type="Texture2D" uid="uid://ce1qsa3w5jmw8" path="res://art/environment/foreground_assets/Foreground_Assets_TEst.png" id="1_mk2pl"]
 [ext_resource type="Script" uid="uid://cokxbuuggh7i5" path="res://scripts/particle_manager.gd" id="2_11x7p"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
@@ -41,7 +41,63 @@ size = Vector3(9.898926, 2, 28.023865)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.376122, -0.18857288, -3.763791)
 size = Vector3(9.898926, 2, 28.023865)
 
-[node name="WallTest" parent="." unique_id=294609644 instance=ExtResource("1_dhcy0")]
+[node name="Lantern" parent="WorldEnvironment" unique_id=222458714 instance=ExtResource("5_w3j1i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.034893, 3.9013624, 1.9265375)
+
+[node name="Lantern2" parent="WorldEnvironment" unique_id=2051800722 instance=ExtResource("5_w3j1i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.281929, 3.912846, 1.9265375)
+
+[node name="Spawner" parent="WorldEnvironment" unique_id=1742698435 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0.61184597, 3.7540712)
+enemies_node = NodePath("../NavigationRegion3D/enemies")
+players_node = NodePath("../../players")
+
+[node name="Spawner2" parent="WorldEnvironment" unique_id=383998498 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0.44209242, 3.929162)
+switch = true
+enemies_node = NodePath("../NavigationRegion3D/enemies")
+players_node = NodePath("../../players")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="WorldEnvironment" unique_id=967241649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0, 2.9074392)
+navigation_mesh = SubResource("NavigationMesh_3prlv")
+
+[node name="csg_collisions" type="CSGCombiner3D" parent="WorldEnvironment/NavigationRegion3D" unique_id=1734424177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0914903, 0.1, -2.9074392)
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_mask = 14
+
+[node name="floor" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1440559892]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.553406, 3)
+size = Vector3(15, 1, 12)
+
+[node name="left_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=761228251]
+transform = Transform3D(0.99314433, 0, -0.11689609, 0, 1, 0, 0.11689609, 0, 0.99314433, -6.1509113, 0, 3)
+size = Vector3(1, 1, 9)
+
+[node name="right_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1634391969]
+transform = Transform3D(0.9843252, 0, 0.17636323, 0, 1, 0, -0.17636323, 0, 0.9843252, 6.1616197, 0, 3)
+size = Vector3(1, 1, 9)
+
+[node name="close_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1133102009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, 8.120031)
+size = Vector3(14, 1, 1)
+
+[node name="far_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=884806968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, -1.5611135)
+size = Vector3(15, 1, 1)
+
+[node name="rock_right" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1789640051]
+transform = Transform3D(0.43117258, 0, -0.9022694, 0, 1, 0, 0.9022694, 0, 0.43117258, 5.651985, 0, 7.0373774)
+size = Vector3(1, 1, 8)
+
+[node name="rock_left" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=501041731]
+transform = Transform3D(-0.39695573, 0, -0.9178377, 0, 1, 0, 0.9178377, 0, -0.39695573, -3.3382614, 0, 7.541526)
+size = Vector3(1, 1, 8)
+
+[node name="enemies" type="Node" parent="WorldEnvironment/NavigationRegion3D" unique_id=1923202654]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1849936746]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.6070476, 9.012972)
@@ -57,47 +113,6 @@ texture = ExtResource("1_mk2pl")
 transform = Transform3D(-0.37584254, 0.6758859, 0.6339722, 0.4250831, -0.4821622, 0.76604456, 0.82343596, 0.55740297, -0.10609061, 0, 8.67632, 0)
 shadow_enabled = true
 shadow_blur = 1.715
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=967241649]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0, 2.9074392)
-navigation_mesh = SubResource("NavigationMesh_3prlv")
-
-[node name="csg_collisions" type="CSGCombiner3D" parent="NavigationRegion3D" unique_id=1734424177]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0914903, 0.1, -2.9074392)
-transparency = 1.0
-cast_shadow = 0
-use_collision = true
-collision_mask = 14
-
-[node name="floor" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1440559892]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.553406, 3)
-size = Vector3(15, 1, 12)
-
-[node name="left_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=761228251]
-transform = Transform3D(0.99314433, 0, -0.11689609, 0, 1, 0, 0.11689609, 0, 0.99314433, -6.1509113, 0, 3)
-size = Vector3(1, 1, 9)
-
-[node name="right_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1634391969]
-transform = Transform3D(0.9843252, 0, 0.17636323, 0, 1, 0, -0.17636323, 0, 0.9843252, 6.1616197, 0, 3)
-size = Vector3(1, 1, 9)
-
-[node name="close_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1133102009]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, 8.120031)
-size = Vector3(14, 1, 1)
-
-[node name="far_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=884806968]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, -1.5611135)
-size = Vector3(15, 1, 1)
-
-[node name="rock_right" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1789640051]
-transform = Transform3D(0.43117258, 0, -0.9022694, 0, 1, 0, 0.9022694, 0, 0.43117258, 5.651985, 0, 7.0373774)
-size = Vector3(1, 1, 8)
-
-[node name="rock_left" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=501041731]
-transform = Transform3D(-0.39695573, 0, -0.9178377, 0, 1, 0, 0.9178377, 0, -0.39695573, -3.3382614, 0, 7.541526)
-size = Vector3(1, 1, 8)
-
-[node name="enemies" type="Node" parent="NavigationRegion3D" unique_id=1923202654]
 
 [node name="particle_manager" type="Node" parent="." unique_id=1798723023]
 script = ExtResource("2_11x7p")
@@ -118,20 +133,3 @@ player_colour = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1262026, 0, 0)
 player_count = 2
 player_colour = 3
-
-[node name="Lantern" parent="." unique_id=222458714 instance=ExtResource("5_w3j1i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.034893, 3.9013624, 1.9265375)
-
-[node name="Lantern2" parent="." unique_id=2051800722 instance=ExtResource("5_w3j1i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.281929, 3.912846, 1.9265375)
-
-[node name="Spawner" parent="." unique_id=1742698435 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0.61184597, 3.7540712)
-enemies_node = NodePath("../NavigationRegion3D/enemies")
-players_node = NodePath("../players")
-
-[node name="Spawner2" parent="." unique_id=383998498 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0.44209242, 3.929162)
-switch = true
-enemies_node = NodePath("../NavigationRegion3D/enemies")
-players_node = NodePath("../players")
