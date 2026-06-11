@@ -77,8 +77,11 @@ func _on_bullet_area_area_entered(area: Area3D) -> void:
 	if ('player' in area.name):
 		area.damage(config[0].damage, config[tick_step])
 		explode()
-	print(area.name)
-
+## 
+func _on_bullet_area_body_entered(body: Node3D) -> void:
+	if ('player' in body.name):
+		body.damage(config[0].damage, config[tick_step])
+		explode()
 
 func explode():
 	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)

@@ -39,4 +39,6 @@ mesh = SubResource("SphereMesh_lv25w")
 [node name="death_timer" type="Timer" parent="." unique_id=1482295666]
 one_shot = true
 
+[connection signal="area_entered" from="bullet_area" to="." method="_on_bullet_area_area_entered"]
+[connection signal="body_entered" from="bullet_area" to="." method="_on_bullet_area_body_entered"]
 [connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

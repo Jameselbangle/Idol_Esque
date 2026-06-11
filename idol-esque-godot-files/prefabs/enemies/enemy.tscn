@@ -20,7 +20,7 @@ _data = {
 &"scream": SubResource("Animation_31a65")
 }
 
-[node name="Enemy" type="CharacterBody3D" unique_id=454864309]
+[node name="Enemy" type="CharacterBody3D" unique_id=454864309 groups=["enemies"]]
 collision_layer = 4
 collision_mask = 0
 

@@ -327,7 +327,6 @@ func look_time():
 		target_angle = -joy_look.angle() + deg_to_rad(90.0)
 	elif movement_vector >= deadzone:
 		target_angle = -joy_move.angle() + deg_to_rad(90.0)
-		print(target_angle)
 	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
 	if neck.rotation.y != target_angle:
 		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed)

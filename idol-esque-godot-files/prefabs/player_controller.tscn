@@ -284,7 +284,7 @@ charge_time_seconds = 0.9
 revive_time = 2.0
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82092094, -0.002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821, 0)
 shape = SubResource("CapsuleShape3D_io705")
 
 [node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
