@@ -111,17 +111,12 @@ material = SubResource("StandardMaterial3D_2av8n")
 
 [node name="players" type="Node" parent="." unique_id=288650930]
 
-[node name="player_1" parent="players" unique_id=1761623861 instance=ExtResource("1_2av8n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9650183, 0.032012463, -0.68884945)
-player_colour = 1
-
-[node name="player_2" parent="players" unique_id=968089026 instance=ExtResource("1_2av8n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034981728, 0.032012463, -0.68884945)
+[node name="player_2" parent="players" unique_id=1761623861 instance=ExtResource("1_2av8n")]
 player_count = 1
 player_colour = 2
 
-[node name="player_3" parent="players" unique_id=1546687309 instance=ExtResource("1_2av8n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0349817, 0.032012463, -0.68884945)
+[node name="player_3" parent="players" unique_id=1922456124 instance=ExtResource("1_2av8n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1262026, 0, 0)
 player_count = 2
 player_colour = 3
 

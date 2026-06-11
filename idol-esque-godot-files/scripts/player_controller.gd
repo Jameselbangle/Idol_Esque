@@ -6,10 +6,8 @@ extends CharacterBody3D
 @export var health : int = 5
 
 @export_group("Speeds")
-@export var base_move_speed : float = 7.0
-@export var buff_move_speed : float = 14.0
-var move_speed : float = base_move_speed
-@export var base_slipperyness_lerp : float = 15
+@export var move_speed : float = 7.0
+@export var base_slipperyness_lerp : float = 7
 var slipperyness_lerp : float = base_slipperyness_lerp
 
 @export_group("Dash")
@@ -25,19 +23,11 @@ var num : int = denominator  - 1
 @export_group("Bullets")
 @export var bullet_speed : float = 20.0
 @export var charge_time_seconds : float = 0.8
-var charge_time_seconds_base = charge_time_seconds
-var charge_time_seconds_buff = charge_time_seconds / 2
 
 @export_group("Timers")
 @export var firerate : float = 0.2
-var firerate_base := firerate
-var firerate_buff := firerate / 2
 @export var chargerate : float = firerate * 2
 @export var revive_time : float = 3.0
-@export var special_cooldown : float = 5.0
-
-@export_group("Shield")
-@export var shield_health : int = 10
 
 @export_group("Is Keyboard?")
 @export var keyboard_mode : bool = false
@@ -48,52 +38,42 @@ var firerate_buff := firerate / 2
 @onready var player_sprite : Sprite3D = $player_spr
 @onready var bullet_spawn : Marker3D = $neck/BulletSpawn
 var bulletScene = preload("res://prefabs/bullet.tscn")
-var player_shield = preload("res://prefabs/player_shield.tscn")
-var shield_count : int = 0
-var sprites = {
-	"front" : preload("res://art/characters/players/front.png"),
-	"back" : preload("res://art/characters/players/back.png"),
-	"left" : preload("res://art/characters/players/left.png"),
-	"right" : preload("res://art/characters/players/right.png"),
-	"dead" : preload("res://art/characters/players/dead.png")
-}
 
 @onready var fire_rate_timer : Timer = $FireRate
 @onready var charge_rate_timer : Timer = $ChargeRate
 @onready var dash_cooldown_timer : Timer = $DashCooldown
 @onready var dash_length_timer : Timer = $DashLength
 @onready var revive_timer : Timer = $revive_timer
-@onready var special_attack_timer : Timer = $special_attack_timer
 
 @onready var bar_charging : ProgressBar3D = $ChargeProgressBar
 @onready var bar_dash_cooldown : ProgressBar3D = $DashProgressBar
 @onready var bar_revive : ProgressBar3D = $revive_progress_bar
-@onready var bar_special : ProgressBar3D = $special_attack_bar
 
 @onready var neck : Node3D = $neck
 @onready var pointer : Node3D = $neck/Pointer
+@onready var character_body = get_node(".")
+@onready var animation_player = $AnimationPlayer
 
 @onready var revive_area : Area3D = $revive_area
-
-@onready var _animation_player = $AnimationPlayer
 
 var players_reviving : int = 0
 
 var joy_move : Vector2
 var joy_look : Vector2
+var prev_joy_look : Vector2
+
+enum Anim_state {WALK_LEFT, WALK_RIGHT, WALK_FORWARD, WALK_BACKWARD, IDLE_LEFT, IDLE_RIGHT, IDLE_FORWARD, IDLE_BACKWARD, DEAD}
+var state: Anim_state = Anim_state.IDLE_FORWARD
 
 var is_shooting: bool = false
 var is_charging: bool = false
 var is_dashing: bool = false
-var is_dead : bool = false
-var is_buffed : bool = false
-var is_buffing : bool = false
 var can_dash : bool = true
-var can_special : bool = true
+var is_dead : bool = false
 
 ## rotating character with joystick
-var deadzone: float = 0.3
-#var rotation_speed: float = 20.0
+var deadzone: float = 0.4
+var rotation_speed: float = 17
 var target_angle: float
 
 var mouse_captured : bool = false
@@ -104,17 +84,12 @@ func _ready() -> void:
 	## Set initial wait times for Progress Bar
 	charge_rate_timer.wait_time = charge_time_seconds
 	bar_charging.max_value = charge_time_seconds
-	
-	dash_cooldown_timer.wait_time = dash_cooldown
 	bar_dash_cooldown.max_value = dash_cooldown
 	
-	special_attack_timer.wait_time = special_cooldown
-	bar_special.max_value = special_cooldown
-	
 	## Set wait times for timers
+	dash_cooldown_timer.wait_time = dash_cooldown
 	dash_length_timer.wait_time = dash_length_seconds
 	revive_timer.wait_time = revive_time
-	fire_rate_timer.wait_time = firerate
 	
 	var mat : StandardMaterial3D = StandardMaterial3D.new()
 	var pointer_cylinder : Node3D = $neck/Pointer/PointerCylinder
@@ -123,26 +98,16 @@ func _ready() -> void:
 	match player_colour:
 		BulletConfig.BulletColour.RED:
 			mat.albedo_color = Color.RED
-			sprites["front"] = load("res://art/characters/players/Stella/Stella_front.png")
-			sprites["back"] = load("res://art/characters/players/Stella/Stella_Back.png")
-			sprites["left"] = load("res://art/characters/players/Stella/Stella_Left.png")
-			sprites["right"] = load("res://art/characters/players/Stella/Stella_Right.png")
-			sprites["dead"] = load("res://art/characters/players/Stella/Stella_Dead.png")
+			player_sprite.texture = load("res://art/characters/players/Stella/test_spritesheet.png")
 		BulletConfig.BulletColour.BLUE:
 			mat.albedo_color = Color.NAVY_BLUE
-			sprites["front"] = load("res://art/characters/players/Iris/Iris_Front.png")
-			sprites["back"] = load("res://art/characters/players/Iris/Iris_Back.png")
-			sprites["left"] = load("res://art/characters/players/Iris/Iris_Left.png")
-			sprites["right"] = load("res://art/characters/players/Iris/Iris_Right.png")
-			sprites["dead"] = load("res://art/characters/players/Iris/Iris_Dead.png")
+			player_sprite.texture = load("res://art/characters/players/Iris/iris_test_spritesheet.png")
 		BulletConfig.BulletColour.YELLOW:
 			mat.albedo_color = Color.YELLOW
-			sprites["front"] = load("res://art/characters/players/Bee/Bee_Front.png")
-			sprites["back"] = load("res://art/characters/players/Bee/Bee_Back.png")
-			sprites["left"] = load("res://art/characters/players/Bee/Bee_Left.png")
-			sprites["right"] = load("res://art/characters/players/Bee/Bee_Right.png")
-			sprites["dead"] = load("res://art/characters/players/Bee/Bee_Dead.png")
+			player_sprite.texture = load("res://art/characters/players/Bee/bee_test_spritesheet.png")
 	pointer_cylinder.set_surface_override_material(0, mat)
+	
+	change_anim_state(Anim_state.IDLE_FORWARD)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -181,6 +146,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				if event.is_action_pressed("right_look_3"):
 					KEY_rotate(1)
 		
+		look_time()
+		
 		## KEY FIRE
 		if (event.is_action_pressed("fire_1") and player_count == 0) or (event.is_action_pressed("fire_2") and player_count == 1) or (event.is_action_pressed("fire_3") and player_count == 2):
 			if fire_rate_timer.time_left == 0:
@@ -208,7 +175,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	
 	## Handles firing bullets seperate from PhysicsProcess 
-	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging and !is_buffing:
+	if event.is_action_pressed("fire") and event.device == player_count and !is_shooting and !is_charging:
 		if fire_rate_timer.is_stopped():
 			shoot()
 		is_shooting = true
@@ -216,64 +183,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_shooting = false
 	
 	## Charge fire attack
-	if event.is_action_pressed("charge_fire") and event.device == player_count and !is_charging and !is_buffing:
+	if event.is_action_pressed("charge_fire") and event.device == player_count and !is_charging:
 		charge_shot_charge()
 	elif event.is_action_released("charge_fire") and event.device == player_count and is_charging:
 		charge_shot_fire()
 	
-	if event.is_action_pressed("special_fire") and event.device == player_count:
-		match player_colour:
-			
-			BulletConfig.BulletColour.RED:
-				if !can_special:
-					return
-				
-				## Delete all bullets in radius
-				for area in $Special/delete.get_overlapping_areas():
-					if "bullet" in area.name:
-						if area.get_parent().config[0].bullet_colour == BulletConfig.BulletColour.ENEMY:
-							area.get_parent().explode()
-				
-				$Special/delete/delete_mesh.visible = true
-				$special_red_flash.start()
-				
-				special_attack_recharge()
-			
-			BulletConfig.BulletColour.BLUE:
-				if !can_special:
-					return
-				
-				## Shield to block bullets (has set hp)
-				var shield = player_shield.instantiate()
-				shield.setup(shield_count, global_position, shield_health)
-				shield_count += 1
-				get_tree().current_scene.get_node("bullet_manager").add_child(shield)
-				
-				special_attack_recharge()
-			
-			BulletConfig.BulletColour.YELLOW:
-				## Buff player
-				is_buffing = true
-				if is_charging:
-					charge_shot_fire()
-				for body in $Special/buff.get_overlapping_bodies():
-					body.stats_buff()
-				is_shooting = false
-				$Special/buff/buff_mesh.visible = true
-	
-	if event.is_action_released("special_fire") and event.device == player_count:
-		if player_colour == BulletConfig.BulletColour.YELLOW:
-			## Buff player movement speed
-			is_buffing = false
-			for body in get_tree().get_nodes_in_group("players"):
-				body.stats_reset()
-			$Special/buff/buff_mesh.visible = false
-			if fire_rate_timer.is_stopped():
-				fire_rate_timer.start()
-			
-	
 	## Dash
-	if event.is_action_pressed("dash") and event.device == player_count and can_dash and !is_buffing:
+	if event.is_action_pressed("dash") and event.device == player_count and can_dash:
 		dash()
 	
 	## Movement
@@ -284,12 +200,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_Y)
 	)
 	
+	
+	
 	## rotation
 	#joy_look = Input.get_vector("left_look","right_look","up_look","down_look")
 	joy_look = Vector2(
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_Y)
 	)
+	
+	look_time()
+	
+	prev_joy_look = joy_look
+	#if !joy_look.is_zero_approx():
+		#print("nOT " + str(joy_look))
 
 
 ## TODO: Move input and moving code to _unhandled input
@@ -301,7 +225,6 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		dead()
 		return
-	
 	
 	### --------------
 	### TEMP MOVEMENT
@@ -324,44 +247,17 @@ func _physics_process(delta: float) -> void:
 		pointer.scale.z = fill
 	if !can_dash:
 		bar_dash_cooldown.value = (1 / dash_cooldown_timer.wait_time) * (dash_cooldown_timer.wait_time - dash_cooldown_timer.time_left)
-	if !can_special:
-		bar_special.value = special_attack_timer.wait_time - special_attack_timer.time_left
 	
 	## Deadzone checker & apply velocity
 	var movement_vector = sqrt(joy_move.x **2 + joy_move.y **2)
 	if abs(movement_vector) < deadzone:
 		joy_move = Vector2.ZERO
 	
-	if is_buffing:
-		joy_move = Vector2.ZERO
-	
 	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
 	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
 	
-	if is_buffing:
-		move_and_slide()
-		return
-	
-	## Rotation code
-	## source: https://www.youtube.com/watch?v=1C2AAiNxoc8
 
-	if joy_look.length() >= deadzone:
-		target_angle = -joy_look.angle() + deg_to_rad(90.0)
-	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
-	if neck.rotation.y != target_angle:
-		#var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
-		#neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
-		neck.rotation.y = target_angle
-	
-	## Sprite rotation code
-	if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
-		player_sprite.texture = sprites["back"]
-	elif neck.rotation.y > (PI/denominator ):
-		player_sprite.texture = sprites["right"]
-	elif neck.rotation.y < -(PI/denominator ):
-		player_sprite.texture = sprites["left"]
-	else:
-		player_sprite.texture = sprites["front"]
+
 	## Fixes if it goes over or under values
 	if neck.rotation.y > (PI):
 		neck.rotation.y -= 2 * PI
@@ -386,6 +282,76 @@ func _physics_process(delta: float) -> void:
 	## Use velocity to actually move
 	move_and_slide()
 
+func change_anim_state(new_state : int):
+	var previous_state := state
+	state = new_state as Anim_state
+	
+	if state == previous_state:
+		return
+	
+	match state:
+		Anim_state.WALK_LEFT:
+			animation_player.play("running_left")
+		Anim_state.WALK_RIGHT:
+			animation_player.play("running_right")
+		Anim_state.WALK_FORWARD:
+			animation_player.play("running_front")
+		Anim_state.WALK_BACKWARD:
+			animation_player.play("running_back")
+		Anim_state.IDLE_LEFT:
+			animation_player.play("idle_left")
+		Anim_state.IDLE_RIGHT:
+			animation_player.play("idle_right")
+		Anim_state.IDLE_FORWARD:
+			animation_player.play("idle_front")
+		Anim_state.IDLE_BACKWARD:
+			animation_player.play("idle_back")
+		Anim_state.DEAD:
+			animation_player.play("dead")
+
+func look_time():
+	## Rotation code
+	## source: https://www.youtube.com/watch?v=1C2AAiNxoc8
+
+	## Deadzone checker & apply velocity
+	var look_vector = sqrt(joy_look.x **2 + joy_look.y **2)
+	if abs(look_vector) < deadzone:
+		joy_look = Vector2.ZERO
+
+	## Deadzone checker & apply velocity
+	var movement_vector = sqrt(joy_move.x **2 + joy_move.y **2)
+	if abs(movement_vector) < deadzone:
+		joy_move = Vector2.ZERO
+
+	if look_vector >= deadzone:
+		target_angle = -joy_look.angle() + deg_to_rad(90.0)
+	elif movement_vector >= deadzone:
+		target_angle = -joy_move.angle() + deg_to_rad(90.0)
+		print(target_angle)
+	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
+	if neck.rotation.y != target_angle:
+		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed)
+		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
+	
+	## Sprite rotation code
+	if movement_vector > deadzone:
+		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
+			change_anim_state(Anim_state.WALK_BACKWARD)
+		elif neck.rotation.y > (PI/denominator ):
+			change_anim_state(Anim_state.WALK_RIGHT)
+		elif neck.rotation.y < -(PI/denominator ):
+			change_anim_state(Anim_state.WALK_LEFT)
+		else:
+			change_anim_state(Anim_state.WALK_FORWARD)
+	else:
+		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
+			change_anim_state(Anim_state.IDLE_BACKWARD)
+		elif neck.rotation.y > (PI/denominator ):
+			change_anim_state(Anim_state.IDLE_RIGHT)
+		elif neck.rotation.y < -(PI/denominator ):
+			change_anim_state(Anim_state.IDLE_LEFT)
+		else:
+			change_anim_state(Anim_state.IDLE_FORWARD)
 
 func KEY_rotate(rot: float):
 	target_angle = neck.rotation.y + (rot * (PI / 2))
@@ -394,6 +360,7 @@ func KEY_rotate(rot: float):
 ## Creating Bullets and firing
 func shoot():
 	fire_rate_timer.start()
+	fire_rate_timer.start(firerate)
 	
 	var spawn_pos = bullet_spawn.global_position
 	var direction := Vector3(sin(neck.rotation.y), 0, cos(neck.rotation.y))
@@ -457,7 +424,7 @@ func dash():
 	dash_cooldown_timer.start()
 	dash_length_timer.start()
 	
-	set_collision_layer_value(2, false)
+	character_body.set_collision_layer_value(2, false)
 	
 	## Dash Movement enabled
 	#velocity = velocity.normalized() * dash_speed
@@ -467,7 +434,7 @@ func dash():
 func _on_dash_length_timeout() -> void:
 	is_dashing = false
 	slipperyness_lerp = base_slipperyness_lerp
-	set_collision_layer_value(2, true)
+	character_body.set_collision_layer_value(2, true)
 	
 	## Enable/disable for precise stopping/starting
 	#velocity = velocity / dash_speed 
@@ -488,7 +455,7 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 		is_dead = true
 		revive_area.visible = true
 		revive_area.monitoring = true
-		player_sprite.texture = sprites["dead"]
+		change_anim_state(Anim_state.DEAD)
 		velocity = Vector3.ZERO
 		is_shooting = false
 
@@ -534,63 +501,7 @@ func revive():
 	revive_area.visible = false
 	revive_area.monitoring = false
 	bar_revive.visible = false
-	player_sprite.texture = sprites["front"]
-
-
-func _on_special_red_flash_timeout() -> void:
-	$Special/delete/delete_mesh.visible = false
-
-func special_attack_recharge():
-	can_special = false
-	
-	special_attack_timer.start()
-	bar_special.visible = true
-
-func _on_special_attack_timer_timeout() -> void:
-	can_special = true
-	
-	bar_special.visible = false
-
-func stats_buff():
-	move_speed = buff_move_speed 
-	
-	fire_rate_timer.wait_time = firerate_buff
-	charge_rate_timer.wait_time = charge_time_seconds_buff
-	
-	is_buffed = true
-
-func stats_reset():
-	move_speed = base_move_speed
-	
-	fire_rate_timer.wait_time = firerate_base
-	charge_rate_timer.wait_time = charge_time_seconds_base
-	
-	is_buffed = false
-
-func _on_buff_body_entered(body: Node3D) -> void:
-	if !(player_colour == BulletConfig.BulletColour.YELLOW):
-		return
-	
-	if !is_buffing:
-		return
-	
-	if body.is_buffed:
-		return
-	
-	body.stats_buff()
-
-func _on_buff_body_exited(body: Node3D) -> void:
-	if !(player_colour == BulletConfig.BulletColour.YELLOW):
-		return
-	
-	if !is_buffing:
-		return
-	
-	if !body.is_buffed:
-		return
-	
-	body.stats_reset()
-
+	change_anim_state(Anim_state.IDLE_FORWARD)
 
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
