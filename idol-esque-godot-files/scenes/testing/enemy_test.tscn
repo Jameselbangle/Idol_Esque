@@ -93,3 +93,4 @@ god_mode = true
 
 [node name="Mandrake" parent="." unique_id=1050916115 instance=ExtResource("2_q02w0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9334083, 1.1010407, -0.9330673)
+_movement_speed = 2.0
