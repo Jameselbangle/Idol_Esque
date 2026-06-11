@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c5o0smdjkna3p" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_07.png" id="11_w0gws"]
 [ext_resource type="Texture2D" uid="uid://coympljwobxrq" path="res://art/environment/walls/overgrown_walls/Overgrown_Right_Wall_02.png" id="12_trkr4"]
 [ext_resource type="Texture2D" uid="uid://dthfmrs3vtyo6" path="res://art/environment/environment_objects/Rock_4.png" id="13_ahjxx"]
-[ext_resource type="Texture2D" uid="uid://b6tf1nktkxmin" path="res://art/environment/floor_tiles/FloorTile_Test.png" id="13_vr4po"]
+[ext_resource type="Texture2D" uid="uid://b6tf1nktkxmin" path="res://art/environment/floor_tiles/dirt-grass/FloorTile_Test.png" id="13_vr4po"]
 [ext_resource type="Texture2D" uid="uid://by5qv6mpkh7xr" path="res://art/environment/environment_objects/Rock_2.png" id="14_ainht"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgpuk"]

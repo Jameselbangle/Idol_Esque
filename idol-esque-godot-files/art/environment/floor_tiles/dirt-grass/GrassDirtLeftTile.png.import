@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqp4f7ispsmd3"
-path.s3tc="res://.godot/imported/GrassTile.png-985c496973e3a2b5a4550ccd617361ea.s3tc.ctex"
+uid="uid://dk0udtxrer44t"
+path.s3tc="res://.godot/imported/GrassDirtLeftTile.png-c079b0f31c8bb1bfae5f028cc93da399.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/environment/floor_tiles/GrassTile.png"
-dest_files=["res://.godot/imported/GrassTile.png-985c496973e3a2b5a4550ccd617361ea.s3tc.ctex"]
+source_file="res://art/environment/floor_tiles/dirt-grass/GrassDirtLeftTile.png"
+dest_files=["res://.godot/imported/GrassDirtLeftTile.png-c079b0f31c8bb1bfae5f028cc93da399.s3tc.ctex"]
 
 [params]
 

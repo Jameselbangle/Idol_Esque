@@ -30,13 +30,17 @@ glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_3prlv"]
-vertices = PackedVector3Array(7.5655727, 1.046594, -3.9074392, 7.5655727, 1.046594, -2.4074392, 7.8155727, 1.046594, -4.157439, -3.6844273, 1.046594, -4.157439, -3.6844273, 1.046594, -3.1574392, -3.1844273, 1.046594, -4.407439, 7.0655727, 1.046594, -4.407439, -4.9344273, 1.046594, -4.657439, 9.065573, 1.046594, -4.407439, -3.1844273, 0.546594, 1.5925608, -3.1844273, 0.546594, 2.5925608, 0.31557274, 0.546594, 4.092561, 5.3155727, 0.546594, 4.092561, 7.5655727, 0.546594, 2.8425608, 6.5655727, 0.546594, -3.4074392, -2.4344273, 0.546594, -3.4074392, 8.815573, 0.546594, -3.4074392, 9.815573, 0.546594, 1.3425608, 9.815573, 0.546594, -3.4074392, -4.1844273, 1.046594, 3.0925608, -4.1844273, 1.046594, 1.3425608, -4.6844273, 1.046594, 3.0925608, -4.6844273, 1.046594, 4.342561, -3.1844273, 1.046594, 3.8425608, 8.815573, 1.046594, 2.8425608, 8.565573, 1.046594, 1.8425608, 8.565573, 1.046594, 3.5925608, 9.815573, 1.046594, 3.3425608, 8.565573, 1.046594, 4.342561, 2.5655727, 1.046594, 5.342561, 8.565573, 1.046594, 5.342561, 5.8155727, 1.046594, 5.092561, -0.18442726, 1.046594, 5.092561, -2.4344273, 1.046594, 3.8425608, -2.9344273, 1.046594, 3.8425608, -2.9344273, 1.046594, 5.092561, -4.4344273, 1.046594, 4.842561, -4.4344273, 1.046594, 5.342561, 0.31557274, 1.046594, 5.342561, 2.0655727, 1.046594, 6.092561)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(6, 2, 0), PackedInt32Array(7, 5, 3), PackedInt32Array(8, 2, 6), PackedInt32Array(6, 5, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(11, 10, 9), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 9), PackedInt32Array(13, 9, 15), PackedInt32Array(13, 15, 14), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(21, 19, 22), PackedInt32Array(22, 19, 23), PackedInt32Array(26, 25, 24), PackedInt32Array(26, 24, 28), PackedInt32Array(28, 24, 27), PackedInt32Array(32, 31, 29), PackedInt32Array(29, 31, 30), PackedInt32Array(34, 33, 35), PackedInt32Array(35, 33, 32), PackedInt32Array(37, 36, 35), PackedInt32Array(38, 32, 39), PackedInt32Array(39, 32, 29), PackedInt32Array(32, 38, 35), PackedInt32Array(35, 38, 37), PackedInt32Array(31, 26, 28), PackedInt32Array(31, 28, 30)]
-
 [node name="PlayArtTest" type="Node3D" unique_id=2112553745]
 
-[node name="WallTest" parent="." unique_id=294609644 instance=ExtResource("1_dhcy0")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1849936746]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.6070476, 9.012972)
+
+[node name="Foreground" type="Sprite3D" parent="Camera3D" unique_id=1960293626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00025701523, -0.770381)
+cast_shadow = 0
+pixel_size = 0.0011
+alpha_cut = 1
+texture = ExtResource("1_mk2pl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=949190964]
 environment = SubResource("Environment_mk2pl")
@@ -55,113 +59,65 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.034893, 3.9013624, 1.92653
 [node name="Lantern2" parent="WorldEnvironment" unique_id=2051800722 instance=ExtResource("5_w3j1i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.281929, 3.912846, 1.9265375)
 
-[node name="Spawner" parent="WorldEnvironment" unique_id=1742698435 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0.61184597, 3.7540712)
-enemies_node = NodePath("../NavigationRegion3D/enemies")
-players_node = NodePath("../../players")
+[node name="WallTest" parent="WorldEnvironment" unique_id=294609644 instance=ExtResource("1_dhcy0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.905, 0)
 
-[node name="Spawner2" parent="WorldEnvironment" unique_id=383998498 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0.44209242, 3.929162)
-switch = true
-enemies_node = NodePath("../NavigationRegion3D/enemies")
-players_node = NodePath("../../players")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="WorldEnvironment" unique_id=967241649]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0, 2.9074392)
-navigation_mesh = SubResource("NavigationMesh_3prlv")
-
-[node name="csg_collisions" type="CSGCombiner3D" parent="WorldEnvironment/NavigationRegion3D" unique_id=1734424177]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0914903, 0.1, -2.9074392)
-transparency = 1.0
-cast_shadow = 0
-use_collision = true
-collision_mask = 14
-
-[node name="floor" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1440559892]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.553406, 3)
-size = Vector3(15, 1, 12)
-
-[node name="left_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=761228251]
-transform = Transform3D(0.99314433, 0, -0.11689609, 0, 1, 0, 0.11689609, 0, 0.99314433, -6.1509113, 0, 3)
-size = Vector3(1, 1, 9)
-
-[node name="right_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1634391969]
-transform = Transform3D(0.9843252, 0, 0.17636323, 0, 1, 0, -0.17636323, 0, 0.9843252, 6.1616197, 0, 3)
-size = Vector3(1, 1, 9)
-
-[node name="close_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1133102009]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, 8.120031)
-size = Vector3(14, 1, 1)
-
-[node name="far_wall" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=884806968]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, -1.5611135)
-size = Vector3(15, 1, 1)
-
-[node name="rock_right" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=1789640051]
-transform = Transform3D(0.43117258, 0, -0.9022694, 0, 1, 0, 0.9022694, 0, 0.43117258, 5.651985, 0, 7.0373774)
-size = Vector3(1, 1, 8)
-
-[node name="rock_left" type="CSGBox3D" parent="WorldEnvironment/NavigationRegion3D/csg_collisions" unique_id=501041731]
-transform = Transform3D(-0.39695573, 0, -0.9178377, 0, 1, 0, 0.9178377, 0, -0.39695573, -3.3382614, 0, 7.541526)
-size = Vector3(1, 1, 8)
-
-[node name="enemies" type="Node" parent="WorldEnvironment/NavigationRegion3D" unique_id=1923202654]
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1849936746]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5.6070476, 9.012972)
-
-[node name="Foreground" type="Sprite3D" parent="Camera3D" unique_id=1960293626]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00025701523, -0.770381)
-cast_shadow = 0
-pixel_size = 0.0011
-alpha_cut = 1
-texture = ExtResource("1_mk2pl")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1898701058]
-transform = Transform3D(-0.37584254, 0.6758859, 0.6339722, 0.4250831, -0.4821622, 0.76604456, 0.82343596, 0.55740297, -0.10609061, 0, 8.67632, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1898701058]
+transform = Transform3D(-0.37584254, 0.67588586, 0.63397217, 0.4250831, -0.48216215, 0.76604444, 0.82343596, 0.5574029, -0.10609062, 0, 8.67632, 0)
 shadow_enabled = true
 shadow_blur = 1.715
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=985938248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0, 2.9074392)
-navigation_mesh = SubResource("NavigationMesh_3prlv")
+[node name="Enviromental Assets" type="Node" parent="WorldEnvironment" unique_id=764604788]
 
-[node name="csg_collisions" type="CSGCombiner3D" parent="NavigationRegion3D" unique_id=1957278394]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0914903, 0.1, -2.9074392)
-transparency = 1.0
-cast_shadow = 0
-use_collision = true
-collision_mask = 14
+[node name="BlueFlower1" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=1433031332]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660255, 0, -0.8660255, 0.5, 0.44001842, 0.42617667, 1.9446876)
+pixel_size = 0.005
+texture = ExtResource("8_k8hi5")
 
-[node name="floor" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1766127600]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.553406, 3)
-size = Vector3(15, 1, 12)
+[node name="BlueFlower2" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=1483825247]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 1.7195051, 0.3081901, 4.9296074)
+pixel_size = 0.005
+texture = ExtResource("8_oskgc")
 
-[node name="left_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=139816215]
-transform = Transform3D(0.99314433, 0, -0.11689609, 0, 1, 0, 0.11689609, 0, 0.99314433, -6.1509113, 0, 3)
-size = Vector3(1, 1, 9)
+[node name="Mushroom1" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=1925843235]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.661853, 0.42617702, 5.5524144)
+pixel_size = 0.005
 
-[node name="right_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=660382238]
-transform = Transform3D(0.9843252, 0, 0.17636323, 0, 1, 0, -0.17636323, 0, 0.9843252, 6.1616197, 0, 3)
-size = Vector3(1, 1, 9)
+[node name="MushroomShadow1" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets/Mushroom1" unique_id=640930016]
+transform = Transform3D(1.0280156, -0.14435703, 0.025133695, 0.068850145, 0.93545145, 0.6762232, -0.098328196, -0.85423464, 0.7362679, -0.036401987, -0.0057942867, -0.23838568)
+modulate = Color(0, 0, 0, 0.63529414)
+pixel_size = 0.005
 
-[node name="close_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=1858148905]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, 8.120031)
-size = Vector3(14, 1, 1)
+[node name="Mushroom2" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=773294726]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.49999997, 0, -0.49999997, 0.86602545, 3.0971813, 0.30494732, 0.56879234)
+pixel_size = 0.005
+texture = ExtResource("8_ylj65")
 
-[node name="far_wall" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=288965205]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02591753, 0, -1.5611135)
-size = Vector3(15, 1, 1)
+[node name="MushroomShadow2" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets/Mushroom2" unique_id=330521436]
+transform = Transform3D(1.0750002, 0, 0, 0, 0.73441136, 0.84663016, 0, -1.1683497, 0.53218216, 0.054190874, -0.029187705, -0.44882447)
+modulate = Color(0, 0, 0, 0.63529414)
+pixel_size = 0.005
+texture = ExtResource("8_ylj65")
 
-[node name="rock_right" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=959240182]
-transform = Transform3D(0.43117258, 0, -0.9022694, 0, 1, 0, 0.9022694, 0, 0.43117258, 5.651985, 0, 7.0373774)
-size = Vector3(1, 1, 8)
+[node name="Clove1" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=396285299]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.069506645, 0.88815475, 3.467988)
+pixel_size = 0.005
+texture = ExtResource("9_tevsk")
 
-[node name="rock_left" type="CSGBox3D" parent="NavigationRegion3D/csg_collisions" unique_id=146864308]
-transform = Transform3D(-0.39695573, 0, -0.9178377, 0, 1, 0, 0.9178377, 0, -0.39695573, -3.3382614, 0, 7.541526)
-size = Vector3(1, 1, 8)
+[node name="Clove2" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=458826300]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -2.7372358, 0.26823354, 2.0785775)
+pixel_size = 0.0075
+texture = ExtResource("9_tevsk")
 
-[node name="enemies" type="Node" parent="NavigationRegion3D" unique_id=1077230287]
+[node name="Clove3" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=38953196]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -0.7458731, 0.45596576, 5.1769943)
+pixel_size = 0.005
+texture = ExtResource("12_us2ju")
+
+[node name="Clove4" type="Sprite3D" parent="WorldEnvironment/Enviromental Assets" unique_id=385653447]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, 2.2173343, 0.45596576, 3.1621485)
+pixel_size = 0.005
+texture = ExtResource("13_a6ddh")
 
 [node name="particle_manager" type="Node" parent="." unique_id=1798723023]
 script = ExtResource("2_11x7p")
@@ -183,76 +139,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1262026, 0, 0)
 player_count = 2
 player_colour = 3
 
-[node name="Lantern" parent="." unique_id=457236856 instance=ExtResource("5_w3j1i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.034893, 3.9013624, 1.9265375)
-
-[node name="Lantern2" parent="." unique_id=1464924221 instance=ExtResource("5_w3j1i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.281929, 3.912846, 1.9265375)
-
 [node name="Spawner" parent="." unique_id=71214181 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0914903, 0.61184597, 3.7540712)
-enemies_node = NodePath("../NavigationRegion3D/enemies")
+enemies_node = NodePath("../enemies")
 players_node = NodePath("../players")
 
 [node name="Spawner2" parent="." unique_id=1456651098 node_paths=PackedStringArray("enemies_node", "players_node") instance=ExtResource("6_3prlv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7394772, 0.44209242, 3.929162)
 switch = true
-enemies_node = NodePath("../NavigationRegion3D/enemies")
+enemies_node = NodePath("../enemies")
 players_node = NodePath("../players")
 
-[node name="Enviromental Assets" type="Node" parent="." unique_id=764604788]
-
-[node name="BlueFlower1" type="Sprite3D" parent="Enviromental Assets" unique_id=1433031332]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660255, 0, -0.8660255, 0.5, 0.44001842, 0.42617667, 1.9446876)
-pixel_size = 0.005
-texture = ExtResource("8_k8hi5")
-
-[node name="BlueFlower2" type="Sprite3D" parent="Enviromental Assets" unique_id=1483825247]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 1.7195051, 0.3081901, 4.9296074)
-pixel_size = 0.005
-texture = ExtResource("8_oskgc")
-
-[node name="Mushroom1" type="Sprite3D" parent="Enviromental Assets" unique_id=1925843235]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.661853, 0.42617702, 5.5524144)
-pixel_size = 0.005
-
-[node name="MushroomShadow1" type="Sprite3D" parent="Enviromental Assets/Mushroom1" unique_id=640930016]
-transform = Transform3D(1.0280156, -0.14435703, 0.025133695, 0.068850145, 0.93545145, 0.6762232, -0.098328196, -0.85423464, 0.7362679, -0.036401987, -0.0057942867, -0.23838568)
-modulate = Color(0, 0, 0, 0.63529414)
-pixel_size = 0.005
-
-[node name="Mushroom2" type="Sprite3D" parent="Enviromental Assets" unique_id=773294726]
-transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.49999997, 0, -0.49999997, 0.86602545, 3.0971813, 0.30494732, 0.56879234)
-pixel_size = 0.005
-texture = ExtResource("8_ylj65")
-
-[node name="MushroomShadow2" type="Sprite3D" parent="Enviromental Assets/Mushroom2" unique_id=330521436]
-transform = Transform3D(1.0750002, 0, 0, 0, 0.73441136, 0.84663016, 0, -1.1683497, 0.53218216, 0.054190874, -0.029187705, -0.44882447)
-modulate = Color(0, 0, 0, 0.63529414)
-pixel_size = 0.005
-texture = ExtResource("8_ylj65")
-
-[node name="Clove1" type="Sprite3D" parent="Enviromental Assets" unique_id=396285299]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.069506645, 0.88815475, 3.467988)
-pixel_size = 0.005
-texture = ExtResource("9_tevsk")
-
-[node name="Clove2" type="Sprite3D" parent="Enviromental Assets" unique_id=458826300]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -2.7372358, 0.26823354, 2.0785775)
-pixel_size = 0.0075
-texture = ExtResource("9_tevsk")
-
-[node name="Clove3" type="Sprite3D" parent="Enviromental Assets" unique_id=38953196]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -0.7458731, 0.45596576, 5.1769943)
-pixel_size = 0.005
-texture = ExtResource("12_us2ju")
-
-[node name="Clove4" type="Sprite3D" parent="Enviromental Assets" unique_id=385653447]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, 2.2173343, 0.45596576, 3.1621485)
-pixel_size = 0.005
-texture = ExtResource("13_a6ddh")
-
-[node name="Control" type="Control" parent="." unique_id=1399424221]
+[node name="PauseMenu" type="Control" parent="." unique_id=1399424221]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -263,7 +161,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_70mnq")
 
-[node name="TextureRect" type="TextureRect" parent="Control" unique_id=710240621]
+[node name="TextureRect" type="TextureRect" parent="PauseMenu" unique_id=710240621]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -278,7 +176,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_yvk1f")
 
-[node name="PauseText" type="Label" parent="Control/TextureRect" unique_id=2138698843]
+[node name="PauseText" type="Label" parent="PauseMenu/TextureRect" unique_id=2138698843]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -299,3 +197,5 @@ text = "Paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="enemies" type="Node" parent="." unique_id=977506474]
