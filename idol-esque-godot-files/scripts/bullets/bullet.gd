@@ -82,6 +82,9 @@ func _on_bullet_area_body_entered(body: Node3D) -> void:
 	if ('player' in body.name):
 		body.damage(config[0].damage, config[tick_step])
 		explode()
+	if body.is_in_group("enemies"):
+		body.damage(config[0].damage, config[tick_step])
+		explode()
 
 func explode():
 	GlobalSignals.emit_signal("create_particles", "mandrake", global_position)
