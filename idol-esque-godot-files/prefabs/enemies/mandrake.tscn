@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cnrrt1lhlq70p" path="res://scripts/enemies/mandrake.gd" id="1_vnqm5"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_jt5h8"]
-[ext_resource type="Texture2D" uid="uid://cd3q31nuqenon" path="res://art/characters/enemies/mandrake/original/mandrake_idle_sprite.png" id="3_jt5h8"]
 [ext_resource type="Script" uid="uid://yn0eojbx44xy" path="res://scripts/bullets/bullet_config_group.gd" id="3_iawsw"]
-[ext_resource type="BehaviorTree" uid="uid://b1ijp7cxnqnsp" path="res://ai/BT/mandrake.tres" id="3_uvdid"]
+[ext_resource type="Texture2D" uid="uid://cd3q31nuqenon" path="res://art/characters/enemies/mandrake/original/mandrake_idle_sprite.png" id="3_jt5h8"]
+[ext_resource type="BehaviorTree" uid="uid://ddca2wrqeywxs" path="res://ai/BT/mandrake.tres" id="3_uvdid"]
 [ext_resource type="Script" uid="uid://djuwhyhdhfi2v" path="res://scripts/bullets/bullet_config.gd" id="4_7c17s"]
 
 [sub_resource type="Resource" id="Resource_8m6qa"]
@@ -74,8 +74,8 @@ height = 0.4
 collision_layer = 4
 script = ExtResource("1_vnqm5")
 _bullet_scene = ExtResource("2_jt5h8")
-death_particle_name = "mandrake"
 _configs = Array[ExtResource("3_iawsw")]([SubResource("Resource_sr5k1")])
+death_particle_name = "mandrake"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1082717938]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
@@ -84,7 +84,6 @@ hframes = 3
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1579455540]
 target_desired_distance = 0.5
-debug_enabled = true
 
 [node name="BulletSpawn" type="Marker3D" parent="." unique_id=1373801589]
 

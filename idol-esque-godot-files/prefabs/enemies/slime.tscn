@@ -72,7 +72,6 @@ vframes = 3
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=189828419]
 target_desired_distance = 0.5
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
 
