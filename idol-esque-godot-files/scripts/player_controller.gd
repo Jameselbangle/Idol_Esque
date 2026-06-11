@@ -38,13 +38,6 @@ var num : int = denominator  - 1
 @onready var player_sprite : Sprite3D = $player_spr
 @onready var bullet_spawn : Marker3D = $neck/BulletSpawn
 var bulletScene = preload("res://prefabs/bullet.tscn")
-var sprites = {
-	"front" : preload("res://art/characters/players/front.png"),
-	"back" : preload("res://art/characters/players/back.png"),
-	"left" : preload("res://art/characters/players/left.png"),
-	"right" : preload("res://art/characters/players/right.png"),
-	"dead" : preload("res://art/characters/players/dead.png")
-}
 
 @onready var fire_rate_timer : Timer = $FireRate
 @onready var charge_rate_timer : Timer = $ChargeRate
@@ -59,15 +52,18 @@ var sprites = {
 @onready var neck : Node3D = $neck
 @onready var pointer : Node3D = $neck/Pointer
 @onready var character_body = get_node(".")
+@onready var animation_player = $AnimationPlayer
 
 @onready var revive_area : Area3D = $revive_area
-
-@onready var _animation_player = $AnimationPlayer
 
 var players_reviving : int = 0
 
 var joy_move : Vector2
 var joy_look : Vector2
+var prev_joy_look : Vector2
+
+enum Anim_state {WALK_LEFT, WALK_RIGHT, WALK_FORWARD, WALK_BACKWARD, IDLE_LEFT, IDLE_RIGHT, IDLE_FORWARD, IDLE_BACKWARD, DEAD}
+var state: Anim_state = Anim_state.IDLE_FORWARD
 
 var is_shooting: bool = false
 var is_charging: bool = false
@@ -76,8 +72,8 @@ var can_dash : bool = true
 var is_dead : bool = false
 
 ## rotating character with joystick
-var deadzone: float = 0.3
-var rotation_speed: float = 5.0
+var deadzone: float = 0.4
+var rotation_speed: float = 17
 var target_angle: float
 
 var mouse_captured : bool = false
@@ -102,26 +98,16 @@ func _ready() -> void:
 	match player_colour:
 		BulletConfig.BulletColour.RED:
 			mat.albedo_color = Color.RED
-			sprites["front"] = load("res://art/characters/players/Stella/Stella_front.png")
-			sprites["back"] = load("res://art/characters/players/Stella/Stella_Back.png")
-			sprites["left"] = load("res://art/characters/players/Stella/Stella_Left.png")
-			sprites["right"] = load("res://art/characters/players/Stella/Stella_Right.png")
-			sprites["dead"] = load("res://art/characters/players/Stella/Stella_Dead.png")
+			player_sprite.texture = load("res://art/characters/players/Stella/test_spritesheet.png")
 		BulletConfig.BulletColour.BLUE:
 			mat.albedo_color = Color.NAVY_BLUE
-			sprites["front"] = load("res://art/characters/players/Iris/Iris_Front.png")
-			sprites["back"] = load("res://art/characters/players/Iris/Iris_Back.png")
-			sprites["left"] = load("res://art/characters/players/Iris/Iris_Left.png")
-			sprites["right"] = load("res://art/characters/players/Iris/Iris_Right.png")
-			sprites["dead"] = load("res://art/characters/players/Iris/Iris_Dead.png")
+			player_sprite.texture = load("res://art/characters/players/Iris/iris_test_spritesheet.png")
 		BulletConfig.BulletColour.YELLOW:
 			mat.albedo_color = Color.YELLOW
-			sprites["front"] = load("res://art/characters/players/Bee/Bee_Front.png")
-			sprites["back"] = load("res://art/characters/players/Bee/Bee_Back.png")
-			sprites["left"] = load("res://art/characters/players/Bee/Bee_Left.png")
-			sprites["right"] = load("res://art/characters/players/Bee/Bee_Right.png")
-			sprites["dead"] = load("res://art/characters/players/Bee/Bee_Dead.png")
+			player_sprite.texture = load("res://art/characters/players/Bee/bee_test_spritesheet.png")
 	pointer_cylinder.set_surface_override_material(0, mat)
+	
+	change_anim_state(Anim_state.IDLE_FORWARD)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -159,6 +145,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					KEY_rotate(-1)
 				if event.is_action_pressed("right_look_3"):
 					KEY_rotate(1)
+		
+		look_time()
 		
 		## KEY FIRE
 		if (event.is_action_pressed("fire_1") and player_count == 0) or (event.is_action_pressed("fire_2") and player_count == 1) or (event.is_action_pressed("fire_3") and player_count == 2):
@@ -212,12 +200,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_Y)
 	)
 	
+	
+	
 	## rotation
 	#joy_look = Input.get_vector("left_look","right_look","up_look","down_look")
 	joy_look = Vector2(
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(player_count, JOY_AXIS_RIGHT_Y)
 	)
+	
+	look_time()
+	
+	prev_joy_look = joy_look
+	#if !joy_look.is_zero_approx():
+		#print("nOT " + str(joy_look))
 
 
 ## TODO: Move input and moving code to _unhandled input
@@ -260,36 +256,8 @@ func _physics_process(delta: float) -> void:
 	velocity.x = lerp( velocity.x, joy_move.x * move_speed, slipperyness_lerp * delta) 
 	velocity.z = lerp( velocity.z, joy_move.y * move_speed, slipperyness_lerp * delta) 
 	
-	## Rotation code
-	## source: https://www.youtube.com/watch?v=1C2AAiNxoc8
 
-	if joy_look.length() >= deadzone:
-		target_angle = -joy_look.angle() + deg_to_rad(90.0)
-	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
-	if neck.rotation.y != target_angle:
-		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed * delta)
-		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
-	
-	## Sprite rotation code
-	print(joy_move.length())
-	if joy_move.length() > 0.4:
-		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
-			_animation_player.play("walk_back")
-		elif neck.rotation.y > (PI/denominator ):
-			_animation_player.play("walk_right")
-		elif neck.rotation.y < -(PI/denominator ):
-			_animation_player.play("walk_left")
-		else:
-			_animation_player.play("walk_front")
-	else:
-		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
-			player_sprite.texture = sprites["back"]
-		elif neck.rotation.y > (PI/denominator ):
-			player_sprite.texture = sprites["right"]
-		elif neck.rotation.y < -(PI/denominator ):
-			player_sprite.texture = sprites["left"]
-		else:
-			player_sprite.texture = sprites["front"]
+
 	## Fixes if it goes over or under values
 	if neck.rotation.y > (PI):
 		neck.rotation.y -= 2 * PI
@@ -314,6 +282,76 @@ func _physics_process(delta: float) -> void:
 	## Use velocity to actually move
 	move_and_slide()
 
+func change_anim_state(new_state : int):
+	var previous_state := state
+	state = new_state as Anim_state
+	
+	if state == previous_state:
+		return
+	
+	match state:
+		Anim_state.WALK_LEFT:
+			animation_player.play("running_left")
+		Anim_state.WALK_RIGHT:
+			animation_player.play("running_right")
+		Anim_state.WALK_FORWARD:
+			animation_player.play("running_front")
+		Anim_state.WALK_BACKWARD:
+			animation_player.play("running_back")
+		Anim_state.IDLE_LEFT:
+			animation_player.play("idle_left")
+		Anim_state.IDLE_RIGHT:
+			animation_player.play("idle_right")
+		Anim_state.IDLE_FORWARD:
+			animation_player.play("idle_front")
+		Anim_state.IDLE_BACKWARD:
+			animation_player.play("idle_back")
+		Anim_state.DEAD:
+			animation_player.play("dead")
+
+func look_time():
+	## Rotation code
+	## source: https://www.youtube.com/watch?v=1C2AAiNxoc8
+
+	## Deadzone checker & apply velocity
+	var look_vector = sqrt(joy_look.x **2 + joy_look.y **2)
+	if abs(look_vector) < deadzone:
+		joy_look = Vector2.ZERO
+
+	## Deadzone checker & apply velocity
+	var movement_vector = sqrt(joy_move.x **2 + joy_move.y **2)
+	if abs(movement_vector) < deadzone:
+		joy_move = Vector2.ZERO
+
+	if look_vector >= deadzone:
+		target_angle = -joy_look.angle() + deg_to_rad(90.0)
+	elif movement_vector >= deadzone:
+		target_angle = -joy_move.angle() + deg_to_rad(90.0)
+		print(target_angle)
+	## TODO !! - Make so its not a direct != sign, but a not close to equal (t_a-1 < y < t_a+1)
+	if neck.rotation.y != target_angle:
+		var rotation_lerp_weight: float = 1.0 - exp(-rotation_speed)
+		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
+	
+	## Sprite rotation code
+	if movement_vector > deadzone:
+		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
+			change_anim_state(Anim_state.WALK_BACKWARD)
+		elif neck.rotation.y > (PI/denominator ):
+			change_anim_state(Anim_state.WALK_RIGHT)
+		elif neck.rotation.y < -(PI/denominator ):
+			change_anim_state(Anim_state.WALK_LEFT)
+		else:
+			change_anim_state(Anim_state.WALK_FORWARD)
+	else:
+		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
+			change_anim_state(Anim_state.IDLE_BACKWARD)
+		elif neck.rotation.y > (PI/denominator ):
+			change_anim_state(Anim_state.IDLE_RIGHT)
+		elif neck.rotation.y < -(PI/denominator ):
+			change_anim_state(Anim_state.IDLE_LEFT)
+		else:
+			change_anim_state(Anim_state.IDLE_FORWARD)
 
 func KEY_rotate(rot: float):
 	target_angle = neck.rotation.y + (rot * (PI / 2))
@@ -417,7 +455,7 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 		is_dead = true
 		revive_area.visible = true
 		revive_area.monitoring = true
-		player_sprite.texture = sprites["dead"]
+		change_anim_state(Anim_state.DEAD)
 		velocity = Vector3.ZERO
 		is_shooting = false
 
@@ -463,7 +501,7 @@ func revive():
 	revive_area.visible = false
 	revive_area.monitoring = false
 	bar_revive.visible = false
-	player_sprite.texture = sprites["front"]
+	change_anim_state(Anim_state.IDLE_FORWARD)
 
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

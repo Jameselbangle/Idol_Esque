@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://j8ggnltygy01"]
 
 [ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_tpop7"]
-[ext_resource type="Texture2D" uid="uid://6mw85dh0i1hk" path="res://art/characters/players/test_spritesheet.png" id="2_io705"]
+[ext_resource type="Texture2D" uid="uid://6mw85dh0i1hk" path="res://art/characters/players/Stella/test_spritesheet.png" id="2_io705"]
 [ext_resource type="Shader" uid="uid://ci6kbqhc1mw3u" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="3_io705"]
 [ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
 
@@ -91,6 +91,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_vaksc"]
 resource_name = "dead"
 length = 0.1
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -108,6 +109,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_io705"]
 resource_name = "idle_back"
 length = 0.01
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -124,6 +126,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_51y0g"]
 resource_name = "idle_front"
 length = 0.01
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -140,6 +143,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_bnhpu"]
 resource_name = "idle_left"
 length = 0.01
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -156,6 +160,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_a22ng"]
 resource_name = "idle_right"
 length = 0.01
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -172,6 +177,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_m11dk"]
 resource_name = "running_back"
 length = 0.5
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -189,6 +195,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_lwu01"]
 resource_name = "running_front"
 length = 0.5
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -206,6 +213,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_2rgfs"]
 resource_name = "running_left"
 length = 0.5
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -223,6 +231,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_4uqa2"]
 resource_name = "running_right"
 length = 0.5
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false

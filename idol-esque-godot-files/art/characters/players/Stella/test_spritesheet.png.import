@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq6s7kq51i8pq"
-path.s3tc="res://.godot/imported/Stella spritesheet Placeholder.png-d86fa1f925932e443a8e12fd9a9d3b5a.s3tc.ctex"
+uid="uid://6mw85dh0i1hk"
+path.s3tc="res://.godot/imported/test_spritesheet.png-990ac2c741d93720d28a5afa8e680e49.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/characters/players/Stella/Stella spritesheet Placeholder.png"
-dest_files=["res://.godot/imported/Stella spritesheet Placeholder.png-d86fa1f925932e443a8e12fd9a9d3b5a.s3tc.ctex"]
+source_file="res://art/characters/players/Stella/test_spritesheet.png"
+dest_files=["res://.godot/imported/test_spritesheet.png-990ac2c741d93720d28a5afa8e680e49.s3tc.ctex"]
 
 [params]
 
