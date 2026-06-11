@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyym14sajk4hg"
-path="res://.godot/imported/Bee Run Placeholder.png-7c178ad861c99d58974ff9d2ec091d36.ctex"
+uid="uid://dkaivp2jiigd4"
+path="res://.godot/imported/iris_test_spritesheet.png-66d9feb39d65a57ea04b38b30f498ced.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/players/Bee/Bee Run Placeholder.png"
-dest_files=["res://.godot/imported/Bee Run Placeholder.png-7c178ad861c99d58974ff9d2ec091d36.ctex"]
+source_file="res://art/characters/players/Iris/iris_test_spritesheet.png"
+dest_files=["res://.godot/imported/iris_test_spritesheet.png-66d9feb39d65a57ea04b38b30f498ced.ctex"]
 
 [params]
 
