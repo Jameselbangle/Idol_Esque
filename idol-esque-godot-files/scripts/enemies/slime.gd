@@ -22,25 +22,36 @@ func choose_target() -> Vector3:
 	return current_target.position
 
 func choose_target_position() -> Vector3:
-	var closest_target : Vector3 = choose_target()
+	var closest_target: Vector3 = choose_target()
 	var distance = position.distance_to(closest_target)
-	var current_target = null
-	#print(distance)
+	var current_target: Vector3 = position
+
+	# move away / toward logic
 	if distance < 2:
-		var direction : Vector3  = (position - closest_target).normalized()
-		direction *= 4
-		current_target = position + direction
-	if distance > 6:
-		var direction : Vector3  = (position - closest_target).normalized()
-		direction *= 4
-		current_target = position - direction
-	
-	if current_target == null: return position
-	
+		var direction: Vector3 = (position - closest_target).normalized()
+		current_target = position + direction * 4
+	elif distance > 6:
+		var direction: Vector3 = (position - closest_target).normalized()
+		current_target = position - direction * 4
+	else:
+		current_target = position
+
+	# keep it grounded (CRITICAL FIX)
+	current_target.y = position.y
+
+	# enemy spacing avoidance
 	for e in get_tree().get_nodes_in_group("enemies"):
+		if e == self:
+			continue
+
 		if current_target.distance_to(e._navigation_agent.target_position) < enemy_spacing:
-			var perp_pos = Vector3(-current_target.z, current_target.y, current_target.x)
-			return perp_pos
+			var dir = (current_target - position).normalized()
+			var perp = Vector3(-dir.z, 0, dir.x) # proper XZ perpendicular
+
+			current_target = current_target + perp * enemy_spacing
+			current_target.y = position.y
+			return current_target
+
 	return current_target
 	
 

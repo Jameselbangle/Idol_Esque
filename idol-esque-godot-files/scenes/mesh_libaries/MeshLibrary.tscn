@@ -24,8 +24,6 @@ material = SubResource("StandardMaterial3D_a6gie")
 [sub_resource type="BoxShape3D" id="BoxShape3D_g6d3t"]
 size = Vector3(2, 0.001, 2)
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_hr568"]
-
 [sub_resource type="NavigationMesh" id="NavigationMesh_5dgej"]
 vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
 polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
@@ -263,10 +261,8 @@ mesh = SubResource("PlaneMesh_x0skc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassCentre/StaticBody3D" unique_id=855980860]
 shape = SubResource("BoxShape3D_g6d3t")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassCentre" unique_id=429713779]
-navigation_mesh = SubResource("NavigationMesh_hr568")
-
-[node name="NavigationRegion3D2" type="NavigationRegion3D" parent="GrassTiles/GrassCentre" unique_id=525268927]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassCentre" unique_id=1919685101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_5dgej")
 
 [node name="GrassLeft" type="MeshInstance3D" parent="GrassTiles" unique_id=295914199]
@@ -279,6 +275,7 @@ mesh = SubResource("PlaneMesh_l7ahu")
 shape = SubResource("BoxShape3D_nm41d")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassLeft" unique_id=2063079906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_pmkr7")
 
 [node name="GrassRight" type="MeshInstance3D" parent="GrassTiles" unique_id=757019124]
@@ -291,6 +288,7 @@ mesh = SubResource("PlaneMesh_qp35t")
 shape = SubResource("BoxShape3D_pd5p2")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassRight" unique_id=608899796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_h206g")
 
 [node name="GrassTop" type="MeshInstance3D" parent="GrassTiles" unique_id=1223753681]
@@ -303,6 +301,7 @@ mesh = SubResource("PlaneMesh_qruvw")
 shape = SubResource("BoxShape3D_fxwci")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassTop" unique_id=950370209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_s2lq4")
 
 [node name="GrassBottom" type="MeshInstance3D" parent="GrassTiles" unique_id=59809569]
@@ -315,6 +314,7 @@ mesh = SubResource("PlaneMesh_ka0ki")
 shape = SubResource("BoxShape3D_getcw")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassBottom" unique_id=1844365693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_ckus0")
 
 [node name="GrassBottomRight" type="MeshInstance3D" parent="GrassTiles" unique_id=2002191946]
@@ -327,6 +327,7 @@ mesh = SubResource("PlaneMesh_pnhew")
 shape = SubResource("BoxShape3D_uyufo")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassBottomRight" unique_id=1156929719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_begox")
 
 [node name="GrassBottomLeft" type="MeshInstance3D" parent="GrassTiles" unique_id=469961029]
@@ -339,6 +340,7 @@ mesh = SubResource("PlaneMesh_q5q3p")
 shape = SubResource("BoxShape3D_885y5")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassBottomLeft" unique_id=2056892111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_sy5cu")
 
 [node name="GrassTopLeft" type="MeshInstance3D" parent="GrassTiles" unique_id=1286771633]
@@ -351,6 +353,7 @@ mesh = SubResource("PlaneMesh_h0a4e")
 shape = SubResource("BoxShape3D_1m2c0")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassTopLeft" unique_id=1516999910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_xt1xc")
 
 [node name="GrassTopRight" type="MeshInstance3D" parent="GrassTiles" unique_id=763830801]
@@ -363,6 +366,7 @@ mesh = SubResource("PlaneMesh_wiwkt")
 shape = SubResource("BoxShape3D_2ka2r")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassTopRight" unique_id=1987019088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_qo1ig")
 
 [node name="DirtTiles" type="Node" parent="." unique_id=1012577601]
@@ -377,6 +381,7 @@ mesh = SubResource("PlaneMesh_g6d3t")
 shape = SubResource("BoxShape3D_mspdp")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtCentre" unique_id=1222137184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_20ptt")
 
 [node name="DirtLeft" type="MeshInstance3D" parent="DirtTiles" unique_id=670413483]
@@ -389,6 +394,7 @@ mesh = SubResource("PlaneMesh_hr568")
 shape = SubResource("BoxShape3D_qebje")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtLeft" unique_id=1879291871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_jcivs")
 
 [node name="DirtRight" type="MeshInstance3D" parent="DirtTiles" unique_id=1659700111]
@@ -401,6 +407,7 @@ mesh = SubResource("PlaneMesh_nm41d")
 shape = SubResource("BoxShape3D_n21e1")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtRight" unique_id=1341497729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_0v6vx")
 
 [node name="DirtTop" type="MeshInstance3D" parent="DirtTiles" unique_id=1736876057]
@@ -413,6 +420,7 @@ mesh = SubResource("PlaneMesh_pmkr7")
 shape = SubResource("BoxShape3D_1pubo")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtTop" unique_id=915348069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_1cmny")
 
 [node name="DirtBottom" type="MeshInstance3D" parent="DirtTiles" unique_id=154719612]
@@ -425,6 +433,7 @@ mesh = SubResource("PlaneMesh_pd5p2")
 shape = SubResource("BoxShape3D_bab18")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtBottom" unique_id=385531791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_vya08")
 
 [node name="DirtBottomRight" type="MeshInstance3D" parent="DirtTiles" unique_id=1133611069]
@@ -437,6 +446,7 @@ mesh = SubResource("PlaneMesh_h206g")
 shape = SubResource("BoxShape3D_t41rm")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtBottomRight" unique_id=1752134453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_iehio")
 
 [node name="DirtBottomLeft" type="MeshInstance3D" parent="DirtTiles" unique_id=323100372]
@@ -449,6 +459,7 @@ mesh = SubResource("PlaneMesh_fxwci")
 shape = SubResource("BoxShape3D_v4f0a")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtBottomLeft" unique_id=1364593584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_ffojq")
 
 [node name="DirtTopLeft" type="MeshInstance3D" parent="DirtTiles" unique_id=421613466]
@@ -461,6 +472,7 @@ mesh = SubResource("PlaneMesh_s2lq4")
 shape = SubResource("BoxShape3D_3gjdi")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtTopLeft" unique_id=1385565598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_yitda")
 
 [node name="DirtTopRight" type="MeshInstance3D" parent="DirtTiles" unique_id=1254372642]
@@ -473,4 +485,5 @@ mesh = SubResource("PlaneMesh_getcw")
 shape = SubResource("BoxShape3D_dgp4t")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtTopRight" unique_id=1303185850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 navigation_mesh = SubResource("NavigationMesh_dhkxs")

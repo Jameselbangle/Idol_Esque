@@ -1,7 +1,6 @@
 extends Enemy
 
 func choose_target() -> Vector3:
-	
 	var targets = get_tree().get_nodes_in_group("players")
 	assert(!targets.is_empty(), "'players' group is empty")
 	
@@ -20,7 +19,6 @@ func choose_target() -> Vector3:
 	return current_target.position
 
 func choose_target_position() -> Vector3:
-
 	return choose_target()
 
 func _ready() -> void:
