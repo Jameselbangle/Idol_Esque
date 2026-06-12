@@ -287,14 +287,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821, 0)
 shape = SubResource("CapsuleShape3D_io705")
 
 [node name="player_spr" type="Sprite3D" parent="." unique_id=491786671]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, 0.06862816, 0.75, -0.3)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, 0.05376807, 0.75, -0.3)
 texture = ExtResource("2_io705")
 hframes = 5
 vframes = 5
 frame = 1
 
 [node name="Shadow" type="MeshInstance3D" parent="." unique_id=934179183]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, 0.21, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, 0.2, 0)
 cast_shadow = 3
 mesh = SubResource("SphereMesh_io705")
 
@@ -383,6 +383,7 @@ shape = SubResource("CylinderShape3D_io705")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="revive_area" unique_id=1301415557]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044165134, 0)
+visible = false
 mesh = SubResource("PlaneMesh_bnhpu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=337602906]
