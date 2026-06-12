@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		for e in enemies_node.get_children():
 			e.damage(999)
 		
-		for b in get_node("/root/PlaytestRoom/bullet_manager").get_children():
+		for b in get_node("/root/PlayArtTest/bullet_manager").get_children():
 			b.explode()
 	
 	if event.is_action_pressed("revive_all"):

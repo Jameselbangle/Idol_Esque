@@ -464,7 +464,7 @@ func dead():
 	if players_reviving <= 0:
 		return
 	
-	bar_revive.value = (revive_time - revive_timer.time_left) * 33
+	bar_revive.value = (1 / revive_timer.wait_time) * (revive_time - revive_timer.time_left)
 
 func _on_revive_area_body_entered(body: Node3D) -> void:
 	if !('player' in body.name):
@@ -479,7 +479,7 @@ func _on_revive_area_body_entered(body: Node3D) -> void:
 		bar_revive.visible = true
 
 func _on_revive_area_body_exited(body: Node3D) -> void:
-	if !('player' in body.name):
+	if !body.is_in_group("players"):
 		return
 	
 	players_reviving -=1
