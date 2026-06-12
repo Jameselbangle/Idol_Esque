@@ -419,7 +419,6 @@ func look_time():
 		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
 	
 	## Sprite rotation code
-	print(movement_vector)
 	if movement_vector > deadzone:
 		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
 			change_anim_state(Anim_state.WALK_BACKWARD)
