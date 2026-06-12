@@ -5,6 +5,150 @@
 [ext_resource type="Shader" uid="uid://ci6kbqhc1mw3u" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="3_io705"]
 [ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
 
+[sub_resource type="Animation" id="Animation_io705"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_spr:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_spr:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_51y0g"]
+resource_name = "walk_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_spr:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_spr:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bnhpu"]
+resource_name = "walk_forward"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_spr:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_spr:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_a22ng"]
+resource_name = "walk_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_spr:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_spr:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_m11dk"]
+resource_name = "walk_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player_spr:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("player_spr:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51y0g"]
+_data = {
+&"RESET": SubResource("Animation_io705"),
+&"walk_back": SubResource("Animation_51y0g"),
+&"walk_forward": SubResource("Animation_bnhpu"),
+&"walk_left": SubResource("Animation_a22ng"),
+&"walk_right": SubResource("Animation_m11dk")
+}
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_io705"]
 radius = 0.3
 height = 1.604248
@@ -86,6 +230,34 @@ albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_bnhpu"]
 material = SubResource("StandardMaterial3D_51y0g")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a22ng"]
+height = 2.5
+radius = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnhpu"]
+blend_mode = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a22ng"]
+material = SubResource("StandardMaterial3D_bnhpu")
+top_radius = 6.0
+bottom_radius = 6.0
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_51y0g"]
+height = 2.5
+radius = 9.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a22ng"]
+blend_mode = 1
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m11dk"]
+material = SubResource("StandardMaterial3D_a22ng")
+top_radius = 9.0
+bottom_radius = 9.0
+height = 0.1
 
 [sub_resource type="Animation" id="Animation_2oyw2"]
 length = 0.001
@@ -282,6 +454,9 @@ dash_length_seconds = 0.2
 charge_time_seconds = 0.9
 revive_time = 2.0
 
+[node name="player_anim_player" type="AnimationPlayer" parent="." unique_id=1674663447]
+libraries/ = SubResource("AnimationLibrary_51y0g")
+
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821, 0)
 shape = SubResource("CapsuleShape3D_io705")
@@ -386,6 +561,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044165134, 0)
 visible = false
 mesh = SubResource("PlaneMesh_bnhpu")
 
+[node name="Special" type="Node3D" parent="." unique_id=43498030]
+
+[node name="delete" type="Area3D" parent="Special" unique_id=1768995993]
+collision_layer = 2
+collision_mask = 8
+
+[node name="delete_col" type="CollisionShape3D" parent="Special/delete" unique_id=1900012627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CylinderShape3D_a22ng")
+
+[node name="delete_mesh" type="MeshInstance3D" parent="Special/delete" unique_id=1978690392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+visible = false
+mesh = SubResource("CylinderMesh_a22ng")
+
+[node name="buff" type="Area3D" parent="Special" unique_id=836292579]
+collision_layer = 2
+collision_mask = 2
+
+[node name="buff_col" type="CollisionShape3D" parent="Special/buff" unique_id=1421756118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CylinderShape3D_51y0g")
+
+[node name="buff_mesh" type="MeshInstance3D" parent="Special/buff" unique_id=944399278]
+visible = false
+transparency = 0.8
+mesh = SubResource("CylinderMesh_m11dk")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=337602906]
 libraries/ = SubResource("AnimationLibrary_2oyw2")
 
@@ -397,3 +600,5 @@ libraries/ = SubResource("AnimationLibrary_2oyw2")
 [connection signal="timeout" from="special_red_flash" to="." method="_on_special_red_flash_timeout"]
 [connection signal="body_entered" from="revive_area" to="." method="_on_revive_area_body_entered"]
 [connection signal="body_exited" from="revive_area" to="." method="_on_revive_area_body_exited"]
+[connection signal="body_entered" from="Special/buff" to="." method="_on_buff_body_entered"]
+[connection signal="body_exited" from="Special/buff" to="." method="_on_buff_body_exited"]
