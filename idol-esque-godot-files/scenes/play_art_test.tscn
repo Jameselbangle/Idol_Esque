@@ -56,6 +56,8 @@ shadow_blur = 1.715
 [node name="particle_manager" type="Node" parent="." unique_id=1798723023]
 script = ExtResource("2_11x7p")
 
+[node name="Shield" type="Node" parent="." unique_id=706168801]
+
 [node name="bullet_manager" type="Node" parent="." unique_id=121080574]
 
 [node name="enemies" type="Node" parent="." unique_id=977506474]
