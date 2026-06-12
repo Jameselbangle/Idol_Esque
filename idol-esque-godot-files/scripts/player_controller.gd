@@ -314,7 +314,7 @@ func _physics_process(delta: float) -> void:
 			joy_move = Input.get_vector("left2","right2","up2","down2").normalized()
 		elif player_count == 2:
 			joy_move = Input.get_vector("left3","right3","up3","down3").normalized()
-	
+		look_time()
 	### --------------
 	
 	
@@ -419,6 +419,7 @@ func look_time():
 		neck.rotation.y = lerp_angle(neck.rotation.y, target_angle, rotation_lerp_weight)
 	
 	## Sprite rotation code
+	print(movement_vector)
 	if movement_vector > deadzone:
 		if neck.rotation.y > (num * PI/denominator ) or neck.rotation.y < -(num * PI/denominator ):
 			change_anim_state(Anim_state.WALK_BACKWARD)
