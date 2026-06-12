@@ -1,7 +1,7 @@
 [gd_resource type="BehaviorTree" format=3 uid="uid://ddca2wrqeywxs"]
 
 [ext_resource type="Script" uid="uid://biqf2nmojq8oe" path="res://ai/tasks/set_target_pos.gd" id="1_wkxx6"]
-[ext_resource type="Script" path="res://ai/tasks/stand_still.gd" id="2_08uao"]
+[ext_resource type="Script" uid="uid://dia8d2ws55uxk" path="res://ai/tasks/stand_still.gd" id="2_08uao"]
 [ext_resource type="Script" uid="uid://wx86bpmoh23u" path="res://ai/tasks/shoot_target.gd" id="2_rhiej"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_4epn5"]

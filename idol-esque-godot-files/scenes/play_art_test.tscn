@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_mk2pl"]
 [ext_resource type="PackedScene" uid="uid://c75ftsi3woasi" path="res://prefabs/lantern.tscn" id="5_w3j1i"]
 [ext_resource type="PackedScene" uid="uid://jyp13bv05d5c" path="res://prefabs/enemies/spawner.tscn" id="6_3prlv"]
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="7_70mnq"]
+[ext_resource type="Script" uid="uid://djq7afsoigixl" path="res://scripts/pause_menu.gd" id="7_70mnq"]
+[ext_resource type="Texture2D" uid="uid://cffesoq6fxlw8" path="res://art/ui/blank_button2.png" id="9_tevsk"]
 [ext_resource type="Texture2D" uid="uid://dfnh2hbmjabf4" path="res://art/ui/blank_button1.png" id="14_yvk1f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c4oot"]
@@ -66,6 +67,8 @@ script = ExtResource("2_11x7p")
 
 [node name="bullet_manager" type="Node" parent="." unique_id=121080574]
 
+[node name="enemies" type="Node" parent="." unique_id=977506474]
+
 [node name="players" type="Node" parent="." unique_id=1959000736]
 
 [node name="player_1" parent="players" unique_id=1761623861 instance=ExtResource("3_mk2pl")]
@@ -103,7 +106,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_70mnq")
 
-[node name="TextureRect" type="TextureRect" parent="PauseMenu" unique_id=710240621]
+[node name="PauseText" type="TextureRect" parent="PauseMenu" unique_id=710240621]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -118,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_yvk1f")
 
-[node name="PauseText" type="Label" parent="PauseMenu/TextureRect" unique_id=2138698843]
+[node name="PauseText" type="Label" parent="PauseMenu/PauseText" unique_id=2138698843]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -140,4 +143,134 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="enemies" type="Node" parent="." unique_id=977506474]
+[node name="Movement" type="TextureRect" parent="PauseMenu" unique_id=2091602001]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -140.0
+offset_right = 512.0
+grow_vertical = 0
+texture = ExtResource("14_yvk1f")
+
+[node name="Controls" type="Label" parent="PauseMenu/Movement" unique_id=1068463464]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -49.25
+offset_right = 164.0
+offset_bottom = 49.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Movement
+WASD - IJKL - ←↑↓→"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Dash" type="TextureRect" parent="PauseMenu" unique_id=1147002603]
+layout_mode = 1
+offset_right = 512.0
+offset_bottom = 140.0
+texture = ExtResource("14_yvk1f")
+
+[node name="Controls" type="Label" parent="PauseMenu/Dash" unique_id=2073810216]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -49.25
+offset_right = 164.0
+offset_bottom = 49.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Dashing
+z - Gamepad Face Buttons"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Shooting" type="TextureRect" parent="PauseMenu" unique_id=1955365514]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -140.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("9_tevsk")
+
+[node name="Controls" type="Label" parent="PauseMenu/Shooting" unique_id=1128844013]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -49.25
+offset_right = 164.0
+offset_bottom = 49.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Shooting
+C - Space - Left Alt
+Shoulder Bumpers"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Charge" type="TextureRect" parent="PauseMenu" unique_id=112130344]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -512.0
+offset_bottom = 140.0
+grow_horizontal = 0
+texture = ExtResource("9_tevsk")
+
+[node name="Controls" type="Label" parent="PauseMenu/Charge" unique_id=738874618]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -49.25
+offset_right = 164.0
+offset_bottom = 49.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Charge Shot
+X - Shoulder Buttons"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
