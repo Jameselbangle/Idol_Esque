@@ -206,6 +206,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_released("charge_fire") and event.device == player_count and is_charging:
 		charge_shot_fire()
 	
+	## Special abilities
 	if event.is_action_pressed("special_fire") and event.device == player_count:
 		match player_colour:
 			
@@ -230,9 +231,16 @@ func _unhandled_input(event: InputEvent) -> void:
 				
 				## Shield to block bullets (has set hp)
 				var shield = player_shield.instantiate()
+				var shield_scene = get_tree().current_scene.get_node("Shield")
 				shield.setup(shield_count, global_position, shield_health)
 				shield_count += 1
-				get_tree().current_scene.get_node("bullet_manager").add_child(shield)
+				
+				for s in shield_scene.get_children():
+					s.queue_free()
+				
+				shield_scene.add_child(shield)
+				
+				
 				
 				special_attack_recharge()
 			
@@ -244,6 +252,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				for body in $Special/buff.get_overlapping_bodies():
 					body.stats_buff()
 				
+				
+				change_anim_state(Anim_state.IDLE_FORWARD)
 				$Special/buff/buff_mesh.visible = true
 	
 	if event.is_action_released("special_fire") and event.device == player_count:
@@ -266,7 +276,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.get_joy_axis(player_count, JOY_AXIS_LEFT_Y)
 	)
 	
-	
+	if is_buffing:
+		return
 	
 	## rotation
 	#joy_look = Input.get_vector("left_look","right_look","up_look","down_look")
