@@ -69,7 +69,6 @@ var shield_count : int = 0
 @onready var sound_shoot : AudioStreamPlayer = $Sounds/sound_shoot
 @onready var sound_charging : AudioStreamPlayer = $Sounds/sound_charging
 @onready var sound_charge_shot : AudioStreamPlayer = $Sounds/sound_charge_shot
-@onready var sound_reviving : AudioStreamPlayer = $Sounds/sound_reviving
 @onready var sound_revive : AudioStreamPlayer = $Sounds/sound_revive
 @onready var sound_hit : AudioStreamPlayer = $Sounds/sound_hit
 
