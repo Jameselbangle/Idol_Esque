@@ -278,7 +278,6 @@ _data = {
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_tpop7")
-base_slipperyness_lerp = 1.0
 dash_length_seconds = 0.2
 charge_time_seconds = 0.9
 revive_time = 2.0

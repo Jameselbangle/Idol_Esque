@@ -373,6 +373,7 @@ func shoot():
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
 
+
 func _on_fire_rate_timeout() -> void:
 	if is_shooting and !is_charging:
 		shoot()
