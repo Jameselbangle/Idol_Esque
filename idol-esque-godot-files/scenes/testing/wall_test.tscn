@@ -112,7 +112,7 @@ alpha_cut = 1
 texture = ExtResource("11_iwdf3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall/LeftWalls" unique_id=1548254680]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2301235, -2.1753488, 0)
+transform = Transform3D(0.9683483, 0, -0.24960265, 0, 1, 0, 0.24960265, 0, 0.9683483, -1.3505793, -2.1753488, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/LeftWalls/StaticBody3D" unique_id=737465120]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0880432)
@@ -157,10 +157,10 @@ alpha_cut = 1
 texture = ExtResource("12_1dtc0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall/RightWalls" unique_id=1009626167]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2759647, -2.1753488, 0)
+transform = Transform3D(0.9801502, 0, 0.19825612, 0, 1, 0, -0.19825612, 0, 0.9801502, 0.95713806, -2.1753488, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/RightWalls/StaticBody3D" unique_id=1972017659]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.28315735)
+transform = Transform3D(1, 0, -1.4901161e-08, 0, 1, 0, 1.4901161e-08, 0, 1, 0.5483031, 0, 0.39406335)
 shape = SubResource("BoxShape3D_42gu6")
 
 [node name="Enviromental Assets" type="Node3D" parent="." unique_id=1837008775]
