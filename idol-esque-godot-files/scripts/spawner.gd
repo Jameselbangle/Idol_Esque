@@ -6,11 +6,16 @@ var mandrake := preload("res://prefabs/enemies/mandrake.tscn")
 @export var switch : bool = false
 @export var enemies_node : Node
 @export var players_node : Node
+var no_shield : bool = false
 
 var time : float = 5
 
 func _process(delta: float) -> void:
 	time -= delta
+	
+	if Input.is_action_just_pressed("ShieldsOff"):
+		no_shield = !no_shield
+		print(no_shield)
 	
 	if time <= 0:
 		var instance
@@ -20,19 +25,23 @@ func _process(delta: float) -> void:
 		else:
 			instance = mandrake.instantiate()
 		var rng = RandomNumberGenerator.new()
-		match rng.randi_range(1, 6):
-			1:
-				instance.set_shield(BulletConfig.BulletColour.RED)
-			2:
-				instance.set_shield(BulletConfig.BulletColour.BLUE)
-			3:
-				instance.set_shield(BulletConfig.BulletColour.YELLOW)
-			4:
-				pass
-			5:
-				pass
-			6:
-				pass
+		
+		if not no_shield:
+			match rng.randi_range(1, 6):
+				1:
+					instance.set_shield(BulletConfig.BulletColour.RED)
+				2:
+					instance.set_shield(BulletConfig.BulletColour.BLUE)
+				3:
+					instance.set_shield(BulletConfig.BulletColour.YELLOW)
+				4:
+					pass
+				5:
+					pass
+				6:
+					pass
+		else:
+			instance.set_shield(BulletConfig.BulletColour.ENEMY)
 
 		instance.global_transform = global_transform
 		enemies_node.add_child(instance)
