@@ -7,11 +7,42 @@ var mandrake := preload("res://prefabs/enemies/mandrake.tscn")
 @export var enemies_node : Node
 @export var players_node : Node
 
+var time : float = 5
+
+func _process(delta: float) -> void:
+	time -= delta
+	
+	if time <= 0:
+		var instance
+		var random_bool: bool = randi() % 2 == 0
+		if random_bool:
+			instance = slime.instantiate()
+		else:
+			instance = mandrake.instantiate()
+		var rng = RandomNumberGenerator.new()
+		match rng.randi_range(1, 6):
+			1:
+				instance.set_shield(BulletConfig.BulletColour.RED)
+			2:
+				instance.set_shield(BulletConfig.BulletColour.BLUE)
+			3:
+				instance.set_shield(BulletConfig.BulletColour.YELLOW)
+			4:
+				pass
+			5:
+				pass
+			6:
+				pass
+
+		instance.global_transform = global_transform
+		enemies_node.add_child(instance)
+		time = 15
+
 func _unhandled_input(event: InputEvent) -> void:
 	var instance
 	
 	if event.is_action_pressed("spawn_1"):
-		instance = slime.instantiate() #mandrake.instantiate() if switch else slime.instantiate()
+		instance = slime.instantiate()
 	
 	if event.is_action_pressed("spawn_2"):
 		instance = slime.instantiate() if switch else mandrake.instantiate()
