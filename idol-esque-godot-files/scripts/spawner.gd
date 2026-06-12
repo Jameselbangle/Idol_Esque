@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 
 		instance.global_transform = global_transform
 		enemies_node.add_child(instance)
-		time = 15
+		time = 8
 
 func _unhandled_input(event: InputEvent) -> void:
 	var instance
