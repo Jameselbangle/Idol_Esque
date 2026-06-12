@@ -66,6 +66,13 @@ var shield_count : int = 0
 
 @onready var revive_area : Area3D = $revive_area
 
+@onready var sound_shoot : AudioStreamPlayer = $Sounds/sound_shoot
+@onready var sound_charging : AudioStreamPlayer = $Sounds/sound_charging
+@onready var sound_charge_shot : AudioStreamPlayer = $Sounds/sound_charge_shot
+@onready var sound_reviving : AudioStreamPlayer = $Sounds/sound_reviving
+@onready var sound_revive : AudioStreamPlayer = $Sounds/sound_revive
+@onready var sound_hit : AudioStreamPlayer = $Sounds/sound_hit
+
 var players_reviving : int = 0
 
 var joy_move : Vector2
@@ -457,6 +464,9 @@ func shoot():
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
+	
+	#sound_shoot.pitch_scale = randf_range(0.8, 1.5)
+	sound_shoot.play()
 
 
 func _on_fire_rate_timeout() -> void:
@@ -470,11 +480,13 @@ func charge_shot_charge():
 	bar_charging.visible = true
 	pointer.scale.z = 0
 	pointer.visible = true
+	sound_charging.play()
 
 func charge_shot_fire():
 	## Allows for a 1/5 allowance (e.g. since charge time is 1s, if its been .9s you can shoot anyway)
 	if charge_rate_timer.time_left <= (0.2) * charge_time_seconds:
 		charge_shoot()
+	sound_charging.stop()
 	is_charging = false
 	bar_charging.visible = false
 	pointer.visible = false
@@ -497,6 +509,9 @@ func charge_shoot():
 	var bullet = bulletScene.instantiate()
 	bullet.setup(config, spawn_pos)
 	get_tree().current_scene.get_node("bullet_manager").add_child(bullet)
+	
+	#sound_charge_shot.pitch_scale = randf_range(0.8, 1.2)
+	sound_charge_shot.play()
 
 
 ## Dash begin
@@ -533,6 +548,9 @@ func damage(hit : int, _bullet_config : BulletConfig = null):
 	if god_mode: return
 	
 	health -= hit
+	
+	#sound_hit.pitch_scale = randf_range(0.8, 1.5)
+	sound_hit.play()
 	
 	## Add death command
 	if health <= 0:
@@ -587,6 +605,8 @@ func revive():
 	revive_area.monitoring = false
 	bar_revive.visible = false
 	change_anim_state(Anim_state.IDLE_FORWARD)
+	
+	sound_revive.play()
 
 
 func _on_special_red_flash_timeout() -> void:

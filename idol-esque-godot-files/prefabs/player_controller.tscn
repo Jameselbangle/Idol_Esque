@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://j8ggnltygy01"]
 
 [ext_resource type="Script" uid="uid://bsglso6fl7hrn" path="res://scripts/player_controller.gd" id="1_tpop7"]
+[ext_resource type="AudioStream" uid="uid://dqdnk4x606rkh" path="res://art/sound/Shoot3.wav" id="2_51y0g"]
 [ext_resource type="Texture2D" uid="uid://6mw85dh0i1hk" path="res://art/characters/players/Stella/test_spritesheet.png" id="2_io705"]
+[ext_resource type="AudioStream" uid="uid://kqis4egw3ql4" path="res://art/sound/charge.wav" id="3_a22ng"]
 [ext_resource type="Shader" uid="uid://ci6kbqhc1mw3u" path="res://addons/progress_bar_3d/progress_bar_3d_unshaded_no_shadows_no_depth_test.gdshader" id="3_io705"]
 [ext_resource type="Script" uid="uid://dmrc357wou0bo" path="res://addons/progress_bar_3d/progress_bar_3d.gd" id="4_51y0g"]
+[ext_resource type="AudioStream" uid="uid://bm3di2yjwwu1m" path="res://art/sound/charge_shoot.wav" id="4_m11dk"]
+[ext_resource type="AudioStream" uid="uid://colm3kkpebf2d" path="res://art/sound/revive10.wav" id="5_m11dk"]
+[ext_resource type="AudioStream" uid="uid://dnr03jrgqngsk" path="res://art/sound/hit.wav" id="6_lwu01"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_io705"]
 radius = 0.3
@@ -308,7 +313,26 @@ collision_mask = 7
 script = ExtResource("1_tpop7")
 dash_length_seconds = 0.2
 charge_time_seconds = 0.9
+firerate = 0.353
+chargerate = 0.706
 revive_time = 2.0
+
+[node name="Sounds" type="Node" parent="." unique_id=2025231449]
+
+[node name="sound_shoot" type="AudioStreamPlayer" parent="Sounds" unique_id=156084345]
+stream = ExtResource("2_51y0g")
+
+[node name="sound_charging" type="AudioStreamPlayer" parent="Sounds" unique_id=1584357285]
+stream = ExtResource("3_a22ng")
+
+[node name="sound_charge_shot" type="AudioStreamPlayer" parent="Sounds" unique_id=1326444153]
+stream = ExtResource("4_m11dk")
+
+[node name="sound_revive" type="AudioStreamPlayer" parent="Sounds" unique_id=1071117728]
+stream = ExtResource("5_m11dk")
+
+[node name="sound_hit" type="AudioStreamPlayer" parent="Sounds" unique_id=325500465]
+stream = ExtResource("6_lwu01")
 
 [node name="player_col" type="CollisionShape3D" parent="." unique_id=587024000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821, 0)
