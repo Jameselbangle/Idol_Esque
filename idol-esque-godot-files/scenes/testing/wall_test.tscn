@@ -1,0 +1,223 @@
+[gd_scene format=3 uid="uid://bv37w7clm8bxg"]
+
+[ext_resource type="Texture2D" uid="uid://dthfmrs3vtyo6" path="res://art/environment/environment_objects/Rock_4.png" id="1_1proe"]
+[ext_resource type="Texture2D" uid="uid://by5qv6mpkh7xr" path="res://art/environment/environment_objects/Rock_2.png" id="2_iwdf3"]
+[ext_resource type="Texture2D" uid="uid://cnbtpyqgsieu4" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_2.png" id="10_1proe"]
+[ext_resource type="Texture2D" uid="uid://ckd0gr7drogbg" path="res://art/environment/environment_objects/FlowersSet1.png" id="11_1dtc0"]
+[ext_resource type="Texture2D" uid="uid://u0us4e61wgg3" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_1.png" id="11_iwdf3"]
+[ext_resource type="Texture2D" uid="uid://cljxtxji3ou5p" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_2.png" id="12_1dtc0"]
+[ext_resource type="Texture2D" uid="uid://ncuksnspqpcw" path="res://art/environment/environment_objects/FlowersSmall.png" id="12_02jf8"]
+[ext_resource type="Texture2D" uid="uid://bruw0usmbbobs" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_1.png" id="13_02jf8"]
+[ext_resource type="Texture2D" uid="uid://c367vuw6eu3sd" path="res://art/environment/environment_objects/MushroomsMedium.png" id="13_vfyrs"]
+[ext_resource type="Texture2D" uid="uid://daxgfhelngmos" path="res://art/environment/environment_objects/CloversSmall.png" id="14_8uyel"]
+[ext_resource type="Texture2D" uid="uid://dkvgm414j7ncx" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Left_Test_3.png" id="15_1proe"]
+[ext_resource type="Texture2D" uid="uid://ccjtxwtc83tmp" path="res://art/environment/environment_objects/CloversSecretTile.png" id="15_42p50"]
+[ext_resource type="MeshLibrary" uid="uid://8gekicof3fi4" path="res://MeshLibrary.tres" id="16_1dtc0"]
+[ext_resource type="Texture2D" uid="uid://qd6taklp4wjm" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Right_Test_3.png" id="16_iwdf3"]
+[ext_resource type="Texture2D" uid="uid://bkpfj3gcrx174" path="res://art/environment/environment_objects/CloversSet1.png" id="16_vmluw"]
+[ext_resource type="Texture2D" uid="uid://que6pdv7sf2p" path="res://art/environment/walls/overgrown_walls/Wall_Rework_Back_Test.png" id="17_1dtc0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1dtc0"]
+size = Vector3(1.9194946, 1.0650024, 0.17541504)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iwdf3"]
+size = Vector3(1.7472839, 1.1611328, 0.25598145)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qppmk"]
+size = Vector3(12.540146, 3.157959, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42gu6"]
+size = Vector3(1, 1.9111328, 15.202972)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_02jf8"]
+size = Vector3(23.409058, 1.6658936, 1)
+
+[node name="WallTest" type="Node3D" unique_id=294609644]
+
+[node name="Rock_Front" type="Sprite3D" parent="." unique_id=1874873032]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, 2.6463275, 1.5905269, 4.782977)
+alpha_cut = 1
+texture = ExtResource("1_1proe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Rock_Front" unique_id=231949874]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock_Front/StaticBody3D" unique_id=2093676163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05050659, -0.21792746, 0.0055556297)
+shape = SubResource("BoxShape3D_1dtc0")
+
+[node name="Rock_Mid" type="Sprite3D" parent="." unique_id=557936902]
+transform = Transform3D(1.0176072, 0, 0, 0, 0.819152, 0.5735764, 0, -0.5735764, 0.819152, -2.4483154, 1.4537724, 2.1437368)
+alpha_cut = 1
+texture = ExtResource("2_iwdf3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Rock_Mid" unique_id=698412750]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock_Mid/StaticBody3D" unique_id=275136329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019577026, -0.08056569, -0.00469923)
+shape = SubResource("BoxShape3D_iwdf3")
+
+[node name="Wall_Back" type="Sprite3D" parent="." unique_id=548450781]
+transform = Transform3D(1.9468389, 0, 0, 0, 1.228728, 0.8603647, 0, -0.8603647, 1.228728, 0.22598648, 3.465681, -3.7162023)
+cast_shadow = 0
+pixel_size = 0.0035
+alpha_cut = 1
+texture = ExtResource("17_1dtc0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall_Back" unique_id=1891139942]
+transform = Transform3D(1, 0, 0, 0, 0.8660257, -0.49999997, 0, 0.49999997, 0.8660257, 0, -0.42138457, 0.60591805)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_Back/StaticBody3D" unique_id=425477782]
+transform = Transform3D(1, 0, 0, 0, 1.0000005, 0, 0, 0, 1.0000005, 0, 0, 0)
+shape = SubResource("BoxShape3D_qppmk")
+
+[node name="Wall" type="Node3D" parent="." unique_id=2111848478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.885, 0)
+
+[node name="LeftWalls" type="Node3D" parent="Wall" unique_id=1353343739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="Left_1" type="Sprite3D" parent="Wall/LeftWalls" unique_id=1227688899]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.2479057, 0, -1.9943457)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("10_1proe")
+
+[node name="Left_2" type="Sprite3D" parent="Wall/LeftWalls" unique_id=30208607]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.032095, -0.30259228, -0.32624936)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("15_1proe")
+
+[node name="Left_3" type="Sprite3D" parent="Wall/LeftWalls" unique_id=1088252299]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -3.9843621, 0, 1.4139538)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("11_iwdf3")
+
+[node name="Left_4" type="Sprite3D" parent="Wall/LeftWalls" unique_id=639174111]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -2.5023365, -0.38085508, 3.5333316)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("15_1proe")
+
+[node name="Left_5" type="Sprite3D" parent="Wall/LeftWalls" unique_id=1026143278]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -5.0413346, 0, 3.935193)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("11_iwdf3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall/LeftWalls" unique_id=1548254680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2301235, -2.1753488, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/LeftWalls/StaticBody3D" unique_id=737465120]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0880432)
+shape = SubResource("BoxShape3D_42gu6")
+
+[node name="RightWalls" type="Node3D" parent="Wall" unique_id=358064331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Right_1" type="Sprite3D" parent="Wall/RightWalls" unique_id=1776457659]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 4.5251126, 0, -2.5424988)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("13_02jf8")
+
+[node name="Right_3" type="Sprite3D" parent="Wall/RightWalls" unique_id=1818002632]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 4.9736905, 0, 1.3674219)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("12_1dtc0")
+
+[node name="Right_2" type="Sprite3D" parent="Wall/RightWalls" unique_id=812128606]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 3.3757653, -0.46702027, 0.1485846)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("16_iwdf3")
+
+[node name="Right_4" type="Sprite3D" parent="Wall/RightWalls" unique_id=699484672]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 3.5412002, -0.5091443, 3.1853323)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("16_iwdf3")
+
+[node name="Right_5" type="Sprite3D" parent="Wall/RightWalls" unique_id=458831173]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 5.471749, 0, 3.820283)
+cast_shadow = 0
+pixel_size = 0.007
+alpha_cut = 1
+texture = ExtResource("12_1dtc0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall/RightWalls" unique_id=1009626167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2759647, -2.1753488, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/RightWalls/StaticBody3D" unique_id=1972017659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.28315735)
+shape = SubResource("BoxShape3D_42gu6")
+
+[node name="Enviromental Assets" type="Node3D" parent="." unique_id=1837008775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92880213, 0)
+
+[node name="BlueFlower1" type="Sprite3D" parent="Enviromental Assets" unique_id=1460709204]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660255, 0, -0.8660255, 0.5, -1.3554438, 0.42617667, 1.9446876)
+pixel_size = 0.005
+texture = ExtResource("11_1dtc0")
+
+[node name="BlueFlower2" type="Sprite3D" parent="Enviromental Assets" unique_id=120127471]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 1.4858143, 0.3081901, 4.9296074)
+pixel_size = 0.005
+texture = ExtResource("12_02jf8")
+
+[node name="Mushrooms" type="Sprite3D" parent="Enviromental Assets" unique_id=1357942533]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.49999997, 0, -0.49999997, 0.86602545, 3.0971813, 0.30494726, 1.941974)
+pixel_size = 0.005
+texture = ExtResource("13_vfyrs")
+
+[node name="MushroomShadow2" type="Sprite3D" parent="Enviromental Assets/Mushrooms" unique_id=653180702]
+transform = Transform3D(1.0750002, 0, 0, 0, 0.73441136, 0.84663016, 0, -1.1683497, 0.53218216, 0.054190874, -0.029187705, -0.44882447)
+modulate = Color(0, 0, 0, 0.63529414)
+pixel_size = 0.005
+texture = ExtResource("13_vfyrs")
+
+[node name="Clove1" type="Sprite3D" parent="Enviromental Assets" unique_id=1189253858]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0.069506645, 0.38920712, 3.467988)
+pixel_size = 0.005
+texture = ExtResource("14_8uyel")
+
+[node name="Clove2" type="Sprite3D" parent="Enviromental Assets" unique_id=1332373447]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -3.8914642, 0.26823354, 2.0785775)
+pixel_size = 0.0075
+texture = ExtResource("14_8uyel")
+
+[node name="Clove3" type="Sprite3D" parent="Enviromental Assets" unique_id=304728096]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, -4.2758284, 0.32324457, 5.1769943)
+pixel_size = 0.005
+texture = ExtResource("15_42p50")
+
+[node name="Clove4" type="Sprite3D" parent="Enviromental Assets" unique_id=724870733]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.8660254, 0, -0.8660254, 0.5, 4.6217575, 0.45596576, 3.1621485)
+pixel_size = 0.005
+texture = ExtResource("16_vmluw")
+
+[node name="GridMap" type="GridMap" parent="." unique_id=501410539]
+mesh_library = ExtResource("16_1dtc0")
+bake_navigation = true
+data = {
+"cells": PackedInt32Array(11, 65535, 786441, 65530, 65535, 9, 65530, 0, 9, 65530, 1, 9, 65530, 2, 9, 65530, 3, 9, 65531, 65535, 9, 65531, 0, 9, 65531, 1, 9, 65531, 2, 9, 65531, 3, 9, 65532, 65535, 9, 65532, 0, 9, 65532, 1, 9, 65532, 2, 9, 65532, 3, 9, 65533, 65535, 9, 65533, 0, 7, 65533, 1, 1, 65533, 2, 6, 65533, 3, 9, 65534, 65535, 9, 65534, 0, 3, 65534, 1, 0, 65534, 2, 4, 65534, 3, 9, 65535, 65535, 9, 65535, 0, 3, 65535, 1, 0, 65535, 2, 4, 65535, 3, 9, 0, 65535, 9, 0, 0, 3, 0, 1, 0, 0, 2, 4, 0, 3, 9, 1, 65535, 9, 1, 0, 3, 1, 1, 0, 1, 2, 4, 1, 3, 9, 2, 65535, 9, 2, 0, 8, 2, 1, 2, 2, 2, 5, 2, 3, 9, 3, 65535, 9, 3, 0, 9, 3, 1, 9, 3, 2, 9, 3, 3, 9, 4, 65535, 9, 4, 0, 9, 4, 1, 9, 4, 2, 9, 4, 3, 9, 5, 65535, 9, 5, 0, 9, 5, 1, 9, 5, 2, 9, 5, 3, 9)
+}
+metadata/_editor_floor_ = Vector3(0, -3, 0)
+
+[node name="FrontBoundary" type="StaticBody3D" parent="." unique_id=1592074074]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4270157, 7.832485)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrontBoundary" unique_id=1628129959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007507324, 0.33294678, 0)
+shape = SubResource("BoxShape3D_02jf8")

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://8wvjw3f7k62b"]
+
+[ext_resource type="Script" uid="uid://bc55y130t2h4t" path="res://prefabs/particles/particle.gd" id="1_68do3"]
+[ext_resource type="Texture2D" uid="uid://5dlimnbqglww" path="res://art/characters/bullets/green_slime_splat.png" id="1_f8ueg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mfsy"]
+transparency = 1
+albedo_texture = ExtResource("1_f8ueg")
+backlight_enabled = true
+backlight = Color(0.8089983, 0.8089983, 0.80899817, 1)
+uv1_offset = Vector3(1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5770o"]
+material = SubResource("StandardMaterial3D_8mfsy")
+size = Vector2(0.75, 0.75)
+
+[sub_resource type="Curve" id="Curve_ym27p"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_73ydi"]
+_data = [Vector2(0, 0.65625), 0.0, 0.0, 0, 0, Vector2(0.3081571, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Mandrake_particle" type="CPUParticles3D" unique_id=1991056628]
+transform = Transform3D(0.9897199, 0.06894628, -0.12530303, -0.12443537, -0.016755773, -0.99208623, -0.0705002, 0.99747974, -0.008004166, 0, 0.7067132, 0)
+emitting = false
+amount = 12
+lifetime = 0.4
+one_shot = true
+speed_scale = 0.6
+explosiveness = 1.0
+randomness = 0.65
+lifetime_randomness = 0.19
+mesh = SubResource("PlaneMesh_5770o")
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+gravity = Vector3(0, -3, 0)
+initial_velocity_max = 9.0
+angular_velocity_min = -720.0
+angular_velocity_max = -297.15
+angular_velocity_curve = SubResource("Curve_ym27p")
+scale_amount_min = 0.75
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_73ydi")
+script = ExtResource("1_68do3")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

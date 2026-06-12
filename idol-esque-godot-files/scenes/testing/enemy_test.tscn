@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://pdahav4akuvt"]
 
-[ext_resource type="PackedScene" uid="uid://co7jmjwp5sh5s" path="res://prefabs/enemies/slime.tscn" id="1_44dbt"]
+[ext_resource type="PackedScene" uid="uid://dxlobb1sm4bde" path="res://prefabs/enemies/mandrake.tscn" id="2_q02w0"]
 [ext_resource type="PackedScene" uid="uid://j8ggnltygy01" path="res://prefabs/player_controller.tscn" id="3_wtxvo"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ysrml"]
@@ -88,10 +88,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5
 
 [node name="player_controller" parent="." unique_id=1761623861 instance=ExtResource("3_wtxvo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008675337, 0.7036226, 3.269239)
+player_colour = 1
 god_mode = true
 
-[node name="Slime" parent="." unique_id=454864309 instance=ExtResource("1_44dbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5132136, 0.99407697, -1.6658354)
-
-[node name="Slime2" parent="." unique_id=692904464 instance=ExtResource("1_44dbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8594446, 0.99407697, -1.6658354)
+[node name="Mandrake" parent="." unique_id=1050916115 instance=ExtResource("2_q02w0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9334083, 1.1010407, -0.9330673)
+_movement_speed = 2.0

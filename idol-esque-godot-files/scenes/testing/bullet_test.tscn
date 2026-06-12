@@ -72,10 +72,12 @@ _bullet_scene = ExtResource("2_87sy2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="NavigationRegion3D/Tester" unique_id=736325986]
 
+[node name="BulletSpawn" type="Marker3D" parent="NavigationRegion3D/Tester" unique_id=1234865329]
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=541020554]
 transform = Transform3D(1, 0, 0, 0, 0.53256613, 0.84638846, 0, -0.84638846, 0.53256613, 0, 6.5414925, 5.27748)
 
-[node name="BulletManager" type="Node" parent="." unique_id=800795356]
+[node name="bullet_manager" type="Node" parent="." unique_id=800795356]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1184840555]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)

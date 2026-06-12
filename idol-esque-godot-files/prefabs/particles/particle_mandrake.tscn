@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://bhpxvkhx7xfsd"]
 
+[ext_resource type="Texture2D" uid="uid://cknquevf87nt4" path="res://art/characters/bullets/Mandrake_splat.png" id="1_6dqg2"]
 [ext_resource type="Script" uid="uid://bc55y130t2h4t" path="res://prefabs/particles/particle.gd" id="1_vx2y2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_got8t"]
-albedo_color = Color(0.926936, 0.49898404, 0.7939966, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trqry"]
+transparency = 1
+albedo_texture = ExtResource("1_6dqg2")
+backlight_enabled = true
+backlight = Color(0.19315353, 0.19315353, 0.19315353, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kkj6c"]
-material = SubResource("StandardMaterial3D_got8t")
-size = Vector2(0.5, 0.5)
+material = SubResource("StandardMaterial3D_trqry")
+size = Vector2(0.75, 0.75)
 
 [sub_resource type="Curve" id="Curve_73ydi"]
 _data = [Vector2(0, 0.65625), 0.0, 0.0, 0, 0, Vector2(0.3081571, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

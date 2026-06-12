@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dwqe8xn8i664d"]
+
+[ext_resource type="Texture2D" uid="uid://chw1orhe2neqw" path="res://art/characters/bullets/Bullet.png" id="1_tt5l4"]
+
+[node name="PlayerHealth" type="HBoxContainer" unique_id=128702165]
+offset_right = 150.0
+offset_bottom = 49.0
+theme_override_constants/separation = 4
+
+[node name="Heart" type="TextureRect" parent="." unique_id=1393120180]
+layout_mode = 2
+texture = ExtResource("1_tt5l4")
+expand_mode = 3
+
+[node name="Heart2" type="TextureRect" parent="." unique_id=508349602]
+layout_mode = 2
+texture = ExtResource("1_tt5l4")
+expand_mode = 3
+
+[node name="Heart3" type="TextureRect" parent="." unique_id=2104516586]
+layout_mode = 2
+texture = ExtResource("1_tt5l4")
+expand_mode = 3

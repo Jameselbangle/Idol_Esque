@@ -1,12 +1,17 @@
 extends Node
 
 var Particles = {
+
 	"mandrake" : preload("res://prefabs/particles/particle_mandrake.tscn"), ## Mandrake
+	"slime" : preload("res://prefabs/particles/particle_ult.tscn")
 	## New particles here...
 }
 
 func _ready() -> void:
-	GlobalSignals.connect("create_particles", Callable(self, "create_particles"))
+	if GlobalSignals:
+		GlobalSignals.connect("create_particles", Callable(self, "create_particles"))
+	else:
+		push_error("GlobalSignals autoload not found!")
 
 func create_particles(Pname, Pposition):
 	

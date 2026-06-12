@@ -1,0 +1,489 @@
+[gd_scene format=3 uid="uid://cmdpk7hufauhx"]
+
+[ext_resource type="Texture2D" uid="uid://dqp4f7ispsmd3" path="res://art/environment/floor_tiles/grass/GrassTile.png" id="1_5dgej"]
+[ext_resource type="Texture2D" uid="uid://dk0udtxrer44t" path="res://art/environment/floor_tiles/dirt-grass/GrassDirtLeftTile.png" id="2_dhkxs"]
+[ext_resource type="Texture2D" uid="uid://wt5af3o12857" path="res://art/environment/floor_tiles/dirt-grass/GrassDirtRightTile.png" id="3_vmiov"]
+[ext_resource type="Texture2D" uid="uid://bivlolyfu6dw6" path="res://art/environment/floor_tiles/dirt-grass/GrassDirtTopTile.png" id="4_nlhfr"]
+[ext_resource type="Texture2D" uid="uid://bllw6a1hf5a7m" path="res://art/environment/floor_tiles/dirt-grass/GrassDirtBottomTile.png" id="5_juqxj"]
+[ext_resource type="Texture2D" uid="uid://dxu63b7ylv023" path="res://art/environment/floor_tiles/grass/GrassTopLeftTile.png" id="6_stq4j"]
+[ext_resource type="Texture2D" uid="uid://cgvhscexp0b8n" path="res://art/environment/floor_tiles/grass/GrassTopRightTile.png" id="7_ysxpx"]
+[ext_resource type="Texture2D" uid="uid://dw1gxwkgcpqnt" path="res://art/environment/floor_tiles/grass/FloorTile_1.png" id="8_toh84"]
+[ext_resource type="Texture2D" uid="uid://whxg6h6sdfae" path="res://art/environment/floor_tiles/grass/GrassBottomLeftTile.png" id="9_yvl2l"]
+[ext_resource type="Texture2D" uid="uid://djgr4lh2qytmh" path="res://art/environment/floor_tiles/dirt/DirtTile.png" id="10_kjqjo"]
+[ext_resource type="Texture2D" uid="uid://b85canxpalbr0" path="res://art/environment/floor_tiles/dirt/DirtTopLeftTile.png" id="11_p5djr"]
+[ext_resource type="Texture2D" uid="uid://cpf24m2hrnk2s" path="res://art/environment/floor_tiles/dirt/DirtTopRightTile.png" id="12_8n5fk"]
+[ext_resource type="Texture2D" uid="uid://da6bbq8of3w3d" path="res://art/environment/floor_tiles/dirt/DirtBottomRightTile.png" id="13_52c0m"]
+[ext_resource type="Texture2D" uid="uid://bi4u012cjjxxb" path="res://art/environment/floor_tiles/dirt/DirtBottomLeftTile.png" id="14_2gt41"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6gie"]
+albedo_texture = ExtResource("1_5dgej")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x0skc"]
+material = SubResource("StandardMaterial3D_a6gie")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g6d3t"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_5dgej"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wiwkt"]
+albedo_texture = ExtResource("2_dhkxs")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l7ahu"]
+material = SubResource("StandardMaterial3D_wiwkt")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nm41d"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_pmkr7"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6d3t"]
+albedo_texture = ExtResource("3_vmiov")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qp35t"]
+material = SubResource("StandardMaterial3D_g6d3t")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pd5p2"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_h206g"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hr568"]
+albedo_texture = ExtResource("4_nlhfr")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qruvw"]
+material = SubResource("StandardMaterial3D_hr568")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fxwci"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_s2lq4"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nm41d"]
+albedo_texture = ExtResource("5_juqxj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ka0ki"]
+material = SubResource("StandardMaterial3D_nm41d")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_getcw"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ckus0"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmkr7"]
+albedo_texture = ExtResource("6_stq4j")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pnhew"]
+material = SubResource("StandardMaterial3D_pmkr7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uyufo"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_begox"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pd5p2"]
+albedo_texture = ExtResource("7_ysxpx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_q5q3p"]
+material = SubResource("StandardMaterial3D_pd5p2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_885y5"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_sy5cu"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckus0"]
+albedo_texture = ExtResource("8_toh84")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h0a4e"]
+material = SubResource("StandardMaterial3D_ckus0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1m2c0"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_xt1xc"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxwci"]
+albedo_texture = ExtResource("9_yvl2l")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wiwkt"]
+material = SubResource("StandardMaterial3D_fxwci")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ka2r"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_qo1ig"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h206g"]
+albedo_texture = ExtResource("10_kjqjo")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g6d3t"]
+material = SubResource("StandardMaterial3D_h206g")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mspdp"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_20ptt"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s2lq4"]
+albedo_texture = ExtResource("3_vmiov")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hr568"]
+material = SubResource("StandardMaterial3D_s2lq4")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qebje"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_jcivs"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_getcw"]
+albedo_texture = ExtResource("2_dhkxs")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nm41d"]
+material = SubResource("StandardMaterial3D_getcw")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n21e1"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0v6vx"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyufo"]
+albedo_texture = ExtResource("5_juqxj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pmkr7"]
+material = SubResource("StandardMaterial3D_uyufo")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1pubo"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_1cmny"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_begox"]
+albedo_texture = ExtResource("4_nlhfr")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pd5p2"]
+material = SubResource("StandardMaterial3D_begox")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bab18"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_vya08"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_885y5"]
+albedo_texture = ExtResource("11_p5djr")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h206g"]
+material = SubResource("StandardMaterial3D_885y5")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t41rm"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_iehio"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sy5cu"]
+albedo_texture = ExtResource("12_8n5fk")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fxwci"]
+material = SubResource("StandardMaterial3D_sy5cu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v4f0a"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ffojq"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1m2c0"]
+albedo_texture = ExtResource("13_52c0m")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s2lq4"]
+material = SubResource("StandardMaterial3D_1m2c0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gjdi"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_yitda"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xt1xc"]
+albedo_texture = ExtResource("14_2gt41")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_getcw"]
+material = SubResource("StandardMaterial3D_xt1xc")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dgp4t"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_dhkxs"]
+vertices = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(1, 3, 2)]
+
+[node name="Scene Root" type="Node3D" unique_id=1497202411]
+
+[node name="GrassTiles" type="Node" parent="." unique_id=995825462]
+
+[node name="GrassCentre" type="MeshInstance3D" parent="GrassTiles" unique_id=1464474876]
+mesh = SubResource("PlaneMesh_x0skc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassCentre" unique_id=1057957646]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassCentre/StaticBody3D" unique_id=855980860]
+shape = SubResource("BoxShape3D_g6d3t")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassCentre" unique_id=1919685101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_5dgej")
+
+[node name="GrassLeft" type="MeshInstance3D" parent="GrassTiles" unique_id=295914199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("PlaneMesh_l7ahu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassLeft" unique_id=1171079187]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassLeft/StaticBody3D" unique_id=1866579756]
+shape = SubResource("BoxShape3D_nm41d")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassLeft" unique_id=2063079906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_pmkr7")
+
+[node name="GrassRight" type="MeshInstance3D" parent="GrassTiles" unique_id=757019124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("PlaneMesh_qp35t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassRight" unique_id=689226264]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassRight/StaticBody3D" unique_id=1403376892]
+shape = SubResource("BoxShape3D_pd5p2")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassRight" unique_id=608899796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_h206g")
+
+[node name="GrassTop" type="MeshInstance3D" parent="GrassTiles" unique_id=1223753681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+mesh = SubResource("PlaneMesh_qruvw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassTop" unique_id=1632788220]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassTop/StaticBody3D" unique_id=1847502468]
+shape = SubResource("BoxShape3D_fxwci")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassTop" unique_id=950370209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_s2lq4")
+
+[node name="GrassBottom" type="MeshInstance3D" parent="GrassTiles" unique_id=59809569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+mesh = SubResource("PlaneMesh_ka0ki")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassBottom" unique_id=700397342]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassBottom/StaticBody3D" unique_id=824135703]
+shape = SubResource("BoxShape3D_getcw")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassBottom" unique_id=1844365693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_ckus0")
+
+[node name="GrassBottomRight" type="MeshInstance3D" parent="GrassTiles" unique_id=2002191946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = SubResource("PlaneMesh_pnhew")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassBottomRight" unique_id=1806281319]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassBottomRight/StaticBody3D" unique_id=1992932406]
+shape = SubResource("BoxShape3D_uyufo")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassBottomRight" unique_id=1156929719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_begox")
+
+[node name="GrassBottomLeft" type="MeshInstance3D" parent="GrassTiles" unique_id=469961029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+mesh = SubResource("PlaneMesh_q5q3p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassBottomLeft" unique_id=322348384]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassBottomLeft/StaticBody3D" unique_id=1209852759]
+shape = SubResource("BoxShape3D_885y5")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassBottomLeft" unique_id=2056892111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_sy5cu")
+
+[node name="GrassTopLeft" type="MeshInstance3D" parent="GrassTiles" unique_id=1286771633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+mesh = SubResource("PlaneMesh_h0a4e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassTopLeft" unique_id=1744090083]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassTopLeft/StaticBody3D" unique_id=1878030105]
+shape = SubResource("BoxShape3D_1m2c0")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassTopLeft" unique_id=1516999910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_xt1xc")
+
+[node name="GrassTopRight" type="MeshInstance3D" parent="GrassTiles" unique_id=763830801]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+mesh = SubResource("PlaneMesh_wiwkt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassTiles/GrassTopRight" unique_id=1400526491]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassTiles/GrassTopRight/StaticBody3D" unique_id=1159831047]
+shape = SubResource("BoxShape3D_2ka2r")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GrassTiles/GrassTopRight" unique_id=1987019088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_qo1ig")
+
+[node name="DirtTiles" type="Node" parent="." unique_id=1012577601]
+
+[node name="DirtCentre" type="MeshInstance3D" parent="DirtTiles" unique_id=619140046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+mesh = SubResource("PlaneMesh_g6d3t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtCentre" unique_id=582688975]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtCentre/StaticBody3D" unique_id=1587430353]
+shape = SubResource("BoxShape3D_mspdp")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtCentre" unique_id=1222137184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_20ptt")
+
+[node name="DirtLeft" type="MeshInstance3D" parent="DirtTiles" unique_id=670413483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+mesh = SubResource("PlaneMesh_hr568")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtLeft" unique_id=675420825]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtLeft/StaticBody3D" unique_id=387851947]
+shape = SubResource("BoxShape3D_qebje")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtLeft" unique_id=1879291871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_jcivs")
+
+[node name="DirtRight" type="MeshInstance3D" parent="DirtTiles" unique_id=1659700111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+mesh = SubResource("PlaneMesh_nm41d")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtRight" unique_id=1929229628]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtRight/StaticBody3D" unique_id=896268086]
+shape = SubResource("BoxShape3D_n21e1")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtRight" unique_id=1341497729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_0v6vx")
+
+[node name="DirtTop" type="MeshInstance3D" parent="DirtTiles" unique_id=1736876057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -2)
+mesh = SubResource("PlaneMesh_pmkr7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtTop" unique_id=1690360849]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtTop/StaticBody3D" unique_id=996885032]
+shape = SubResource("BoxShape3D_1pubo")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtTop" unique_id=915348069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_1cmny")
+
+[node name="DirtBottom" type="MeshInstance3D" parent="DirtTiles" unique_id=154719612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+mesh = SubResource("PlaneMesh_pd5p2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtBottom" unique_id=1771377598]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtBottom/StaticBody3D" unique_id=1820060446]
+shape = SubResource("BoxShape3D_bab18")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtBottom" unique_id=385531791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_vya08")
+
+[node name="DirtBottomRight" type="MeshInstance3D" parent="DirtTiles" unique_id=1133611069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
+mesh = SubResource("PlaneMesh_h206g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtBottomRight" unique_id=1323565498]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtBottomRight/StaticBody3D" unique_id=75183140]
+shape = SubResource("BoxShape3D_t41rm")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtBottomRight" unique_id=1752134453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_iehio")
+
+[node name="DirtBottomLeft" type="MeshInstance3D" parent="DirtTiles" unique_id=323100372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+mesh = SubResource("PlaneMesh_fxwci")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtBottomLeft" unique_id=74472801]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtBottomLeft/StaticBody3D" unique_id=658838223]
+shape = SubResource("BoxShape3D_v4f0a")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtBottomLeft" unique_id=1364593584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_ffojq")
+
+[node name="DirtTopLeft" type="MeshInstance3D" parent="DirtTiles" unique_id=421613466]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+mesh = SubResource("PlaneMesh_s2lq4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtTopLeft" unique_id=507872408]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtTopLeft/StaticBody3D" unique_id=1567415642]
+shape = SubResource("BoxShape3D_3gjdi")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtTopLeft" unique_id=1385565598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_yitda")
+
+[node name="DirtTopRight" type="MeshInstance3D" parent="DirtTiles" unique_id=1254372642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -2)
+mesh = SubResource("PlaneMesh_getcw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtTiles/DirtTopRight" unique_id=1635046162]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtTiles/DirtTopRight/StaticBody3D" unique_id=1693089854]
+shape = SubResource("BoxShape3D_dgp4t")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DirtTiles/DirtTopRight" unique_id=1303185850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+navigation_mesh = SubResource("NavigationMesh_dhkxs")

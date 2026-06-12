@@ -1,24 +1,53 @@
 [gd_scene format=3 uid="uid://co7jmjwp5sh5s"]
 
-[ext_resource type="Texture2D" uid="uid://d13x3j3euevdd" path="res://art/characters/enemies/slime/cute_slime_forward.png" id="1_5jc4t"]
 [ext_resource type="Script" uid="uid://4n6wx6cfecvo" path="res://scripts/enemies/slime.gd" id="1_qrp3d"]
-[ext_resource type="BehaviorTree" uid="uid://xkugsms15caq" path="res://ai/BT/slime.tres" id="2_uocvo"]
+[ext_resource type="BehaviorTree" uid="uid://btws7oiprma7k" path="res://ai/BT/slime.tres" id="2_uocvo"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_v3pje"]
+[ext_resource type="Texture2D" uid="uid://b6rdp3jh12dwq" path="res://art/characters/enemies/slime/green_slime_idle_frames.png" id="3_v3pje"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_5jc4t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_md0e3"]
 size = Vector3(1.6901245, 1.6150513, 1.0930176)
 
+[sub_resource type="Animation" id="Animation_0vrhk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_jt5h8"]
 resource_name = "idle"
+length = 1.4333333
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 4, 5, 6, 4]
+}
 
 [sub_resource type="Animation" id="Animation_31a65"]
 resource_name = "scream"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4l1t8"]
 _data = {
+&"RESET": SubResource("Animation_0vrhk"),
 &"idle": SubResource("Animation_jt5h8"),
 &"scream": SubResource("Animation_31a65")
 }
@@ -33,14 +62,16 @@ collision_mask = 0
 script = ExtResource("1_qrp3d")
 enemy_spacing = 2.0
 _bullet_scene = ExtResource("2_v3pje")
+death_particle_name = "slime"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1195072125]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
-texture = ExtResource("1_5jc4t")
+texture = ExtResource("3_v3pje")
+hframes = 4
+vframes = 3
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=189828419]
 target_desired_distance = 0.5
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
 
@@ -59,6 +90,6 @@ shape = SubResource("BoxShape3D_md0e3")
 libraries/ = SubResource("AnimationLibrary_4l1t8")
 
 [node name="Shadow" type="MeshInstance3D" parent="." unique_id=1112190252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.058, -0.24706738, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999983, -0.0018675013, 0, 0.0018675013, 0.9999983, 0.058, -0.24706738, 0)
 cast_shadow = 3
 mesh = SubResource("SphereMesh_v3pje")

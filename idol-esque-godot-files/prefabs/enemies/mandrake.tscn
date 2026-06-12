@@ -2,23 +2,66 @@
 
 [ext_resource type="Script" uid="uid://cnrrt1lhlq70p" path="res://scripts/enemies/mandrake.gd" id="1_vnqm5"]
 [ext_resource type="PackedScene" uid="uid://3owv0xjdpbg4" path="res://prefabs/bullet.tscn" id="2_jt5h8"]
-[ext_resource type="Texture2D" uid="uid://bcw51iyq5q05g" path="res://art/characters/enemies/mandrake/original/mandrake_original_forward.png" id="2_uvdid"]
-[ext_resource type="BehaviorTree" uid="uid://b1ijp7cxnqnsp" path="res://ai/BT/mandrake.tres" id="3_uvdid"]
+[ext_resource type="Script" uid="uid://yn0eojbx44xy" path="res://scripts/bullets/bullet_config_group.gd" id="3_iawsw"]
+[ext_resource type="Texture2D" uid="uid://cd3q31nuqenon" path="res://art/characters/enemies/mandrake/original/mandrake_idle_sprite.png" id="3_jt5h8"]
+[ext_resource type="BehaviorTree" uid="uid://ddca2wrqeywxs" path="res://ai/BT/mandrake.tres" id="3_uvdid"]
+[ext_resource type="Script" uid="uid://djuwhyhdhfi2v" path="res://scripts/bullets/bullet_config.gd" id="4_7c17s"]
+
+[sub_resource type="Resource" id="Resource_8m6qa"]
+script = ExtResource("4_7c17s")
+speed = -2.0
+movement_type = 4
+tick_timer = 600.0
+metadata/_custom_type_script = "uid://djuwhyhdhfi2v"
+
+[sub_resource type="Resource" id="Resource_sr5k1"]
+script = ExtResource("3_iawsw")
+configs = Array[ExtResource("4_7c17s")]([SubResource("Resource_8m6qa")])
+metadata/_custom_type_script = "uid://yn0eojbx44xy"
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_jt5h8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iawsw"]
 size = Vector3(0.42769623, 0.9950714, 0.5734863)
 
+[sub_resource type="Animation" id="Animation_iawsw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_jt5h8"]
 resource_name = "idle"
+length = 0.4
 loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
 
 [sub_resource type="Animation" id="Animation_31a65"]
 resource_name = "scream"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iawsw"]
 _data = {
+&"RESET": SubResource("Animation_iawsw"),
 &"idle": SubResource("Animation_jt5h8"),
 &"scream": SubResource("Animation_31a65")
 }
@@ -29,16 +72,19 @@ height = 0.4
 
 [node name="Mandrake" type="CharacterBody3D" unique_id=1050916115]
 collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_vnqm5")
 _bullet_scene = ExtResource("2_jt5h8")
+_configs = Array[ExtResource("3_iawsw")]([SubResource("Resource_sr5k1")])
+death_particle_name = "mandrake"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1082717938]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
-texture = ExtResource("2_uvdid")
+texture = ExtResource("3_jt5h8")
+hframes = 3
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1579455540]
 target_desired_distance = 0.5
-debug_enabled = true
 
 [node name="BulletSpawn" type="Marker3D" parent="." unique_id=1373801589]
 

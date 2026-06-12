@@ -2,10 +2,10 @@ class_name Bullet_Factory extends Node
 
 static func single_formation(source : Enemy, offset : Vector3, bullet_config : Array[BulletConfig], rotation : float = 0):
 	var spawn_pos : Vector3 = source.position + offset
-	var bullet = source.enemy_bullet_scene.instantiate()
+	var bullet = source._bullet_scene.instantiate()
 	bullet.setup(bullet_config, spawn_pos)
 	bullet.transform = bullet.transform.rotated(Vector3.UP, rotation)
-	source.bullet_buffer.append(bullet)
+	source._bullet_buffer.append(bullet)
 
 static func line_formation(source : Enemy, start_position : Vector3, end_position : 
 						Vector3, bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0) -> void:
@@ -59,7 +59,7 @@ static func polygon_formation(source : Enemy, offset : Vector3, radius : float, 
 		var end : Vector3 = Vector3(cos(theta * i), 0, sin(theta * i)) + offset
 		end *= radius
 		line_formation(source, start, end, bullet_per_side, bullet_config, rotation)
-		source.bullet_buffer.pop_back()
+		source._bullet_buffer.pop_back()
 
 static func arc_formation(source : Enemy, offset : Vector3, radius : float, 
 						bullet_count : int, bullet_config : Array[BulletConfig], rotation : float = 0):

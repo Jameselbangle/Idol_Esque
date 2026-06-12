@@ -10,6 +10,7 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Bullet" type="CharacterBody3D" unique_id=1062259565]
 collision_layer = 8
+collision_mask = 5
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -35,5 +36,9 @@ transform = Transform3D(0.4140423, 0, 0, 0, 0.4140423, 0, 0, 0, 0.4140423, 0, -0
 cast_shadow = 3
 mesh = SubResource("SphereMesh_lv25w")
 
+[node name="death_timer" type="Timer" parent="." unique_id=1482295666]
+one_shot = true
+
 [connection signal="area_entered" from="bullet_area" to="." method="_on_bullet_area_area_entered"]
-[connection signal="body_entered" from="bullet_area" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="bullet_area" to="." method="_on_bullet_area_body_entered"]
+[connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]
